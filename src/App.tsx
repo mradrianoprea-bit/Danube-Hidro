@@ -8,6 +8,7 @@ import { StationDetailPanel } from './components/StationDetailPanel';
 import { StationsTableView } from './components/StationsTableView';
 import { useOnlineStatus, usePWAInstall } from './hooks/usePWAInstall';
 import { usePushAlerts } from './hooks/usePushAlerts';
+import { fetchOverviewData, fetchStationDetailData, isStandaloneNativeApp } from './services/apiClient';
 import type { DanubeStation, OverviewResponse, StationDetailPayload } from './types/hydrology';
 import { exportBasinBulletinPdf } from './utils/pdfReport';
 import { COUNTRY_NAMES_RO, formatSignedCm, getStatusPresentation } from './utils/statusFormat';
@@ -42,9 +43,7 @@ export default function App() {
     setLoadingOverview(true);
     setOverviewError(null);
     try {
-      const res = await fetch(`/api/overview${forceRefresh ? '?refresh=1' : ''}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = (await res.json()) as OverviewResponse;
+      const data = await fetchOverviewData(forceRefresh);
       setOverview(data);
       setSelectedStationId((prev) => {
         if (data.stations.some((s) => s.id === prev)) return prev;
@@ -66,10 +65,8 @@ export default function App() {
     if (!stationId) return;
     setLoadingDetail(true);
     try {
-      const res = await fetch(`/api/stations/${encodeURIComponent(stationId)}`);
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = (await res.json()) as StationDetailPayload;
-      setStationDetail(data);
+      const data = await fetchStationDetailData(stationId);
+      if (data) setStationDetail(data);
     } catch (err) {
       console.warn('Station detail load error:', err);
     } finally {
@@ -83,8 +80,15 @@ export default function App() {
     }
   }, [selectedStationId, fetchStationDetail]);
 
-  // Real-time SSE alerts listener
+  // Real-time alerts: SSE stream in web/server mode, periodic direct refresh in standalone APK/iOS mode
   useEffect(() => {
+    if (isStandaloneNativeApp()) {
+      const timer = setInterval(() => {
+        void fetchOverview(true);
+      }, 15 * 60 * 1000);
+      return () => clearInterval(timer);
+    }
+
     const es = new EventSource('/api/alerts/stream');
     es.addEventListener('alerts', (ev) => {
       try {
@@ -99,7 +103,7 @@ export default function App() {
       }
     });
     return () => es.close();
-  }, []);
+  }, [fetchOverview]);
 
   const alerts = overview?.alerts ?? [];
   const push = usePushAlerts(alerts);

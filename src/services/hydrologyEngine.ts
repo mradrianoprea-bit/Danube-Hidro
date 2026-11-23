@@ -54,6 +54,56 @@ interface GlofasBaselineStats {
 const OVERVIEW_CACHE_TTL_MS = 15 * 60 * 1000;
 const DETAIL_CACHE_TTL_MS = 15 * 60 * 1000;
 
+export interface HydrologyHttpTransport {
+  getJson<T>(url: string, timeoutMs: number): Promise<T | null>;
+  getText(url: string, timeoutMs: number, encoding?: 'utf-8' | 'latin1'): Promise<string | null>;
+}
+
+function createTimeoutFetchOptions(timeoutMs: number): { signal?: AbortSignal; cleanup: () => void } {
+  if (typeof AbortSignal !== 'undefined' && typeof AbortSignal.timeout === 'function') {
+    return { signal: AbortSignal.timeout(timeoutMs), cleanup: () => {} };
+  }
+  if (typeof AbortController !== 'undefined') {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    return { signal: controller.signal, cleanup: () => clearTimeout(timer) };
+  }
+  return { cleanup: () => {} };
+}
+
+const defaultHttpTransport: HydrologyHttpTransport = {
+  async getJson<T>(url: string, timeoutMs: number): Promise<T | null> {
+    const { signal, cleanup } = createTimeoutFetchOptions(timeoutMs);
+    try {
+      const res = await fetch(url, { signal });
+      if (!res.ok) return null;
+      return (await res.json()) as T;
+    } finally {
+      cleanup();
+    }
+  },
+  async getText(url: string, timeoutMs: number, encoding: 'utf-8' | 'latin1' = 'utf-8'): Promise<string | null> {
+    const { signal, cleanup } = createTimeoutFetchOptions(timeoutMs);
+    try {
+      const res = await fetch(url, { signal });
+      if (!res.ok) return null;
+      if (encoding === 'latin1') {
+        const buf = await res.arrayBuffer();
+        return new TextDecoder('latin1').decode(buf);
+      }
+      return await res.text();
+    } finally {
+      cleanup();
+    }
+  },
+};
+
+let activeHttpTransport: HydrologyHttpTransport = defaultHttpTransport;
+
+export function setHydrologyHttpTransport(transport: HydrologyHttpTransport): void {
+  activeHttpTransport = transport;
+}
+
 let overviewCache: { timestamp: number; data: OverviewResponse; glofasZones: Map<BasinZoneId, GlofasBaselineStats> } | null = null;
 const stationGlofasCache = new Map<string, { timestamp: number; stats: GlofasBaselineStats }>();
 const channelSnapCache = new Map<string, { lat: number; lon: number }>();
@@ -91,9 +141,11 @@ async function resolveDanubeChannelCoords(
   const probeUrl = `https://flood-api.open-meteo.com/v1/flood?latitude=${lats}&longitude=${lons}&daily=river_discharge&forecast_days=1`;
 
   try {
-    const res = await fetch(probeUrl, { signal: AbortSignal.timeout(8000) });
-    if (!res.ok) return null;
-    const arr = (await res.json()) as Array<{ daily?: { river_discharge?: Array<number | null> } }>;
+    const arr = await activeHttpTransport.getJson<Array<{ daily?: { river_discharge?: Array<number | null> } }>>(
+      probeUrl,
+      8000,
+    );
+    if (!arr || !Array.isArray(arr)) return null;
     const minQ = minPlausibleDanubeDischarge(km);
 
     let bestIdx = -1;
@@ -168,22 +220,19 @@ async function fetchHydroinfoDanube(): Promise<{
   let live = false;
 
   try {
-    const [headerRes, tableRes] = await Promise.all([
-      fetch('https://www.hydroinfo.hu/tables/ENG/dunhid_f.html', { signal: AbortSignal.timeout(7000) }),
-      fetch('https://www.hydroinfo.hu/tables/ENG/dunhif_a.html', { signal: AbortSignal.timeout(8000) }),
+    const [hText, html] = await Promise.all([
+      activeHttpTransport.getText('https://www.hydroinfo.hu/tables/ENG/dunhid_f.html', 9000, 'utf-8'),
+      activeHttpTransport.getText('https://www.hydroinfo.hu/tables/ENG/dunhif_a.html', 10000, 'latin1'),
     ]);
 
-    if (headerRes.ok) {
-      const hText = await headerRes.text();
+    if (hText) {
       const dateMatch = hText.match(/Observed on:\s*([^<\n]+)/i);
       if (dateMatch?.[1]) {
         observedDateLabel = dateMatch[1].replace(/\s+/g, ' ').trim();
       }
     }
 
-    if (tableRes.ok) {
-      const buf = await tableRes.arrayBuffer();
-      const html = new TextDecoder('latin1').decode(buf);
+    if (html) {
       const trMatches = html.match(/<tr[\s\S]*?<\/tr>/gi) || [];
 
       for (const tr of trMatches) {
@@ -221,12 +270,11 @@ async function fetchPegelonlineDanube(): Promise<{ stations: Map<string, PegelSt
   const map = new Map<string, PegelStationRaw>();
   let live = false;
   try {
-    const res = await fetch(
+    const data = await activeHttpTransport.getJson<PegelStationRaw[]>(
       'https://www.pegelonline.wsv.de/webservices/rest-api/v2/stations.json?waters=DONAU&includeTimeseries=true&includeCurrentMeasurement=true',
-      { signal: AbortSignal.timeout(7000) },
+      9000,
     );
-    if (res.ok) {
-      const data = (await res.json()) as PegelStationRaw[];
+    if (Array.isArray(data)) {
       for (const st of data) {
         map.set(st.shortname.toLowerCase(), st);
       }
@@ -244,11 +292,11 @@ async function fetchBasinPrecipitation14d(): Promise<BasinPrecipitationZone[]> {
   const url = `https://api.open-meteo.com/v1/forecast?latitude=${lats}&longitude=${lons}&daily=precipitation_sum&forecast_days=14&timezone=UTC`;
 
   try {
-    const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
-    if (res.ok) {
-      const json = (await res.json()) as
-        | Array<{ daily: { time: string[]; precipitation_sum: Array<number | null> } }>
-        | { daily: { time: string[]; precipitation_sum: Array<number | null> } };
+    const json = await activeHttpTransport.getJson<
+      | Array<{ daily: { time: string[]; precipitation_sum: Array<number | null> } }>
+      | { daily: { time: string[]; precipitation_sum: Array<number | null> } }
+    >(url, 10000);
+    if (json) {
       const arr = Array.isArray(json) ? json : [json];
 
       return BASIN_ZONES_META.map((meta, idx) => {
@@ -350,14 +398,18 @@ async function fetchGlofasForZoneAnchors(): Promise<Map<BasinZoneId, GlofasBasel
   const fcUrl = `https://flood-api.open-meteo.com/v1/flood?latitude=${lats}&longitude=${lons}&daily=river_discharge&forecast_days=14&past_days=30`;
 
   try {
-    const [histRes, fcRes] = await Promise.all([
-      fetch(histUrl, { signal: AbortSignal.timeout(12000) }),
-      fetch(fcUrl, { signal: AbortSignal.timeout(8000) }),
+    const [histJson, fcJson] = await Promise.all([
+      activeHttpTransport.getJson<Array<{ daily: { time: string[]; river_discharge: Array<number | null> } }>>(
+        histUrl,
+        14000,
+      ),
+      activeHttpTransport.getJson<Array<{ daily: { time: string[]; river_discharge: Array<number | null> } }>>(
+        fcUrl,
+        10000,
+      ),
     ]);
 
-    if (histRes.ok && fcRes.ok) {
-      const histJson = (await histRes.json()) as Array<{ daily: { time: string[]; river_discharge: Array<number | null> } }>;
-      const fcJson = (await fcRes.json()) as Array<{ daily: { time: string[]; river_discharge: Array<number | null> } }>;
+    if (Array.isArray(histJson) && Array.isArray(fcJson)) {
 
       BASIN_ZONES_META.forEach((zone, idx) => {
         const h = histJson[idx]?.daily;
@@ -410,14 +462,12 @@ async function fetchGlofasForSingleStation(
   const fcUrl = `https://flood-api.open-meteo.com/v1/flood?latitude=${snapped.lat}&longitude=${snapped.lon}&daily=river_discharge&forecast_days=14&past_days=30`;
 
   try {
-    const [histRes, fcRes] = await Promise.all([
-      fetch(histUrl, { signal: AbortSignal.timeout(10000) }),
-      fetch(fcUrl, { signal: AbortSignal.timeout(8000) }),
+    const [histJson, fcJson] = await Promise.all([
+      activeHttpTransport.getJson<{ daily: { time: string[]; river_discharge: Array<number | null> } }>(histUrl, 12000),
+      activeHttpTransport.getJson<{ daily: { time: string[]; river_discharge: Array<number | null> } }>(fcUrl, 10000),
     ]);
 
-    if (histRes.ok && fcRes.ok) {
-      const histJson = (await histRes.json()) as { daily: { time: string[]; river_discharge: Array<number | null> } };
-      const fcJson = (await fcRes.json()) as { daily: { time: string[]; river_discharge: Array<number | null> } };
+    if (histJson?.daily && fcJson?.daily) {
 
       const todayIso = new Date().toISOString().slice(0, 10);
       let splitIdx = fcJson.daily.time.findIndex((t) => t >= todayIso);
@@ -812,12 +862,11 @@ export async function getStationDetail(stationId: string): Promise<StationDetail
 
   if (station.pegelUuid) {
     try {
-      const pRes = await fetch(
+      const measurements = await activeHttpTransport.getJson<Array<{ timestamp: string; value: number }>>(
         `https://www.pegelonline.wsv.de/webservices/rest-api/v2/stations/${station.pegelUuid}/W/measurements.json?start=P30D`,
-        { signal: AbortSignal.timeout(6000) },
+        8000,
       );
-      if (pRes.ok) {
-        const measurements = (await pRes.json()) as Array<{ timestamp: string; value: number }>;
+      if (Array.isArray(measurements)) {
         const byDay = new Map<string, number[]>();
         for (const m of measurements) {
           const day = m.timestamp.slice(0, 10);

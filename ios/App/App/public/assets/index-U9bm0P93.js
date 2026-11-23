@@ -39192,7 +39192,7 @@ function le() {
 	}, t.allowFsRead = void 0, t.loadImageFile = t.loadFile;
 }(E.API), function(e) {
 	function r() {
-		return (i.html2canvas ? Promise.resolve(i.html2canvas) : __vitePreload(() => import("./html2canvas-Cd3TD5H_.js").then((m) => /* @__PURE__ */ __toESM(m.default)), [])).catch(function(t) {
+		return (i.html2canvas ? Promise.resolve(i.html2canvas) : __vitePreload(() => import("./html2canvas-CSlM0YhM.js").then((m) => /* @__PURE__ */ __toESM(m.default)), [])).catch(function(t) {
 			return Promise.reject(/* @__PURE__ */ new Error("Could not load html2canvas: " + t));
 		}).then(function(t) {
 			return t.default ? t.default : t;
@@ -40359,7 +40359,7 @@ function le() {
 		ignoreAnimation: !0,
 		ignoreDimensions: !0
 	}, d = this;
-	return (i.canvg ? Promise.resolve(i.canvg) : __vitePreload(() => import("./index.es-K2hTgG98.js"), [])).catch(function(t) {
+	return (i.canvg ? Promise.resolve(i.canvg) : __vitePreload(() => import("./index.es-DmCW8_6n.js"), [])).catch(function(t) {
 		return Promise.reject(/* @__PURE__ */ new Error("Could not load canvg: " + t));
 	}).then(function(t) {
 		return t.default ? t.default : t;
@@ -46897,7 +46897,7 @@ var CapacitorHttpPluginWeb = class extends WebPlugin {
 		return this.request(Object.assign(Object.assign({}, options), { method: "DELETE" }));
 	}
 };
-registerPlugin("CapacitorHttp", { web: () => new CapacitorHttpPluginWeb() });
+var CapacitorHttp = registerPlugin("CapacitorHttp", { web: () => new CapacitorHttpPluginWeb() });
 /******** END HTTP PLUGIN ********/
 /******** SYSTEM BARS PLUGIN ********/
 /**
@@ -47111,6 +47111,2714 @@ function usePushAlerts(alerts) {
 		}, [dispatchBrowserNotification])
 	};
 }
+// src/data/danubeStationsMeta.ts
+var BASIN_ZONES_META = [
+	{
+		id: "upper_de_at",
+		name: "Bazin Superior (Bavaria · Alpi)",
+		region: "Germania & Austria",
+		lat: 48.57,
+		lon: 13.46,
+		lagDaysToLowerDanube: 9
+	},
+	{
+		id: "pannonian_sk_hu",
+		name: "Bazin Pannonic (Bratislava · Budapesta)",
+		region: "Slovacia & Ungaria",
+		lat: 47.49,
+		lon: 19.04,
+		lagDaysToLowerDanube: 6
+	},
+	{
+		id: "drava_sava_tisza",
+		name: "Afluenți Majori (Drava · Tisa · Sava)",
+		region: "Croația & Serbia Nord",
+		lat: 45.175,
+		lon: 19.925,
+		lagDaysToLowerDanube: 4
+	},
+	{
+		id: "iron_gates_west",
+		name: "Sector Porțile de Fier & Banat",
+		region: "Serbia Est & România Vest",
+		lat: 44.56,
+		lon: 22,
+		lagDaysToLowerDanube: 2
+	},
+	{
+		id: "lower_ro_bg",
+		name: "Dunărea Inferioară (Olt · Jiu · Argeș)",
+		region: "România Sud & Bulgaria",
+		lat: 43.89,
+		lon: 25.96,
+		lagDaysToLowerDanube: 1
+	},
+	{
+		id: "delta_siret_prut",
+		name: "Delta Dunării & Bazin Siret–Prut",
+		region: "Moldova Sud & Dobrogea",
+		lat: 45.29,
+		lon: 28.45,
+		lagDaysToLowerDanube: 0
+	}
+];
+var DANUBE_STATIONS_META = [
+	{
+		code: "342205",
+		matchKeys: ["ingolstadt"],
+		displayName: "Ingolstadt",
+		country: "DE",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2458.3,
+		lat: 48.758,
+		lon: 11.425,
+		agency: "WSV / Wasserwirtschaftsamt Ingolstadt",
+		thresholds: {
+			ca: 380,
+			ci: 470,
+			cp: 560
+		},
+		stageSensitivityCmPer1000M3s: 155
+	},
+	{
+		code: "PG-24148",
+		matchKeys: ["kelheim donau"],
+		displayName: "Kelheim Donau",
+		country: "DE",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2414.8,
+		lat: 48.9166,
+		lon: 11.8646,
+		agency: "WSV / Wasserwirtschaftsamt Landshut",
+		thresholds: {
+			ca: 420,
+			ci: 520,
+			cp: 600
+		},
+		stageSensitivityCmPer1000M3s: 150
+	},
+	{
+		code: "PG-24097",
+		matchKeys: ["kelheimwinzer"],
+		displayName: "Kelheimwinzer",
+		country: "DE",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2409.7,
+		lat: 48.9119,
+		lon: 11.9321,
+		agency: "WSV / Standort Regensburg",
+		thresholds: {
+			ca: 430,
+			ci: 530,
+			cp: 610
+		},
+		stageSensitivityCmPer1000M3s: 150
+	},
+	{
+		code: "342206",
+		matchKeys: ["oberndorf"],
+		displayName: "Oberndorf",
+		country: "DE",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2397.4,
+		lat: 48.948,
+		lon: 12.001,
+		agency: "WSV / Standort Regensburg",
+		thresholds: {
+			ca: 420,
+			ci: 520,
+			cp: 600
+		},
+		stageSensitivityCmPer1000M3s: 150
+	},
+	{
+		code: "PG-23817",
+		matchKeys: ["niederwinzer"],
+		displayName: "Niederwinzer",
+		country: "DE",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2381.7,
+		lat: 49.0293,
+		lon: 12.0719,
+		agency: "WSV / Standort Regensburg",
+		thresholds: {
+			ca: 580,
+			ci: 680,
+			cp: 760
+		},
+		stageSensitivityCmPer1000M3s: 145
+	},
+	{
+		code: "PG-23793",
+		matchKeys: ["regensburg eiserne"],
+		displayName: "Regensburg Eiserne Brücke",
+		country: "DE",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2379.3,
+		lat: 49.021,
+		lon: 12.102,
+		agency: "WSV / Standort Regensburg",
+		thresholds: {
+			ca: 460,
+			ci: 550,
+			cp: 630
+		},
+		stageSensitivityCmPer1000M3s: 145
+	},
+	{
+		code: "342001",
+		matchKeys: ["regensburg-schwabelweis", "schwabelweis"],
+		displayName: "Regensburg-Schwabelweis",
+		country: "DE",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2376.5,
+		lat: 49.026,
+		lon: 12.142,
+		agency: "WSV / Standort Regensburg",
+		thresholds: {
+			ca: 460,
+			ci: 550,
+			cp: 630
+		},
+		stageSensitivityCmPer1000M3s: 145
+	},
+	{
+		code: "PG-23507",
+		matchKeys: ["pfatter"],
+		displayName: "Pfatter",
+		country: "DE",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2350.7,
+		lat: 48.9804,
+		lon: 12.3838,
+		agency: "WSV / Standort Regensburg",
+		thresholds: {
+			ca: 480,
+			ci: 580,
+			cp: 670
+		},
+		stageSensitivityCmPer1000M3s: 142
+	},
+	{
+		code: "342004",
+		matchKeys: ["pfelling"],
+		displayName: "Pfelling",
+		country: "DE",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2305.5,
+		lat: 48.882,
+		lon: 12.748,
+		agency: "WSV / Standort Regensburg",
+		thresholds: {
+			ca: 500,
+			ci: 620,
+			cp: 700
+		},
+		stageSensitivityCmPer1000M3s: 140
+	},
+	{
+		code: "342209",
+		matchKeys: ["deggendorf"],
+		displayName: "Deggendorf",
+		country: "DE",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2284.4,
+		lat: 48.831,
+		lon: 12.956,
+		agency: "WSV / Standort Regensburg",
+		thresholds: {
+			ca: 480,
+			ci: 580,
+			cp: 680
+		},
+		stageSensitivityCmPer1000M3s: 135
+	},
+	{
+		code: "342002",
+		matchKeys: ["hofkirchen"],
+		displayName: "Hofkirchen",
+		country: "DE",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2256.9,
+		lat: 48.674,
+		lon: 13.118,
+		agency: "WSV / Standort Regensburg",
+		thresholds: {
+			ca: 470,
+			ci: 560,
+			cp: 650
+		},
+		stageSensitivityCmPer1000M3s: 130
+	},
+	{
+		code: "PG-22495",
+		matchKeys: ["vilshofen"],
+		displayName: "Vilshofen",
+		country: "DE",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2249.5,
+		lat: 48.6373,
+		lon: 13.1824,
+		agency: "WSV / Standort Regensburg",
+		thresholds: {
+			ca: 460,
+			ci: 560,
+			cp: 650
+		},
+		stageSensitivityCmPer1000M3s: 128
+	},
+	{
+		code: "342003",
+		matchKeys: ["passau donau"],
+		displayName: "Passau Donau",
+		country: "DE",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2226.7,
+		lat: 48.575,
+		lon: 13.465,
+		agency: "WSV / Standort Regensburg",
+		thresholds: {
+			ca: 680,
+			ci: 780,
+			cp: 900
+		},
+		stageSensitivityCmPer1000M3s: 120
+	},
+	{
+		code: "342211",
+		matchKeys: ["passau-ilzstadt", "passau ilzstadt"],
+		displayName: "Passau-Ilzstadt",
+		country: "DE",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2225.2,
+		lat: 48.578,
+		lon: 13.481,
+		agency: "WSV / Standort Regensburg",
+		thresholds: {
+			ca: 690,
+			ci: 790,
+			cp: 910
+		},
+		stageSensitivityCmPer1000M3s: 120
+	},
+	{
+		code: "PG-22231",
+		matchKeys: ["achleiten"],
+		displayName: "Achleiten",
+		country: "AT",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2223.1,
+		lat: 48.582,
+		lon: 13.5032,
+		agency: "VIA DONAU",
+		thresholds: {
+			ca: 540,
+			ci: 640,
+			cp: 740
+		},
+		stageSensitivityCmPer1000M3s: 118
+	},
+	{
+		code: "PG-22145",
+		matchKeys: ["erlau"],
+		displayName: "Erlau",
+		country: "DE",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2214.5,
+		lat: 48.5674,
+		lon: 13.5868,
+		agency: "WSV / Standort Regensburg",
+		thresholds: {
+			ca: 850,
+			ci: 940,
+			cp: 1030
+		},
+		stageSensitivityCmPer1000M3s: 115
+	},
+	{
+		code: "242006",
+		matchKeys: ["engelhartszell"],
+		displayName: "Engelhartszell",
+		country: "AT",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2200.5,
+		lat: 48.504,
+		lon: 13.732,
+		agency: "VIA DONAU / Land OÖ",
+		thresholds: {
+			ca: 580,
+			ci: 680,
+			cp: 780
+		},
+		stageSensitivityCmPer1000M3s: 112
+	},
+	{
+		code: "PG-21441",
+		matchKeys: ["wilhering"],
+		displayName: "Wilhering",
+		country: "AT",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2144.1,
+		lat: 48.323,
+		lon: 14.191,
+		agency: "VIA DONAU",
+		thresholds: {
+			ca: 500,
+			ci: 600,
+			cp: 700
+		},
+		stageSensitivityCmPer1000M3s: 109
+	},
+	{
+		code: "242008",
+		matchKeys: ["linz"],
+		displayName: "Linz",
+		country: "AT",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2135.2,
+		lat: 48.313,
+		lon: 14.287,
+		agency: "VIA DONAU / Land OÖ",
+		thresholds: {
+			ca: 550,
+			ci: 650,
+			cp: 750
+		},
+		stageSensitivityCmPer1000M3s: 108
+	},
+	{
+		code: "242009",
+		matchKeys: ["mauthausen"],
+		displayName: "Mauthausen",
+		country: "AT",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2111,
+		lat: 48.241,
+		lon: 14.517,
+		agency: "VIA DONAU",
+		thresholds: {
+			ca: 600,
+			ci: 700,
+			cp: 800
+		},
+		stageSensitivityCmPer1000M3s: 105
+	},
+	{
+		code: "PG-20791",
+		matchKeys: ["grein"],
+		displayName: "Grein",
+		country: "AT",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2079.1,
+		lat: 48.225,
+		lon: 14.854,
+		agency: "VIA DONAU",
+		thresholds: {
+			ca: 880,
+			ci: 980,
+			cp: 1080
+		},
+		stageSensitivityCmPer1000M3s: 103
+	},
+	{
+		code: "242010",
+		matchKeys: ["ybbs"],
+		displayName: "Ybbs",
+		country: "AT",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2058.5,
+		lat: 48.178,
+		lon: 15.086,
+		agency: "VIA DONAU",
+		thresholds: {
+			ca: 480,
+			ci: 580,
+			cp: 680
+		},
+		stageSensitivityCmPer1000M3s: 102
+	},
+	{
+		code: "242120",
+		matchKeys: ["melk"],
+		displayName: "Melk",
+		country: "AT",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2036,
+		lat: 48.232,
+		lon: 15.331,
+		agency: "VIA DONAU",
+		thresholds: {
+			ca: 500,
+			ci: 600,
+			cp: 700
+		},
+		stageSensitivityCmPer1000M3s: 100
+	},
+	{
+		code: "242011",
+		matchKeys: ["kienstock"],
+		displayName: "Kienstock",
+		country: "AT",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2015.2,
+		lat: 48.382,
+		lon: 15.462,
+		agency: "VIA DONAU",
+		thresholds: {
+			ca: 550,
+			ci: 680,
+			cp: 820
+		},
+		stageSensitivityCmPer1000M3s: 98
+	},
+	{
+		code: "PG-20092",
+		matchKeys: ["dürnstein", "durnstein"],
+		displayName: "Dürnstein",
+		country: "AT",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 2009.2,
+		lat: 48.395,
+		lon: 15.521,
+		agency: "VIA DONAU",
+		thresholds: {
+			ca: 560,
+			ci: 680,
+			cp: 800
+		},
+		stageSensitivityCmPer1000M3s: 97
+	},
+	{
+		code: "242013",
+		matchKeys: ["korneuburg"],
+		displayName: "Korneuburg (Viena)",
+		country: "AT",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 1941.5,
+		lat: 48.344,
+		lon: 16.322,
+		agency: "VIA DONAU",
+		thresholds: {
+			ca: 520,
+			ci: 620,
+			cp: 720
+		},
+		stageSensitivityCmPer1000M3s: 95
+	},
+	{
+		code: "242014",
+		matchKeys: ["wildungsmauer"],
+		displayName: "Wildungsmauer",
+		country: "AT",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 1894.7,
+		lat: 48.118,
+		lon: 16.814,
+		agency: "VIA DONAU",
+		thresholds: {
+			ca: 480,
+			ci: 580,
+			cp: 680
+		},
+		stageSensitivityCmPer1000M3s: 92
+	},
+	{
+		code: "242015",
+		matchKeys: ["hainburg"],
+		displayName: "Hainburg",
+		country: "AT",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 1883.9,
+		lat: 48.149,
+		lon: 16.941,
+		agency: "VIA DONAU",
+		thresholds: {
+			ca: 470,
+			ci: 570,
+			cp: 670
+		},
+		stageSensitivityCmPer1000M3s: 90
+	},
+	{
+		code: "PG-18792",
+		matchKeys: ["thebnerstrassl"],
+		displayName: "Thebnerstrassl",
+		country: "AT",
+		sector: "superior",
+		basinZoneId: "upper_de_at",
+		km: 1879.2,
+		lat: 48.171,
+		lon: 16.972,
+		agency: "VIA DONAU",
+		thresholds: {
+			ca: 470,
+			ci: 570,
+			cp: 670
+		},
+		stageSensitivityCmPer1000M3s: 90
+	},
+	{
+		code: "142301",
+		matchKeys: ["devín", "devin"],
+		displayName: "Devín",
+		country: "SK",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1879.8,
+		lat: 48.173,
+		lon: 16.978,
+		agency: "SHMÚ Bratislava",
+		thresholds: {
+			ca: 550,
+			ci: 650,
+			cp: 750
+		},
+		stageSensitivityCmPer1000M3s: 90
+	},
+	{
+		code: "142302",
+		matchKeys: ["bratislava"],
+		displayName: "Bratislava",
+		country: "SK",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1868.8,
+		lat: 48.137,
+		lon: 17.108,
+		agency: "SHMÚ Bratislava",
+		thresholds: {
+			ca: 650,
+			ci: 750,
+			cp: 850
+		},
+		stageSensitivityCmPer1000M3s: 92
+	},
+	{
+		code: "442020",
+		matchKeys: ["rajka"],
+		displayName: "Rajka",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1848.4,
+		lat: 47.997,
+		lon: 17.224,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 420,
+			ci: 500,
+			cp: 580
+		},
+		stageSensitivityCmPer1000M3s: 88
+	},
+	{
+		code: "442021",
+		matchKeys: ["dunaremete"],
+		displayName: "Dunaremete",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1825.5,
+		lat: 47.887,
+		lon: 17.479,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 450,
+			ci: 530,
+			cp: 610
+		},
+		stageSensitivityCmPer1000M3s: 88
+	},
+	{
+		code: "142304",
+		matchKeys: ["gabčíkovo", "gabcikovo"],
+		displayName: "Gabčíkovo",
+		country: "SK",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1819.3,
+		lat: 47.881,
+		lon: 17.537,
+		agency: "SHMÚ Bratislava",
+		thresholds: {
+			ca: 500,
+			ci: 600,
+			cp: 700
+		},
+		stageSensitivityCmPer1000M3s: 88
+	},
+	{
+		code: "142306",
+		matchKeys: ["medveďov", "medvedov"],
+		displayName: "Medveďov",
+		country: "SK",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1806.3,
+		lat: 47.795,
+		lon: 17.654,
+		agency: "SHMÚ Bratislava",
+		thresholds: {
+			ca: 520,
+			ci: 620,
+			cp: 720
+		},
+		stageSensitivityCmPer1000M3s: 88
+	},
+	{
+		code: "442502",
+		matchKeys: ["nagybajcs"],
+		displayName: "Nagybajcs",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1801,
+		lat: 47.772,
+		lon: 17.684,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 470,
+			ci: 540,
+			cp: 610
+		},
+		stageSensitivityCmPer1000M3s: 86
+	},
+	{
+		code: "442521",
+		matchKeys: ["gönyű", "gonyu"],
+		displayName: "Gönyű",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1791,
+		lat: 47.734,
+		lon: 17.832,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 480,
+			ci: 560,
+			cp: 640
+		},
+		stageSensitivityCmPer1000M3s: 85
+	},
+	{
+		code: "442522",
+		matchKeys: ["komárom", "komarom"],
+		displayName: "Komárom",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1768.3,
+		lat: 47.749,
+		lon: 18.126,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 500,
+			ci: 580,
+			cp: 660
+		},
+		stageSensitivityCmPer1000M3s: 85
+	},
+	{
+		code: "142308",
+		matchKeys: ["komárno", "komarno"],
+		displayName: "Komárno",
+		country: "SK",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1767.1,
+		lat: 47.754,
+		lon: 18.133,
+		agency: "SHMÚ Bratislava",
+		thresholds: {
+			ca: 530,
+			ci: 610,
+			cp: 690
+		},
+		stageSensitivityCmPer1000M3s: 85
+	},
+	{
+		code: "442024",
+		matchKeys: ["lábatlan", "labatlan"],
+		displayName: "Lábatlan",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1737,
+		lat: 47.749,
+		lon: 18.497,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 510,
+			ci: 590,
+			cp: 670
+		},
+		stageSensitivityCmPer1000M3s: 84
+	},
+	{
+		code: "442025",
+		matchKeys: ["esztergom"],
+		displayName: "Esztergom",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1718.5,
+		lat: 47.793,
+		lon: 18.736,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 500,
+			ci: 580,
+			cp: 660
+		},
+		stageSensitivityCmPer1000M3s: 84
+	},
+	{
+		code: "142310",
+		matchKeys: ["štúrovo", "sturovo"],
+		displayName: "Štúrovo",
+		country: "SK",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1718,
+		lat: 47.798,
+		lon: 18.724,
+		agency: "SHMÚ Bratislava",
+		thresholds: {
+			ca: 510,
+			ci: 590,
+			cp: 670
+		},
+		stageSensitivityCmPer1000M3s: 84
+	},
+	{
+		code: "442625",
+		matchKeys: ["szob"],
+		displayName: "Szob",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1707,
+		lat: 47.817,
+		lon: 18.867,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 470,
+			ci: 550,
+			cp: 630
+		},
+		stageSensitivityCmPer1000M3s: 83
+	},
+	{
+		code: "442527",
+		matchKeys: ["nagymaros"],
+		displayName: "Nagymaros",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1694.6,
+		lat: 47.787,
+		lon: 18.961,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 470,
+			ci: 550,
+			cp: 630
+		},
+		stageSensitivityCmPer1000M3s: 82
+	},
+	{
+		code: "442026",
+		matchKeys: ["vác", "vac"],
+		displayName: "Vác",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1679.2,
+		lat: 47.775,
+		lon: 19.126,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 480,
+			ci: 560,
+			cp: 640
+		},
+		stageSensitivityCmPer1000M3s: 82
+	},
+	{
+		code: "442643",
+		matchKeys: ["göd", "god"],
+		displayName: "Göd",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1668,
+		lat: 47.685,
+		lon: 19.131,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 510,
+			ci: 590,
+			cp: 670
+		},
+		stageSensitivityCmPer1000M3s: 81
+	},
+	{
+		code: "442027",
+		matchKeys: ["budapest"],
+		displayName: "Budapesta",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1646.5,
+		lat: 47.498,
+		lon: 19.048,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 620,
+			ci: 700,
+			cp: 780
+		},
+		stageSensitivityCmPer1000M3s: 80
+	},
+	{
+		code: "442532",
+		matchKeys: ["kvassay lock upstream"],
+		displayName: "Kvassay (Budapesta Sud)",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1642,
+		lat: 47.463,
+		lon: 19.067,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 600,
+			ci: 680,
+			cp: 760
+		},
+		stageSensitivityCmPer1000M3s: 80
+	},
+	{
+		code: "442533",
+		matchKeys: ["budafok"],
+		displayName: "Budafok",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1638,
+		lat: 47.424,
+		lon: 19.044,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 560,
+			ci: 640,
+			cp: 720
+		},
+		stageSensitivityCmPer1000M3s: 80
+	},
+	{
+		code: "442534",
+		matchKeys: ["ercsi"],
+		displayName: "Ercsi",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1614,
+		lat: 47.246,
+		lon: 18.902,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 500,
+			ci: 580,
+			cp: 660
+		},
+		stageSensitivityCmPer1000M3s: 79
+	},
+	{
+		code: "442535",
+		matchKeys: ["adony"],
+		displayName: "Adony",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1598,
+		lat: 47.119,
+		lon: 18.876,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 490,
+			ci: 570,
+			cp: 650
+		},
+		stageSensitivityCmPer1000M3s: 79
+	},
+	{
+		code: "442536",
+		matchKeys: ["tass"],
+		displayName: "Tass",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1586,
+		lat: 47.018,
+		lon: 18.953,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 540,
+			ci: 620,
+			cp: 700
+		},
+		stageSensitivityCmPer1000M3s: 78
+	},
+	{
+		code: "442028",
+		matchKeys: ["dunaújváros", "dunaujvaros"],
+		displayName: "Dunaújváros",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1580.6,
+		lat: 46.968,
+		lon: 18.952,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 470,
+			ci: 550,
+			cp: 630
+		},
+		stageSensitivityCmPer1000M3s: 78
+	},
+	{
+		code: "442029",
+		matchKeys: ["dunaföldvár", "dunafoldvar"],
+		displayName: "Dunaföldvár",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1560.6,
+		lat: 46.809,
+		lon: 18.932,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 420,
+			ci: 500,
+			cp: 580
+		},
+		stageSensitivityCmPer1000M3s: 78
+	},
+	{
+		code: "442030",
+		matchKeys: ["paks"],
+		displayName: "Paks",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1531.3,
+		lat: 46.625,
+		lon: 18.867,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 500,
+			ci: 580,
+			cp: 660
+		},
+		stageSensitivityCmPer1000M3s: 76
+	},
+	{
+		code: "442540",
+		matchKeys: ["dombori"],
+		displayName: "Dombori",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1506,
+		lat: 46.405,
+		lon: 18.862,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 580,
+			ci: 660,
+			cp: 740
+		},
+		stageSensitivityCmPer1000M3s: 76
+	},
+	{
+		code: "442031",
+		matchKeys: ["baja"],
+		displayName: "Baja",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1478.7,
+		lat: 46.182,
+		lon: 18.926,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 700,
+			ci: 800,
+			cp: 900
+		},
+		stageSensitivityCmPer1000M3s: 75
+	},
+	{
+		code: "442560",
+		matchKeys: ["dunaszekcső", "dunaszekcso"],
+		displayName: "Dunaszekcső",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1460,
+		lat: 46.087,
+		lon: 18.765,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 700,
+			ci: 800,
+			cp: 890
+		},
+		stageSensitivityCmPer1000M3s: 75
+	},
+	{
+		code: "442032",
+		matchKeys: ["mohács", "mohacs"],
+		displayName: "Mohács",
+		country: "HU",
+		sector: "mijlociu",
+		basinZoneId: "pannonian_sk_hu",
+		km: 1446.9,
+		lat: 45.991,
+		lon: 18.693,
+		agency: "OVF Hydroinfo Ungaria",
+		thresholds: {
+			ca: 700,
+			ci: 800,
+			cp: 900
+		},
+		stageSensitivityCmPer1000M3s: 74
+	},
+	{
+		code: "542010",
+		matchKeys: ["bezdan"],
+		displayName: "Bezdan",
+		country: "RS",
+		sector: "mijlociu",
+		basinZoneId: "drava_sava_tisza",
+		km: 1425.6,
+		lat: 45.847,
+		lon: 18.861,
+		agency: "RHMZ Serbia",
+		thresholds: {
+			ca: 500,
+			ci: 600,
+			cp: 700
+		},
+		stageSensitivityCmPer1000M3s: 72
+	},
+	{
+		code: "542015",
+		matchKeys: ["apatin"],
+		displayName: "Apatin",
+		country: "RS",
+		sector: "mijlociu",
+		basinZoneId: "drava_sava_tisza",
+		km: 1401.5,
+		lat: 45.672,
+		lon: 18.963,
+		agency: "RHMZ Serbia",
+		thresholds: {
+			ca: 600,
+			ci: 700,
+			cp: 780
+		},
+		stageSensitivityCmPer1000M3s: 70
+	},
+	{
+		code: "542017",
+		matchKeys: ["aljmaš", "aljmas"],
+		displayName: "Aljmaš",
+		country: "HR",
+		sector: "mijlociu",
+		basinZoneId: "drava_sava_tisza",
+		km: 1380.2,
+		lat: 45.533,
+		lon: 18.948,
+		agency: "Hrvatske Vode",
+		thresholds: {
+			ca: 550,
+			ci: 650,
+			cp: 730
+		},
+		stageSensitivityCmPer1000M3s: 68
+	},
+	{
+		code: "542020",
+		matchKeys: ["bogojevo"],
+		displayName: "Bogojevo",
+		country: "RS",
+		sector: "mijlociu",
+		basinZoneId: "drava_sava_tisza",
+		km: 1367.3,
+		lat: 45.528,
+		lon: 19.082,
+		agency: "RHMZ Serbia",
+		thresholds: {
+			ca: 550,
+			ci: 650,
+			cp: 730
+		},
+		stageSensitivityCmPer1000M3s: 68
+	},
+	{
+		code: "542025",
+		matchKeys: ["vukovar"],
+		displayName: "Vukovar",
+		country: "HR",
+		sector: "mijlociu",
+		basinZoneId: "drava_sava_tisza",
+		km: 1333.1,
+		lat: 45.355,
+		lon: 19.005,
+		agency: "Hrvatske Vode",
+		thresholds: {
+			ca: 550,
+			ci: 630,
+			cp: 700
+		},
+		stageSensitivityCmPer1000M3s: 66
+	},
+	{
+		code: "542030",
+		matchKeys: ["ilok"],
+		displayName: "Ilok",
+		country: "HR",
+		sector: "mijlociu",
+		basinZoneId: "drava_sava_tisza",
+		km: 1300,
+		lat: 45.226,
+		lon: 19.376,
+		agency: "Hrvatske Vode",
+		thresholds: {
+			ca: 550,
+			ci: 640,
+			cp: 720
+		},
+		stageSensitivityCmPer1000M3s: 64
+	},
+	{
+		code: "542035",
+		matchKeys: ["novi sad"],
+		displayName: "Novi Sad",
+		country: "RS",
+		sector: "mijlociu",
+		basinZoneId: "drava_sava_tisza",
+		km: 1254.9,
+		lat: 45.252,
+		lon: 19.857,
+		agency: "RHMZ Serbia",
+		thresholds: {
+			ca: 450,
+			ci: 600,
+			cp: 700
+		},
+		stageSensitivityCmPer1000M3s: 62
+	},
+	{
+		code: "542045",
+		matchKeys: ["zemun"],
+		displayName: "Zemun (Belgrad)",
+		country: "RS",
+		sector: "mijlociu",
+		basinZoneId: "drava_sava_tisza",
+		km: 1173,
+		lat: 44.847,
+		lon: 20.417,
+		agency: "RHMZ Serbia",
+		thresholds: {
+			ca: 550,
+			ci: 650,
+			cp: 750
+		},
+		stageSensitivityCmPer1000M3s: 58
+	},
+	{
+		code: "542050",
+		matchKeys: ["pančevo", "pancevo"],
+		displayName: "Pančevo",
+		country: "RS",
+		sector: "mijlociu",
+		basinZoneId: "drava_sava_tisza",
+		km: 1154.6,
+		lat: 44.864,
+		lon: 20.631,
+		agency: "RHMZ Serbia",
+		thresholds: {
+			ca: 550,
+			ci: 650,
+			cp: 730
+		},
+		stageSensitivityCmPer1000M3s: 56
+	},
+	{
+		code: "542055",
+		matchKeys: ["smederevo"],
+		displayName: "Smederevo",
+		country: "RS",
+		sector: "mijlociu",
+		basinZoneId: "iron_gates_west",
+		km: 1116.2,
+		lat: 44.669,
+		lon: 20.922,
+		agency: "RHMZ Serbia",
+		thresholds: {
+			ca: 600,
+			ci: 700,
+			cp: 780
+		},
+		stageSensitivityCmPer1000M3s: 54
+	},
+	{
+		code: "742001",
+		matchKeys: ["baziaş", "bazias"],
+		displayName: "Baziaș",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "iron_gates_west",
+		km: 1072.4,
+		lat: 44.815,
+		lon: 21.391,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 700,
+			ci: 760,
+			cp: 820
+		},
+		stageSensitivityCmPer1000M3s: 48
+	},
+	{
+		code: "542065",
+		matchKeys: ["veliko gradište", "veliko gradiste"],
+		displayName: "Veliko Gradište",
+		country: "RS",
+		sector: "inferior_delta",
+		basinZoneId: "iron_gates_west",
+		km: 1059.2,
+		lat: 44.769,
+		lon: 21.519,
+		agency: "RHMZ Serbia",
+		thresholds: {
+			ca: 850,
+			ci: 910,
+			cp: 970
+		},
+		stageSensitivityCmPer1000M3s: 45
+	},
+	{
+		code: "742002",
+		matchKeys: ["moldova veche"],
+		displayName: "Moldova Veche",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "iron_gates_west",
+		km: 1048,
+		lat: 44.718,
+		lon: 21.622,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 800,
+			ci: 850,
+			cp: 900
+		},
+		stageSensitivityCmPer1000M3s: 42
+	},
+	{
+		code: "742003",
+		matchKeys: ["drencova"],
+		displayName: "Drencova",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "iron_gates_west",
+		km: 1016,
+		lat: 44.637,
+		lon: 21.976,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 1050,
+			ci: 1120,
+			cp: 1180
+		},
+		stageSensitivityCmPer1000M3s: 36
+	},
+	{
+		code: "742005",
+		matchKeys: ["orşova", "orsova"],
+		displayName: "Orșova",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "iron_gates_west",
+		km: 954,
+		lat: 44.725,
+		lon: 22.401,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 2650,
+			ci: 2720,
+			cp: 2780
+		},
+		stageSensitivityCmPer1000M3s: 28
+	},
+	{
+		code: "742008",
+		matchKeys: ["turnu severin", "drobeta"],
+		displayName: "Drobeta-Turnu Severin",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "iron_gates_west",
+		km: 931,
+		lat: 44.622,
+		lon: 22.655,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 850,
+			ci: 920,
+			cp: 980
+		},
+		stageSensitivityCmPer1000M3s: 45
+	},
+	{
+		code: "542095",
+		matchKeys: ["prahovo"],
+		displayName: "Prahovo",
+		country: "RS",
+		sector: "inferior_delta",
+		basinZoneId: "iron_gates_west",
+		km: 861,
+		lat: 44.294,
+		lon: 22.589,
+		agency: "RHMZ Serbia",
+		thresholds: {
+			ca: 500,
+			ci: 580,
+			cp: 650
+		},
+		stageSensitivityCmPer1000M3s: 58
+	},
+	{
+		code: "742010",
+		matchKeys: ["gruia"],
+		displayName: "Gruia",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "iron_gates_west",
+		km: 851,
+		lat: 44.265,
+		lon: 22.704,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 450,
+			ci: 550,
+			cp: 620
+		},
+		stageSensitivityCmPer1000M3s: 60
+	},
+	{
+		code: "842070",
+		matchKeys: ["novo selo"],
+		displayName: "Novo Selo",
+		country: "BG",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 833.6,
+		lat: 44.165,
+		lon: 22.789,
+		agency: "EAEMDR Ruse Bulgaria",
+		thresholds: {
+			ca: 550,
+			ci: 630,
+			cp: 700
+		},
+		stageSensitivityCmPer1000M3s: 60
+	},
+	{
+		code: "742012",
+		matchKeys: ["cetatea", "cetate"],
+		displayName: "Cetate",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 811,
+		lat: 44.101,
+		lon: 23.048,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 480,
+			ci: 560,
+			cp: 630
+		},
+		stageSensitivityCmPer1000M3s: 60
+	},
+	{
+		code: "742013",
+		matchKeys: ["calafat"],
+		displayName: "Calafat",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 795,
+		lat: 43.993,
+		lon: 22.927,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 500,
+			ci: 600,
+			cp: 680
+		},
+		stageSensitivityCmPer1000M3s: 62
+	},
+	{
+		code: "842073",
+		matchKeys: ["lom"],
+		displayName: "Lom",
+		country: "BG",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 743.3,
+		lat: 43.829,
+		lon: 23.237,
+		agency: "EAEMDR Ruse Bulgaria",
+		thresholds: {
+			ca: 620,
+			ci: 700,
+			cp: 780
+		},
+		stageSensitivityCmPer1000M3s: 60
+	},
+	{
+		code: "742016",
+		matchKeys: ["bistreţ", "bistret"],
+		displayName: "Bistreț",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 725,
+		lat: 43.861,
+		lon: 23.516,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 480,
+			ci: 560,
+			cp: 630
+		},
+		stageSensitivityCmPer1000M3s: 60
+	},
+	{
+		code: "742017",
+		matchKeys: ["bechet"],
+		displayName: "Bechet",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 679,
+		lat: 43.749,
+		lon: 23.956,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 500,
+			ci: 600,
+			cp: 680
+		},
+		stageSensitivityCmPer1000M3s: 60
+	},
+	{
+		code: "842075",
+		matchKeys: ["oryahovo"],
+		displayName: "Oryahovo",
+		country: "BG",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 678,
+		lat: 43.739,
+		lon: 23.961,
+		agency: "EAEMDR Ruse Bulgaria",
+		thresholds: {
+			ca: 500,
+			ci: 590,
+			cp: 670
+		},
+		stageSensitivityCmPer1000M3s: 60
+	},
+	{
+		code: "742018",
+		matchKeys: ["corabia"],
+		displayName: "Corabia",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 630,
+		lat: 43.767,
+		lon: 24.504,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 450,
+			ci: 550,
+			cp: 630
+		},
+		stageSensitivityCmPer1000M3s: 58
+	},
+	{
+		code: "742024",
+		matchKeys: ["turnu măgurele", "turnu magurele"],
+		displayName: "Turnu Măgurele",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 597,
+		lat: 43.719,
+		lon: 24.859,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 450,
+			ci: 550,
+			cp: 630
+		},
+		stageSensitivityCmPer1000M3s: 58
+	},
+	{
+		code: "842078",
+		matchKeys: ["svishtov"],
+		displayName: "Svishtov",
+		country: "BG",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 554.3,
+		lat: 43.621,
+		lon: 25.349,
+		agency: "EAEMDR Ruse Bulgaria",
+		thresholds: {
+			ca: 520,
+			ci: 610,
+			cp: 690
+		},
+		stageSensitivityCmPer1000M3s: 56
+	},
+	{
+		code: "742025",
+		matchKeys: ["zimnicea"],
+		displayName: "Zimnicea",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 554,
+		lat: 43.635,
+		lon: 25.361,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 450,
+			ci: 550,
+			cp: 630
+		},
+		stageSensitivityCmPer1000M3s: 56
+	},
+	{
+		code: "842080",
+		matchKeys: ["ruse"],
+		displayName: "Ruse",
+		country: "BG",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 495.6,
+		lat: 43.857,
+		lon: 25.955,
+		agency: "EAEMDR Ruse Bulgaria",
+		thresholds: {
+			ca: 560,
+			ci: 650,
+			cp: 730
+		},
+		stageSensitivityCmPer1000M3s: 55
+	},
+	{
+		code: "742027",
+		matchKeys: ["giurgiu"],
+		displayName: "Giurgiu",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 493,
+		lat: 43.882,
+		lon: 25.973,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 480,
+			ci: 580,
+			cp: 660
+		},
+		stageSensitivityCmPer1000M3s: 56
+	},
+	{
+		code: "742031",
+		matchKeys: ["olteniţa", "oltenita"],
+		displayName: "Oltenița",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 430,
+		lat: 44.058,
+		lon: 26.641,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 480,
+			ci: 580,
+			cp: 660
+		},
+		stageSensitivityCmPer1000M3s: 55
+	},
+	{
+		code: "842083",
+		matchKeys: ["silistra"],
+		displayName: "Silistra",
+		country: "BG",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 375.5,
+		lat: 44.119,
+		lon: 27.262,
+		agency: "EAEMDR Ruse Bulgaria",
+		thresholds: {
+			ca: 540,
+			ci: 620,
+			cp: 700
+		},
+		stageSensitivityCmPer1000M3s: 52
+	},
+	{
+		code: "742034",
+		matchKeys: ["călăraşi", "calarasi"],
+		displayName: "Călărași",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 370.5,
+		lat: 44.169,
+		lon: 27.334,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 480,
+			ci: 580,
+			cp: 650
+		},
+		stageSensitivityCmPer1000M3s: 52
+	},
+	{
+		code: "742037",
+		matchKeys: ["feteşti", "fetesti"],
+		displayName: "Fetești (Braț Borcea)",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 332,
+		lat: 44.391,
+		lon: 27.848,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 480,
+			ci: 560,
+			cp: 630
+		},
+		stageSensitivityCmPer1000M3s: 50
+	},
+	{
+		code: "742038",
+		matchKeys: ["cernavoda", "cernavodă"],
+		displayName: "Cernavodă",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 300,
+		lat: 44.337,
+		lon: 28.026,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 450,
+			ci: 550,
+			cp: 630
+		},
+		stageSensitivityCmPer1000M3s: 52
+	},
+	{
+		code: "742039",
+		matchKeys: ["hârşova", "harsova"],
+		displayName: "Hârșova",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "lower_ro_bg",
+		km: 253,
+		lat: 44.685,
+		lon: 27.947,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 500,
+			ci: 600,
+			cp: 660
+		},
+		stageSensitivityCmPer1000M3s: 48
+	},
+	{
+		code: "742051",
+		matchKeys: ["brăila", "braila"],
+		displayName: "Brăila",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "delta_siret_prut",
+		km: 170,
+		lat: 45.272,
+		lon: 27.977,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 530,
+			ci: 600,
+			cp: 650
+		},
+		stageSensitivityCmPer1000M3s: 44
+	},
+	{
+		code: "742052",
+		matchKeys: ["galaţi", "galati"],
+		displayName: "Galați",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "delta_siret_prut",
+		km: 150,
+		lat: 45.432,
+		lon: 28.062,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 530,
+			ci: 600,
+			cp: 650
+		},
+		stageSensitivityCmPer1000M3s: 42
+	},
+	{
+		code: "742055",
+		matchKeys: ["isaccea"],
+		displayName: "Isaccea",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "delta_siret_prut",
+		km: 101,
+		lat: 45.276,
+		lon: 28.458,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 400,
+			ci: 470,
+			cp: 530
+		},
+		stageSensitivityCmPer1000M3s: 36
+	},
+	{
+		code: "742057",
+		matchKeys: ["tulcea"],
+		displayName: "Tulcea",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "delta_siret_prut",
+		km: 71,
+		lat: 45.182,
+		lon: 28.805,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 330,
+			ci: 400,
+			cp: 460
+		},
+		stageSensitivityCmPer1000M3s: 32
+	},
+	{
+		code: "742058",
+		matchKeys: ["ceatal ismail"],
+		displayName: "Ceatal Ismail",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "delta_siret_prut",
+		km: 79,
+		lat: 45.221,
+		lon: 28.724,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 350,
+			ci: 420,
+			cp: 480
+		},
+		stageSensitivityCmPer1000M3s: 34
+	},
+	{
+		code: "742059",
+		matchKeys: ["ceatal sfântu gheorghe", "ceatal sfantu gheorghe"],
+		displayName: "Ceatal Sfântu Gheorghe",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "delta_siret_prut",
+		km: 63,
+		lat: 45.174,
+		lon: 28.896,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 350,
+			ci: 420,
+			cp: 480
+		},
+		stageSensitivityCmPer1000M3s: 30
+	},
+	{
+		code: "742060",
+		matchKeys: ["sulina"],
+		displayName: "Sulina (Gura Dunării)",
+		country: "RO",
+		sector: "inferior_delta",
+		basinZoneId: "delta_siret_prut",
+		km: 0,
+		lat: 45.157,
+		lon: 29.662,
+		agency: "AFDJ Galați / INHGA",
+		thresholds: {
+			ca: 140,
+			ci: 180,
+			cp: 210
+		},
+		stageSensitivityCmPer1000M3s: 16
+	}
+];
+// src/services/hydrologyEngine.ts
+var OVERVIEW_CACHE_TTL_MS = 9e5;
+var DETAIL_CACHE_TTL_MS = 9e5;
+function createTimeoutFetchOptions(timeoutMs) {
+	if (typeof AbortSignal !== "undefined" && typeof AbortSignal.timeout === "function") return {
+		signal: AbortSignal.timeout(timeoutMs),
+		cleanup: () => {}
+	};
+	if (typeof AbortController !== "undefined") {
+		const controller = new AbortController();
+		const timer = setTimeout(() => controller.abort(), timeoutMs);
+		return {
+			signal: controller.signal,
+			cleanup: () => clearTimeout(timer)
+		};
+	}
+	return { cleanup: () => {} };
+}
+var activeHttpTransport = {
+	async getJson(url, timeoutMs) {
+		const { signal, cleanup } = createTimeoutFetchOptions(timeoutMs);
+		try {
+			const res = await fetch(url, { signal });
+			if (!res.ok) return null;
+			return await res.json();
+		} finally {
+			cleanup();
+		}
+	},
+	async getText(url, timeoutMs, encoding = "utf-8") {
+		const { signal, cleanup } = createTimeoutFetchOptions(timeoutMs);
+		try {
+			const res = await fetch(url, { signal });
+			if (!res.ok) return null;
+			if (encoding === "latin1") {
+				const buf = await res.arrayBuffer();
+				return new TextDecoder("latin1").decode(buf);
+			}
+			return await res.text();
+		} finally {
+			cleanup();
+		}
+	}
+};
+function setHydrologyHttpTransport(transport) {
+	activeHttpTransport = transport;
+}
+var overviewCache = null;
+var stationGlofasCache = /* @__PURE__ */ new Map();
+var channelSnapCache = /* @__PURE__ */ new Map();
+function minPlausibleDanubeDischarge(km) {
+	if (km >= 2250) return 120;
+	if (km >= 1880) return 450;
+	if (km >= 1400) return 650;
+	if (km >= 1170) return 850;
+	return 1200;
+}
+async function resolveDanubeChannelCoords(lat, lon, cacheKey, km) {
+	const cached = channelSnapCache.get(cacheKey);
+	if (cached) return cached;
+	const offsets = [
+		-.15,
+		-.075,
+		0,
+		.075,
+		.15
+	];
+	const grid = [];
+	for (const dLat of offsets) for (const dLon of offsets) grid.push([Number((lat + dLat).toFixed(4)), Number((lon + dLon).toFixed(4))]);
+	const probeUrl = `https://flood-api.open-meteo.com/v1/flood?latitude=${grid.map((p) => p[0]).join(",")}&longitude=${grid.map((p) => p[1]).join(",")}&daily=river_discharge&forecast_days=1`;
+	try {
+		const arr = await activeHttpTransport.getJson(probeUrl, 8e3);
+		if (!arr || !Array.isArray(arr)) return null;
+		const minQ = minPlausibleDanubeDischarge(km);
+		let bestIdx = -1;
+		let bestScore = -1;
+		arr.forEach((item, idx) => {
+			const q = item?.daily?.river_discharge?.[0] ?? 0;
+			if (!Number.isFinite(q) || q <= 0) return;
+			const score = q - Math.hypot(grid[idx][0] - lat, grid[idx][1] - lon) * 120;
+			if (score > bestScore) {
+				bestScore = score;
+				bestIdx = idx;
+			}
+		});
+		if (bestIdx >= 0) {
+			if ((arr[bestIdx]?.daily?.river_discharge?.[0] ?? 0) >= minQ) {
+				const snapped = {
+					lat: grid[bestIdx][0],
+					lon: grid[bestIdx][1]
+				};
+				channelSnapCache.set(cacheKey, snapped);
+				return snapped;
+			}
+		}
+	} catch (err) {
+		console.warn(`GloFAS channel snap (${cacheKey}) warning:`, err instanceof Error ? err.message : err);
+	}
+	return null;
+}
+function decodeHtmlEntities(input) {
+	const named = {
+		"&aacute;": "á",
+		"&eacute;": "é",
+		"&iacute;": "í",
+		"&oacute;": "ó",
+		"&uacute;": "ú",
+		"&ucirc;": "û",
+		"&Ucirc;": "Û",
+		"&ouml;": "ö",
+		"&Ouml;": "Ö",
+		"&uuml;": "ü",
+		"&Uuml;": "Ü",
+		"&scaron;": "š",
+		"&Scaron;": "Š",
+		"&amp;": "&"
+	};
+	let s = input;
+	for (const [k, v] of Object.entries(named)) s = s.split(k).join(v);
+	s = s.replace(/&#(\d+);/g, (_, num) => String.fromCharCode(Number(num)));
+	return s;
+}
+function parseNumericCell(raw) {
+	const cleaned = raw.trim();
+	if (!cleaned || cleaned === "//" || cleaned === "-" || cleaned === "---") return null;
+	const n = Number(cleaned.replace(",", "."));
+	return Number.isFinite(n) ? n : null;
+}
+async function fetchHydroinfoDanube() {
+	const rows = /* @__PURE__ */ new Map();
+	let observedDateLabel = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
+	let live = false;
+	try {
+		const [hText, html] = await Promise.all([activeHttpTransport.getText("https://www.hydroinfo.hu/tables/ENG/dunhid_f.html", 9e3, "utf-8"), activeHttpTransport.getText("https://www.hydroinfo.hu/tables/ENG/dunhif_a.html", 1e4, "latin1")]);
+		if (hText) {
+			const dateMatch = hText.match(/Observed on:\s*([^<\n]+)/i);
+			if (dateMatch?.[1]) observedDateLabel = dateMatch[1].replace(/\s+/g, " ").trim();
+		}
+		if (html) {
+			const trMatches = html.match(/<tr[\s\S]*?<\/tr>/gi) || [];
+			for (const tr of trMatches) {
+				const tds = [...tr.matchAll(/<td[^>]*>([\s\S]*?)<\/td>/gi)].map((m) => decodeHtmlEntities(m[1].replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim()));
+				if (tds.length < 7) continue;
+				const code = tds[0];
+				const name = tds[1];
+				const river = tds[2];
+				if (!/^\d{6}$/.test(code) || !/^Danube$/i.test(river)) continue;
+				rows.set(code, {
+					code,
+					name,
+					yesterdayMorningCm: parseNumericCell(tds[3]),
+					yesterdayEveningCm: parseNumericCell(tds[4]),
+					todayMorningCm: parseNumericCell(tds[5]),
+					change24hCm: parseNumericCell(tds[6]),
+					dischargeM3s: parseNumericCell(tds[7] ?? ""),
+					waterTempC: parseNumericCell(tds[8] ?? ""),
+					iceCondition: tds[9] && tds[9] !== "//" ? tds[9] : null
+				});
+			}
+			if (rows.size > 20) live = true;
+		}
+	} catch (err) {
+		console.warn("Hydroinfo fetch warning:", err instanceof Error ? err.message : err);
+	}
+	return {
+		observedDateLabel,
+		rows,
+		live
+	};
+}
+async function fetchPegelonlineDanube() {
+	const map = /* @__PURE__ */ new Map();
+	let live = false;
+	try {
+		const data = await activeHttpTransport.getJson("https://www.pegelonline.wsv.de/webservices/rest-api/v2/stations.json?waters=DONAU&includeTimeseries=true&includeCurrentMeasurement=true", 9e3);
+		if (Array.isArray(data)) {
+			for (const st of data) map.set(st.shortname.toLowerCase(), st);
+			if (map.size > 0) live = true;
+		}
+	} catch (err) {
+		console.warn("Pegelonline fetch warning:", err instanceof Error ? err.message : err);
+	}
+	return {
+		stations: map,
+		live
+	};
+}
+async function fetchBasinPrecipitation14d() {
+	const url = `https://api.open-meteo.com/v1/forecast?latitude=${BASIN_ZONES_META.map((z) => z.lat).join(",")}&longitude=${BASIN_ZONES_META.map((z) => z.lon).join(",")}&daily=precipitation_sum&forecast_days=14&timezone=UTC`;
+	try {
+		const json = await activeHttpTransport.getJson(url, 1e4);
+		if (json) {
+			const arr = Array.isArray(json) ? json : [json];
+			return BASIN_ZONES_META.map((meta, idx) => {
+				const entry = arr[idx]?.daily;
+				const times = entry?.time ?? [];
+				const precips = entry?.precipitation_sum ?? [];
+				const daily = times.map((date, i) => ({
+					date,
+					precipitationMm: Number((precips[i] ?? 0).toFixed(1))
+				}));
+				const total14dMm = Number(daily.reduce((sum, d) => sum + d.precipitationMm, 0).toFixed(1));
+				const maxDailyMm = Number(Math.max(0, ...daily.map((d) => d.precipitationMm)).toFixed(1));
+				return {
+					...meta,
+					total14dMm,
+					maxDailyMm,
+					daily
+				};
+			});
+		}
+	} catch (err) {
+		console.warn("Open-Meteo precipitation fetch warning:", err instanceof Error ? err.message : err);
+	}
+	const today = /* @__PURE__ */ new Date();
+	return BASIN_ZONES_META.map((meta) => ({
+		...meta,
+		total14dMm: 0,
+		maxDailyMm: 0,
+		daily: Array.from({ length: 14 }, (_, i) => {
+			return {
+				date: new Date(today.getTime() + i * 864e5).toISOString().slice(0, 10),
+				precipitationMm: 0
+			};
+		})
+	}));
+}
+function summarizeGlofasSeries(histDates, histQ, fcDates, fcQ) {
+	const validHist = histQ.filter((v) => v !== null && Number.isFinite(v) && v > 0);
+	const sorted = [...validHist].sort((a, b) => a - b);
+	const mean10Yr = validHist.length > 0 ? validHist.reduce((s, v) => s + v, 0) / validHist.length : 3500;
+	const p05_10Yr = sorted.length > 0 ? sorted[Math.floor(sorted.length * .05)] : mean10Yr * .5;
+	const p95_10Yr = sorted.length > 0 ? sorted[Math.floor(sorted.length * .95)] : mean10Yr * 1.85;
+	const monthBuckets = Array.from({ length: 12 }, () => []);
+	for (let i = 0; i < histDates.length; i++) {
+		const val = histQ[i];
+		if (val === null || !Number.isFinite(val)) continue;
+		const m = Number(histDates[i].slice(5, 7)) - 1;
+		if (m >= 0 && m < 12) monthBuckets[m].push(val);
+	}
+	const monthLabels = [
+		"Ian",
+		"Feb",
+		"Mar",
+		"Apr",
+		"Mai",
+		"Iun",
+		"Iul",
+		"Aug",
+		"Sep",
+		"Oct",
+		"Nov",
+		"Dec"
+	];
+	const monthlyMeans = monthBuckets.map((vals, idx) => {
+		const avg = vals.length > 0 ? vals.reduce((a, b) => a + b, 0) / vals.length : mean10Yr;
+		const min = vals.length > 0 ? Math.min(...vals) : mean10Yr * .5;
+		const max = vals.length > 0 ? Math.max(...vals) : mean10Yr * 1.8;
+		return {
+			month: monthLabels[idx],
+			meanQ: avg,
+			minQ: min,
+			maxQ: max
+		};
+	});
+	const cleanFc = fcQ.map((v) => v !== null && Number.isFinite(v) ? v : mean10Yr * .65);
+	const todayDischarge = cleanFc[0] ?? mean10Yr * .65;
+	const history30d = [];
+	const startIdx = Math.max(0, histDates.length - 30);
+	for (let i = startIdx; i < histDates.length; i++) {
+		const q = histQ[i];
+		if (q !== null && Number.isFinite(q)) history30d.push({
+			date: histDates[i],
+			q
+		});
+	}
+	return {
+		todayDischarge,
+		mean10Yr,
+		p05_10Yr,
+		p95_10Yr,
+		forecast14dDates: fcDates,
+		forecast14dDischarge: cleanFc,
+		monthlyMeans,
+		history30d
+	};
+}
+async function fetchGlofasForZoneAnchors() {
+	const result = /* @__PURE__ */ new Map();
+	const lats = BASIN_ZONES_META.map((z) => z.lat).join(",");
+	const lons = BASIN_ZONES_META.map((z) => z.lon).join(",");
+	const histUrl = `https://flood-api.open-meteo.com/v1/flood?latitude=${lats}&longitude=${lons}&daily=river_discharge&start_date=2016-01-01&end_date=${(/* @__PURE__ */ new Date(Date.now() - 864e5)).toISOString().slice(0, 10)}`;
+	const fcUrl = `https://flood-api.open-meteo.com/v1/flood?latitude=${lats}&longitude=${lons}&daily=river_discharge&forecast_days=14&past_days=30`;
+	try {
+		const [histJson, fcJson] = await Promise.all([activeHttpTransport.getJson(histUrl, 14e3), activeHttpTransport.getJson(fcUrl, 1e4)]);
+		if (Array.isArray(histJson) && Array.isArray(fcJson)) BASIN_ZONES_META.forEach((zone, idx) => {
+			const h = histJson[idx]?.daily;
+			const f = fcJson[idx]?.daily;
+			if (h && f) {
+				const todayIso = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
+				let splitIdx = f.time.findIndex((t) => t >= todayIso);
+				if (splitIdx < 0) splitIdx = Math.max(0, f.time.length - 14);
+				const recentDates = f.time.slice(0, splitIdx);
+				const recentQ = f.river_discharge.slice(0, splitIdx);
+				const fcDates = f.time.slice(splitIdx, splitIdx + 14);
+				const fcQ = f.river_discharge.slice(splitIdx, splitIdx + 14);
+				const stats = summarizeGlofasSeries(h.time, h.river_discharge, fcDates, fcQ);
+				stats.history30d = recentDates.map((date, i) => ({
+					date,
+					q: recentQ[i] ?? stats.todayDischarge
+				}));
+				result.set(zone.id, stats);
+			}
+		});
+	} catch (err) {
+		console.warn("GloFAS batch zone fetch warning:", err instanceof Error ? err.message : err);
+	}
+	return result;
+}
+async function fetchGlofasForSingleStation(lat, lon, cacheKey, km) {
+	const cached = stationGlofasCache.get(cacheKey);
+	if (cached && Date.now() - cached.timestamp < DETAIL_CACHE_TTL_MS) return cached.stats;
+	const snapped = await resolveDanubeChannelCoords(lat, lon, cacheKey, km);
+	if (!snapped) return null;
+	const endHist = (/* @__PURE__ */ new Date(Date.now() - 864e5)).toISOString().slice(0, 10);
+	const histUrl = `https://flood-api.open-meteo.com/v1/flood?latitude=${snapped.lat}&longitude=${snapped.lon}&daily=river_discharge&start_date=2016-01-01&end_date=${endHist}`;
+	const fcUrl = `https://flood-api.open-meteo.com/v1/flood?latitude=${snapped.lat}&longitude=${snapped.lon}&daily=river_discharge&forecast_days=14&past_days=30`;
+	try {
+		const [histJson, fcJson] = await Promise.all([activeHttpTransport.getJson(histUrl, 12e3), activeHttpTransport.getJson(fcUrl, 1e4)]);
+		if (histJson?.daily && fcJson?.daily) {
+			const todayIso = (/* @__PURE__ */ new Date()).toISOString().slice(0, 10);
+			let splitIdx = fcJson.daily.time.findIndex((t) => t >= todayIso);
+			if (splitIdx < 0) splitIdx = Math.max(0, fcJson.daily.time.length - 14);
+			const recentDates = fcJson.daily.time.slice(0, splitIdx);
+			const recentQ = fcJson.daily.river_discharge.slice(0, splitIdx);
+			const fcDates = fcJson.daily.time.slice(splitIdx, splitIdx + 14);
+			const fcQ = fcJson.daily.river_discharge.slice(splitIdx, splitIdx + 14);
+			const stats = summarizeGlofasSeries(histJson.daily.time, histJson.daily.river_discharge, fcDates, fcQ);
+			const minQ = minPlausibleDanubeDischarge(km);
+			if (stats.todayDischarge < minQ || stats.mean10Yr < minQ) return null;
+			stats.history30d = recentDates.map((date, i) => ({
+				date,
+				q: recentQ[i] ?? stats.todayDischarge
+			}));
+			stationGlofasCache.set(cacheKey, {
+				timestamp: Date.now(),
+				stats
+			});
+			return stats;
+		}
+	} catch (err) {
+		console.warn(`GloFAS single station (${cacheKey}) warning:`, err instanceof Error ? err.message : err);
+	}
+	return null;
+}
+function computeStatus(currentCm, thresholds, tenYearAvgCm) {
+	if (thresholds.cp !== null && currentCm >= thresholds.cp) return "danger";
+	if (thresholds.ci !== null && currentCm >= thresholds.ci) return "flood";
+	if (thresholds.ca !== null && currentCm >= thresholds.ca) return "attention";
+	if (currentCm < tenYearAvgCm - 10) return "below_avg";
+	return "nominal";
+}
+function buildStationForecasts(meta, currentCm, change24hCm, glofas, basinZones) {
+	const localZone = basinZones.find((z) => z.id === meta.basinZoneId) ?? basinZones[0];
+	const zoneOrder = [
+		"upper_de_at",
+		"pannonian_sk_hu",
+		"drava_sava_tisza",
+		"iron_gates_west",
+		"lower_ro_bg",
+		"delta_siret_prut"
+	];
+	const myZoneIdx = zoneOrder.indexOf(meta.basinZoneId);
+	const upstreamZones = basinZones.filter((z) => zoneOrder.indexOf(z.id) <= myZoneIdx);
+	const forecast14d = [];
+	const baseQ = glofas.todayDischarge > 0 ? glofas.todayDischarge : glofas.mean10Yr;
+	for (let day = 0; day < 14; day++) {
+		const date = glofas.forecast14dDates[day] ?? new Date(Date.now() + (day + 1) * 864e5).toISOString().slice(0, 10);
+		const qDay = glofas.forecast14dDischarge[day] ?? baseQ;
+		const glofasStageDelta = (qDay - baseQ) / 1e3 * meta.stageSensitivityCmPer1000M3s;
+		const momentumDelta = change24hCm * (day === 0 ? .55 : day === 1 ? .35 : day === 2 ? .15 : 0);
+		let routedPrecipMm = 0;
+		for (const uz of upstreamZones) {
+			const zIdx = zoneOrder.indexOf(uz.id);
+			const travelDays = Math.max(0, Math.min(8, (myZoneIdx - zIdx) * 2));
+			const rainDayIdx = Math.max(0, day - travelDays);
+			const pVal = uz.daily[rainDayIdx]?.precipitationMm ?? 0;
+			const weight = uz.id === meta.basinZoneId ? 1 : .65 / Math.max(1, myZoneIdx - zIdx + 1);
+			routedPrecipMm += pVal * weight;
+		}
+		const localPrecipMm = localZone?.daily[day]?.precipitationMm ?? 0;
+		const precipRunoffCm = routedPrecipMm * .42;
+		const predictedCm = Math.round(currentCm + glofasStageDelta + momentumDelta + precipRunoffCm);
+		const uncertaintyCm = Math.round(8 + day * 3.8);
+		forecast14d.push({
+			date,
+			predictedCm,
+			minCm: predictedCm - uncertaintyCm,
+			maxCm: predictedCm + uncertaintyCm,
+			dischargeM3s: Math.round(qDay),
+			localPrecipMm: Number(localPrecipMm.toFixed(1)),
+			upstreamBasinPrecipMm: Number(routedPrecipMm.toFixed(1)),
+			horizon: day < 3 ? "short_3d" : "long_14d"
+		});
+	}
+	return {
+		forecast3d: forecast14d.slice(0, 3),
+		forecast14d
+	};
+}
+function evaluateAlerts(stations) {
+	const alerts = [];
+	const nowIso = (/* @__PURE__ */ new Date()).toISOString();
+	for (const st of stations) if (st.thresholds.cp !== null && st.currentLevelCm >= st.thresholds.cp) alerts.push({
+		id: `${st.id}-cp`,
+		stationId: st.id,
+		stationName: st.name,
+		country: st.country,
+		km: st.km,
+		type: "flood_cp",
+		severity: "critical",
+		currentLevelCm: st.currentLevelCm,
+		referenceCm: st.thresholds.cp,
+		deltaCm: st.currentLevelCm - st.thresholds.cp,
+		message: `${st.name} (km ${st.km}): Cota curentă ${st.currentLevelCm} cm depășește Cota de Pericol (${st.thresholds.cp} cm) cu +${st.currentLevelCm - st.thresholds.cp} cm.`,
+		timestamp: nowIso
+	});
+	else if (st.thresholds.ci !== null && st.currentLevelCm >= st.thresholds.ci) alerts.push({
+		id: `${st.id}-ci`,
+		stationId: st.id,
+		stationName: st.name,
+		country: st.country,
+		km: st.km,
+		type: "flood_ci",
+		severity: "high",
+		currentLevelCm: st.currentLevelCm,
+		referenceCm: st.thresholds.ci,
+		deltaCm: st.currentLevelCm - st.thresholds.ci,
+		message: `${st.name} (km ${st.km}): Cota curentă ${st.currentLevelCm} cm depășește Cota de Inundație (${st.thresholds.ci} cm) cu +${st.currentLevelCm - st.thresholds.ci} cm.`,
+		timestamp: nowIso
+	});
+	else if (st.thresholds.ca !== null && st.currentLevelCm >= st.thresholds.ca) alerts.push({
+		id: `${st.id}-ca`,
+		stationId: st.id,
+		stationName: st.name,
+		country: st.country,
+		km: st.km,
+		type: "flood_ca",
+		severity: "warning",
+		currentLevelCm: st.currentLevelCm,
+		referenceCm: st.thresholds.ca,
+		deltaCm: st.currentLevelCm - st.thresholds.ca,
+		message: `${st.name} (km ${st.km}): Cota curentă ${st.currentLevelCm} cm depășește Cota de Atenție (${st.thresholds.ca} cm).`,
+		timestamp: nowIso
+	});
+	else if (st.deviationFrom10YrCm <= -15) alerts.push({
+		id: `${st.id}-low10y`,
+		stationId: st.id,
+		stationName: st.name,
+		country: st.country,
+		km: st.km,
+		type: "below_10yr_avg",
+		severity: st.deviationFrom10YrCm <= -90 ? "warning" : "info",
+		currentLevelCm: st.currentLevelCm,
+		referenceCm: st.tenYearAvgCm,
+		deltaCm: st.deviationFrom10YrCm,
+		message: `${st.name} (km ${st.km}): Nivel scăzut (${st.currentLevelCm} cm), cu ${Math.abs(st.deviationFrom10YrCm)} cm sub media multianuală pe 10 ani (${st.tenYearAvgCm} cm).`,
+		timestamp: nowIso
+	});
+	const rank = {
+		critical: 0,
+		high: 1,
+		warning: 2,
+		info: 3
+	};
+	return alerts.sort((a, b) => rank[a.severity] - rank[b.severity] || Math.abs(b.deltaCm) - Math.abs(a.deltaCm));
+}
+async function getDanubeOverview(forceRefresh = false) {
+	if (!forceRefresh && overviewCache && Date.now() - overviewCache.timestamp < OVERVIEW_CACHE_TTL_MS) return overviewCache.data;
+	const [hydroinfo, pegel, basinZones, glofasZones] = await Promise.all([
+		fetchHydroinfoDanube(),
+		fetchPegelonlineDanube(),
+		fetchBasinPrecipitation14d(),
+		fetchGlofasForZoneAnchors()
+	]);
+	const stations = [];
+	for (const meta of DANUBE_STATIONS_META) {
+		const hRow = hydroinfo.rows.get(meta.code);
+		let pegelMatch;
+		for (const key of meta.matchKeys) {
+			for (const [pKey, pVal] of pegel.stations.entries()) if (pKey.includes(key) && (pVal.km === void 0 || Math.abs(pVal.km - meta.km) < 6)) {
+				pegelMatch = pVal;
+				break;
+			}
+			if (pegelMatch) break;
+		}
+		const pegelLevel = pegelMatch?.timeseries?.find((t) => t.shortname === "W")?.currentMeasurement?.value;
+		const pegelTs = pegelMatch?.timeseries?.find((t) => t.shortname === "W")?.currentMeasurement?.timestamp;
+		const currentLevelCm = hRow?.todayMorningCm ?? (pegelLevel !== void 0 ? Math.round(pegelLevel) : hRow?.yesterdayMorningCm ?? null);
+		if (currentLevelCm === null) continue;
+		const change24hCm = hRow?.change24hCm ?? (hRow?.yesterdayMorningCm !== null && hRow?.yesterdayMorningCm !== void 0 ? currentLevelCm - hRow.yesterdayMorningCm : 0);
+		const glofas = glofasZones.get(meta.basinZoneId) ?? {
+			todayDischarge: hRow?.dischargeM3s ?? 3200,
+			mean10Yr: 4500,
+			p05_10Yr: 2100,
+			p95_10Yr: 8200,
+			forecast14dDates: [],
+			forecast14dDischarge: [],
+			monthlyMeans: [],
+			history30d: []
+		};
+		const tenYearAvgCm = Math.round(currentLevelCm + (glofas.mean10Yr - glofas.todayDischarge) / 1e3 * meta.stageSensitivityCmPer1000M3s);
+		const tenYearMinCm = Math.round(currentLevelCm + (glofas.p05_10Yr - glofas.todayDischarge) / 1e3 * meta.stageSensitivityCmPer1000M3s);
+		const tenYearMaxCm = Math.round(currentLevelCm + (glofas.p95_10Yr - glofas.todayDischarge) / 1e3 * meta.stageSensitivityCmPer1000M3s);
+		const deviationFrom10YrCm = currentLevelCm - tenYearAvgCm;
+		const { forecast3d, forecast14d } = buildStationForecasts(meta, currentLevelCm, change24hCm, glofas, basinZones);
+		const status = computeStatus(currentLevelCm, meta.thresholds, tenYearAvgCm);
+		stations.push({
+			id: meta.code,
+			code: meta.code,
+			name: meta.displayName,
+			country: meta.country,
+			sector: meta.sector,
+			basinZoneId: meta.basinZoneId,
+			km: meta.km,
+			lat: pegelMatch?.latitude ?? meta.lat,
+			lon: pegelMatch?.longitude ?? meta.lon,
+			agency: meta.agency,
+			sourceUrl: pegelMatch && !hRow ? "https://www.pegelonline.wsv.de" : "https://www.hydroinfo.hu/en/hidinfo/duna.html",
+			currentLevelCm,
+			yesterdayMorningCm: hRow?.yesterdayMorningCm ?? null,
+			yesterdayEveningCm: hRow?.yesterdayEveningCm ?? null,
+			change24hCm,
+			dischargeM3s: hRow?.dischargeM3s ?? null,
+			glofasDischargeM3s: Math.round(glofas.todayDischarge),
+			waterTempC: hRow?.waterTempC ?? null,
+			iceCondition: hRow?.iceCondition ?? null,
+			thresholds: meta.thresholds,
+			tenYearAvgCm,
+			tenYearMinCm,
+			tenYearMaxCm,
+			deviationFrom10YrCm,
+			forecast3dCm: forecast3d[2]?.predictedCm ?? currentLevelCm,
+			forecast14dCm: forecast14d[13]?.predictedCm ?? currentLevelCm,
+			status,
+			observedAt: pegelTs ?? hydroinfo.observedDateLabel,
+			pegelUuid: pegelMatch?.uuid
+		});
+	}
+	stations.sort((a, b) => b.km - a.km);
+	const alerts = evaluateAlerts(stations);
+	const response = {
+		observedDateLabel: hydroinfo.observedDateLabel,
+		fetchedAt: (/* @__PURE__ */ new Date()).toISOString(),
+		sources: [
+			{
+				name: "OVF Hydroinfo Danube Exchange (AFDJ / INHGA / RHMZ / SHMÚ)",
+				authority: "Schimb Oficial de Date Hidrologice Bazinul Dunării",
+				url: "https://www.hydroinfo.hu/en/hidinfo/duna.html",
+				status: hydroinfo.live ? "live" : "cached"
+			},
+			{
+				name: "WSV / VIA DONAU Pegelonline REST API v2",
+				authority: "Wasserstraßen- und Schifffahrtsverwaltung (DE / AT)",
+				url: "https://www.pegelonline.wsv.de/",
+				status: pegel.live ? "live" : "cached"
+			},
+			{
+				name: "Copernicus EMS GloFAS v4 (Reanaliză 2016–2025 & Prognoză)",
+				authority: "Centrul European ECMWF / Copernicus",
+				url: "https://flood-api.open-meteo.com/",
+				status: glofasZones.size > 0 ? "live" : "cached"
+			},
+			{
+				name: "ECMWF / DWD ICON Regim Pluviometric Bazin Dunăre",
+				authority: "Serviciul Meteorologic European (14 zile)",
+				url: "https://api.open-meteo.com/",
+				status: basinZones.some((b) => b.daily.length > 0) ? "live" : "cached"
+			}
+		],
+		stations,
+		alerts,
+		basinZones
+	};
+	overviewCache = {
+		timestamp: Date.now(),
+		data: response,
+		glofasZones
+	};
+	return response;
+}
+async function getStationDetail(stationId) {
+	const overview = await getDanubeOverview();
+	const station = overview.stations.find((s) => s.id === stationId);
+	if (!station) return null;
+	const meta = DANUBE_STATIONS_META.find((m) => m.code === station.code);
+	if (!meta) return null;
+	const exactGlofas = await fetchGlofasForSingleStation(station.lat, station.lon, station.id, station.km);
+	const zoneGlofas = overviewCache?.glofasZones.get(meta.basinZoneId) ?? null;
+	const glofas = exactGlofas ?? zoneGlofas ?? {
+		todayDischarge: station.glofasDischargeM3s,
+		mean10Yr: station.glofasDischargeM3s,
+		p05_10Yr: station.glofasDischargeM3s * .6,
+		p95_10Yr: station.glofasDischargeM3s * 1.7,
+		forecast14dDates: overview.basinZones[0]?.daily.map((d) => d.date) ?? [],
+		forecast14dDischarge: Array(14).fill(station.glofasDischargeM3s),
+		monthlyMeans: [],
+		history30d: []
+	};
+	let calibratedStation = station;
+	if (exactGlofas) {
+		const tenYearAvgCm = Math.round(station.currentLevelCm + (exactGlofas.mean10Yr - exactGlofas.todayDischarge) / 1e3 * meta.stageSensitivityCmPer1000M3s);
+		const tenYearMinCm = Math.round(station.currentLevelCm + (exactGlofas.p05_10Yr - exactGlofas.todayDischarge) / 1e3 * meta.stageSensitivityCmPer1000M3s);
+		const tenYearMaxCm = Math.round(station.currentLevelCm + (exactGlofas.p95_10Yr - exactGlofas.todayDischarge) / 1e3 * meta.stageSensitivityCmPer1000M3s);
+		calibratedStation = {
+			...station,
+			tenYearAvgCm,
+			tenYearMinCm,
+			tenYearMaxCm,
+			deviationFrom10YrCm: station.currentLevelCm - tenYearAvgCm,
+			glofasDischargeM3s: Math.round(exactGlofas.todayDischarge),
+			status: computeStatus(station.currentLevelCm, station.thresholds, tenYearAvgCm)
+		};
+	}
+	const { forecast3d, forecast14d } = buildStationForecasts(meta, calibratedStation.currentLevelCm, calibratedStation.change24hCm, glofas, overview.basinZones);
+	let history30d = [];
+	if (station.pegelUuid) try {
+		const measurements = await activeHttpTransport.getJson(`https://www.pegelonline.wsv.de/webservices/rest-api/v2/stations/${station.pegelUuid}/W/measurements.json?start=P30D`, 8e3);
+		if (Array.isArray(measurements)) {
+			const byDay = /* @__PURE__ */ new Map();
+			for (const m of measurements) {
+				const day = m.timestamp.slice(0, 10);
+				const list = byDay.get(day) ?? [];
+				list.push(m.value);
+				byDay.set(day, list);
+			}
+			history30d = [...byDay.entries()].map(([date, vals]) => {
+				return {
+					date,
+					levelCm: Math.round(vals.reduce((a, b) => a + b, 0) / vals.length),
+					dischargeM3s: calibratedStation.dischargeM3s ?? calibratedStation.glofasDischargeM3s,
+					tenYearClimatologyCm: calibratedStation.tenYearAvgCm,
+					source: "pegelonline_15m"
+				};
+			});
+		}
+	} catch {}
+	if (history30d.length === 0) history30d = glofas.history30d.map((pt) => {
+		const levelCm = Math.round(calibratedStation.currentLevelCm + (pt.q - glofas.todayDischarge) / 1e3 * meta.stageSensitivityCmPer1000M3s);
+		return {
+			date: pt.date,
+			levelCm,
+			dischargeM3s: Math.round(pt.q),
+			tenYearClimatologyCm: calibratedStation.tenYearAvgCm,
+			source: "glofas_reanalysis"
+		};
+	});
+	const monthlyClimatology10Yr = glofas.monthlyMeans.map((m) => ({
+		month: m.month,
+		avgCm: Math.round(calibratedStation.currentLevelCm + (m.meanQ - glofas.todayDischarge) / 1e3 * meta.stageSensitivityCmPer1000M3s),
+		minCm: Math.round(calibratedStation.currentLevelCm + (m.minQ - glofas.todayDischarge) / 1e3 * meta.stageSensitivityCmPer1000M3s),
+		maxCm: Math.round(calibratedStation.currentLevelCm + (m.maxQ - glofas.todayDischarge) / 1e3 * meta.stageSensitivityCmPer1000M3s)
+	}));
+	return {
+		station: calibratedStation,
+		forecast3d,
+		forecast14d,
+		history30d,
+		monthlyClimatology10Yr,
+		basinZones: overview.basinZones,
+		methodologyNote: "Cotele curente provin din schimbul oficial de date al bazinului Dunării (OVF Hydroinfo / AFDJ Galați / INHGA / WSV Pegelonline). Media multianuală pe 10 ani (2016–2025) și prognoza la 3 și 14 zile integrează debitul modelat Copernicus GloFAS v4 cu precipitațiile ECMWF/ICON din sub-bazinele amonte."
+	};
+}
+// src/services/apiClient.ts
+var OVERVIEW_STORAGE_KEY = "hidrodunare_last_overview_v1";
+var nativeTransportInitialized = false;
+function decodeBase64ToLatin1(b64) {
+	const cleaned = b64.replace(/\s+/g, "");
+	const binary = atob(cleaned);
+	const bytes = new Uint8Array(binary.length);
+	for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+	return new TextDecoder("latin1").decode(bytes);
+}
+var capacitorNativeTransport = {
+	async getJson(url, timeoutMs) {
+		const res = await CapacitorHttp.get({
+			url,
+			connectTimeout: timeoutMs,
+			readTimeout: timeoutMs,
+			responseType: "json",
+			headers: { Accept: "application/json" }
+		});
+		if (res.status < 200 || res.status >= 300) return null;
+		if (typeof res.data === "string") try {
+			return JSON.parse(res.data);
+		} catch {
+			return null;
+		}
+		return res.data ?? null;
+	},
+	async getText(url, timeoutMs, encoding = "utf-8") {
+		const res = await CapacitorHttp.get({
+			url,
+			connectTimeout: timeoutMs,
+			readTimeout: timeoutMs,
+			responseType: encoding === "latin1" ? "arraybuffer" : "text"
+		});
+		if (res.status < 200 || res.status >= 300) return null;
+		if (res.data == null) return null;
+		if (encoding === "latin1" && typeof res.data === "string") try {
+			return decodeBase64ToLatin1(res.data);
+		} catch {
+			return res.data;
+		}
+		return typeof res.data === "string" ? res.data : String(res.data);
+	}
+};
+function isStandaloneNativeApp() {
+	if (typeof window === "undefined") return false;
+	if (!Capacitor.isNativePlatform()) return false;
+	const host = window.location.hostname;
+	const proto = window.location.protocol;
+	return host === "localhost" || host === "127.0.0.1" || proto === "capacitor:" || proto === "file:";
+}
+function ensureNativeTransport() {
+	if (Capacitor.isNativePlatform() && !nativeTransportInitialized) {
+		setHydrologyHttpTransport(capacitorNativeTransport);
+		nativeTransportInitialized = true;
+	}
+}
+function saveOverviewCache(data) {
+	try {
+		localStorage.setItem(OVERVIEW_STORAGE_KEY, JSON.stringify(data));
+	} catch {}
+}
+function loadOverviewCache() {
+	try {
+		const raw = localStorage.getItem(OVERVIEW_STORAGE_KEY);
+		if (!raw) return null;
+		const parsed = JSON.parse(raw);
+		return Array.isArray(parsed.stations) && parsed.stations.length > 0 ? parsed : null;
+	} catch {
+		return null;
+	}
+}
+async function fetchJsonIfBackendAvailable(url) {
+	const res = await fetch(url, { headers: { Accept: "application/json" } });
+	if (!res.ok) return null;
+	if (!(res.headers.get("content-type") ?? "").toLowerCase().includes("application/json")) return null;
+	return await res.json();
+}
+async function fetchOverviewData(forceRefresh = false) {
+	if (isStandaloneNativeApp()) {
+		ensureNativeTransport();
+		try {
+			const data = await getDanubeOverview(forceRefresh);
+			if (data.stations.length > 0) {
+				saveOverviewCache(data);
+				return data;
+			}
+			const cached = loadOverviewCache();
+			if (cached) return cached;
+			throw new Error("Nu s-au putut încărca datele oficiale. Verificați conexiunea la internet.");
+		} catch (err) {
+			const cached = loadOverviewCache();
+			if (cached) return cached;
+			throw err;
+		}
+	}
+	try {
+		const backendData = await fetchJsonIfBackendAvailable(`/api/overview${forceRefresh ? "?refresh=1" : ""}`);
+		if (backendData) {
+			saveOverviewCache(backendData);
+			return backendData;
+		}
+	} catch {}
+	ensureNativeTransport();
+	try {
+		const directData = await getDanubeOverview(forceRefresh);
+		if (directData.stations.length > 0) {
+			saveOverviewCache(directData);
+			return directData;
+		}
+	} catch {}
+	const cached = loadOverviewCache();
+	if (cached) return cached;
+	throw new Error("Nu s-a putut stabili conexiunea cu sursele hidrologice oficiale.");
+}
+async function fetchStationDetailData(stationId) {
+	if (!stationId) return null;
+	if (isStandaloneNativeApp()) {
+		ensureNativeTransport();
+		return await getStationDetail(stationId);
+	}
+	try {
+		const backendDetail = await fetchJsonIfBackendAvailable(`/api/stations/${encodeURIComponent(stationId)}`);
+		if (backendDetail) return backendDetail;
+	} catch {}
+	ensureNativeTransport();
+	return await getStationDetail(stationId);
+}
 // src/App.tsx
 function App() {
 	const [activeTab, setActiveTab] = (0, import_react.useState)("dashboard");
@@ -47134,9 +49842,7 @@ function App() {
 		setLoadingOverview(true);
 		setOverviewError(null);
 		try {
-			const res = await fetch(`/api/overview${forceRefresh ? "?refresh=1" : ""}`);
-			if (!res.ok) throw new Error(`HTTP ${res.status}`);
-			const data = await res.json();
+			const data = await fetchOverviewData(forceRefresh);
 			setOverview(data);
 			setSelectedStationId((prev) => {
 				if (data.stations.some((s) => s.id === prev)) return prev;
@@ -47155,10 +49861,8 @@ function App() {
 		if (!stationId) return;
 		setLoadingDetail(true);
 		try {
-			const res = await fetch(`/api/stations/${encodeURIComponent(stationId)}`);
-			if (!res.ok) throw new Error(`HTTP ${res.status}`);
-			const data = await res.json();
-			setStationDetail(data);
+			const data = await fetchStationDetailData(stationId);
+			if (data) setStationDetail(data);
 		} catch (err) {
 			console.warn("Station detail load error:", err);
 		} finally {
@@ -47169,6 +49873,12 @@ function App() {
 		if (selectedStationId) fetchStationDetail(selectedStationId);
 	}, [selectedStationId, fetchStationDetail]);
 	(0, import_react.useEffect)(() => {
+		if (isStandaloneNativeApp()) {
+			const timer = setInterval(() => {
+				fetchOverview(true);
+			}, 9e5);
+			return () => clearInterval(timer);
+		}
 		const es = new EventSource("/api/alerts/stream");
 		es.addEventListener("alerts", (ev) => {
 			try {
@@ -47181,7 +49891,7 @@ function App() {
 			} catch {}
 		});
 		return () => es.close();
-	}, []);
+	}, [fetchOverview]);
 	const alerts = overview?.alerts ?? [];
 	const push = usePushAlerts(alerts);
 	const stations = overview?.stations ?? [];
