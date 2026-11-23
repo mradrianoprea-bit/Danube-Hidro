@@ -14,7 +14,7 @@ jobs:
   android-apk:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Locate project directory (package.json)
         id: locate
@@ -30,16 +30,24 @@ jobs:
           echo "Project root detected at: $APP_DIR"
           echo "app_dir=$APP_DIR" >> "$GITHUB_OUTPUT"
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: '22'
 
-      - uses: actions/setup-java@v4
+      - uses: actions/setup-java@v5
         with:
           distribution: 'temurin'
           java-version: '21'
 
-      - uses: android-actions/setup-android@v3
+      - name: Verify preinstalled Android SDK & accept licenses
+        run: |
+          SDK_ROOT="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-/usr/local/lib/android/sdk}}"
+          echo "ANDROID_HOME=$SDK_ROOT" >> "$GITHUB_ENV"
+          echo "ANDROID_SDK_ROOT=$SDK_ROOT" >> "$GITHUB_ENV"
+          SDKMANAGER="$SDK_ROOT/cmdline-tools/latest/bin/sdkmanager"
+          if [ -x "$SDKMANAGER" ]; then
+            yes | "$SDKMANAGER" --licenses > /dev/null 2>&1 || true
+          fi
 
       - name: Install dependencies & build web assets
         working-directory: ${{ steps.locate.outputs.app_dir }}
@@ -86,13 +94,13 @@ jobs:
           ./gradlew assembleRelease bundleRelease
 
       - name: Upload Signed APK Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: HidroDunare-signed-apk
           path: ${{ steps.locate.outputs.app_dir }}/android/app/build/outputs/apk/release/app-release.apk
 
       - name: Upload Signed Google Play AAB Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: HidroDunare-signed-aab
           path: ${{ steps.locate.outputs.app_dir }}/android/app/build/outputs/bundle/release/app-release.aab
