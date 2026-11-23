@@ -1,0 +1,21 @@
+{
+	"appId": "ro.hidrodunare.app",
+	"appName": "HidroDunare",
+	"webDir": "dist",
+	"server": {
+		"androidScheme": "https",
+		"iosScheme": "https"
+	},
+	"plugins": {
+		"PushNotifications": {
+			"presentationOptions": [
+				"badge",
+				"sound",
+				"alert"
+			]
+		}
+	},
+	"packageClassList": [
+		"PushNotificationsPlugin"
+	]
+}

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">HidroDunare</string>
+    <string name="title_activity_main">HidroDunare</string>
+    <string name="package_name">ro.hidrodunare.app</string>
+    <string name="custom_url_scheme">ro.hidrodunare.app</string>
+</resources>

@@ -1,0 +1,8 @@
+{
+  "name": "HidroDunăre — Cotele Apelor Dunării",
+  "description": "Monitorizare oficială a cotelor apelor Dunării, prognoză 3 zile și 14 zile bazată pe regimul pluviometric, alerte push în timp real, hartă interactivă, istoric și export PDF.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

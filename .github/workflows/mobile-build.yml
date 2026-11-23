@@ -1,0 +1,98 @@
+name: Build & Sign Android APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      server_url:
+        description: 'URL public HTTPS al serverului backend (opțional, ex. Cloud Run)'
+        required: false
+        default: ''
+  push:
+    branches: [main]
+
+jobs:
+  android-apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Locate project directory (package.json)
+        id: locate
+        run: |
+          PKG_FILE=$(find . -maxdepth 4 -name "package.json" -not -path "*/node_modules/*" | head -n 1 || true)
+          if [ -z "$PKG_FILE" ]; then
+            echo "::error::Nu a fost găsit fișierul package.json în repository! Verificați că ați încărcat toate fișierele proiectului (package.json, src/, index.html, vite.config.ts, capacitor.config.ts, android/) în GitHub, nu doar folderul .github."
+            echo "Conținut curent al repository-ului:"
+            ls -la
+            exit 1
+          fi
+          APP_DIR=$(dirname "$PKG_FILE")
+          echo "Project root detected at: $APP_DIR"
+          echo "app_dir=$APP_DIR" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Install dependencies & build web assets
+        working-directory: ${{ steps.locate.outputs.app_dir }}
+        env:
+          CAPACITOR_SERVER_URL: ${{ github.event.inputs.server_url || secrets.CAPACITOR_SERVER_URL || '' }}
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci --legacy-peer-deps
+          else
+            npm install --legacy-peer-deps --no-audit --no-fund
+          fi
+          npm run build
+          if [ ! -d android ]; then
+            npx cap add android
+          fi
+          npx cap sync android
+
+      - name: Generate Release Keystore & Signing Properties
+        working-directory: ${{ steps.locate.outputs.app_dir }}
+        env:
+          KEY_PASS: ${{ secrets.ANDROID_KEYSTORE_PASSWORD || 'HidroDunare2026!' }}
+        run: |
+          rm -f android/hidrodunare-release.jks android/keystore.properties
+          keytool -genkeypair -v \
+            -keystore android/hidrodunare-release.jks \
+            -alias hidrodunare \
+            -keyalg RSA \
+            -keysize 2048 \
+            -validity 10000 \
+            -storepass "$KEY_PASS" \
+            -keypass "$KEY_PASS" \
+            -dname "CN=HidroDunare, OU=Hidrologie, O=HidroDunare, L=Bucuresti, S=Bucuresti, C=RO"
+          cat > android/keystore.properties <<EOF
+          storeFile=hidrodunare-release.jks
+          storePassword=$KEY_PASS
+          keyAlias=hidrodunare
+          keyPassword=$KEY_PASS
+          EOF
+
+      - name: Build Signed Release APK & Google Play AAB
+        working-directory: ${{ steps.locate.outputs.app_dir }}/android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleRelease bundleRelease
+
+      - name: Upload Signed APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HidroDunare-signed-apk
+          path: ${{ steps.locate.outputs.app_dir }}/android/app/build/outputs/apk/release/app-release.apk
+
+      - name: Upload Signed Google Play AAB Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: HidroDunare-signed-aab
+          path: ${{ steps.locate.outputs.app_dir }}/android/app/build/outputs/bundle/release/app-release.aab
