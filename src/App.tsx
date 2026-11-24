@@ -1,9 +1,9 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { BellRing, Download, MapPin, Moon, RefreshCw, Search, ShieldAlert, Smartphone, Sun, Table2, X } from 'lucide-react';
+import { BellRing, Download, Info, MapPin, Moon, RefreshCw, Search, ShieldAlert, Smartphone, Sun, Table2, X } from 'lucide-react';
+import { AboutView } from './components/AboutView';
 import { AlertsView } from './components/AlertsView';
 import { DanubeMap } from './components/DanubeMap';
 import type { ChartMode } from './components/HydrographChart';
-import { MobileDeployView } from './components/MobileDeployView';
 import { StationDetailPanel } from './components/StationDetailPanel';
 import { StationsTableView } from './components/StationsTableView';
 import { useOnlineStatus, usePWAInstall } from './hooks/usePWAInstall';
@@ -13,7 +13,7 @@ import type { DanubeStation, OverviewResponse, StationDetailPayload } from './ty
 import { exportBasinBulletinPdf } from './utils/pdfReport';
 import { COUNTRY_NAMES_RO, formatSignedCm, getStatusPresentation } from './utils/statusFormat';
 
-type WorkspaceTab = 'dashboard' | 'table' | 'alerts' | 'mobile';
+type WorkspaceTab = 'dashboard' | 'table' | 'alerts' | 'about';
 type StationListFilter = 'all' | 'ro' | 'flood' | 'below_avg';
 
 export default function App() {
@@ -170,7 +170,7 @@ export default function App() {
               { id: 'dashboard', label: 'Panou & Hartă' },
               { id: 'table', label: 'Stații Dunăre' },
               { id: 'alerts', label: 'Alerte Push' },
-              { id: 'mobile', label: 'Mobil APK & iOS' },
+              { id: 'about', label: 'Despre' },
             ] as const
           ).map((item) => (
             <button
@@ -449,14 +449,15 @@ export default function App() {
             settings={push.settings}
             setSettings={push.setSettings}
             permissionState={push.permissionState}
-            nativeToken={push.nativeToken}
-            onEnablePush={push.requestPushPermission}
+            statusMessage={push.statusMessage}
+            onEnablePush={push.enablePushAlerts}
+            onDisablePush={push.disablePushAlerts}
             onSendTestPush={push.sendTestPushAlert}
             onSelectStation={handleSelectStationFromAnyView}
           />
         )}
 
-        {activeTab === 'mobile' && <MobileDeployView />}
+        {activeTab === 'about' && <AboutView />}
       </main>
 
       {/* Offline Connectivity Indicator */}
@@ -494,7 +495,7 @@ export default function App() {
             { id: 'dashboard', label: 'Hartă', Icon: MapPin },
             { id: 'table', label: 'Stații', Icon: Table2 },
             { id: 'alerts', label: 'Alerte', Icon: BellRing },
-            { id: 'mobile', label: 'APK/iOS', Icon: Smartphone },
+            { id: 'about', label: 'Despre', Icon: Info },
           ] as const
         ).map(({ id, label, Icon }) => {
           const active = activeTab === id;

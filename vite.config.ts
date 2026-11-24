@@ -17,7 +17,7 @@ export default defineConfig(() => {
           id: '/',
           name: 'HidroDunăre — Cotele Apelor Dunării',
           short_name: 'HidroDunăre',
-          description: 'Monitorizare oficială a cotelor apelor Dunării, prognoză 3 zile și 14 zile pluviometrică, alerte push în timp real, hartă și export PDF.',
+          description: 'Date hidrologice și meteorologice oficiale pe întreg cursul Dunării (76 localități, 26 porturi RO Baziaș–Sulina): cotă curentă, prognoză 3/14 zile pluviometrică, alerte push CA/CI/CP, hartă OpenStreetMap, istoric și export PDF.',
           theme_color: '#0369A1',
           background_color: '#F8FAFC',
           display: 'standalone',

@@ -12,8 +12,9 @@ const config: CapacitorConfig = {
     iosScheme: 'https',
   },
   plugins: {
-    PushNotifications: {
-      presentationOptions: ['badge', 'sound', 'alert'],
+    LocalNotifications: {
+      smallIcon: 'ic_launcher',
+      iconColor: '#0369A1',
     },
   },
 };

@@ -11553,6 +11553,30 @@ var ArrowUpDown = createLucideIcon("arrow-up-down", [
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
+var BellOff = createLucideIcon("bell-off", [
+	["path", {
+		d: "M10.268 21a2 2 0 0 0 3.464 0",
+		key: "vwvbt9"
+	}],
+	["path", {
+		d: "M17 17H4a1 1 0 0 1-.74-1.673C4.59 13.956 6 12.499 6 8a6 6 0 0 1 .258-1.742",
+		key: "178tsu"
+	}],
+	["path", {
+		d: "m2 2 20 20",
+		key: "1ooewy"
+	}],
+	["path", {
+		d: "M8.668 3.01A6 6 0 0 1 18 8c0 2.687.77 4.653 1.707 6.05",
+		key: "1hqiys"
+	}]
+]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
 var BellRing = createLucideIcon("bell-ring", [
 	["path", {
 		d: "M10.268 21a2 2 0 0 0 3.464 0",
@@ -11577,28 +11601,23 @@ var BellRing = createLucideIcon("bell-ring", [
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var Check = createLucideIcon("check", [["path", {
-	d: "M20 6 9 17l-5-5",
-	key: "1gmf2c"
-}]]);
-/**
-* @license lucide-react v0.546.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
-var Copy = createLucideIcon("copy", [["rect", {
-	width: "14",
-	height: "14",
-	x: "8",
-	y: "8",
-	rx: "2",
-	ry: "2",
-	key: "17jyea"
-}], ["path", {
-	d: "M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2",
-	key: "zix9uf"
-}]]);
+var Database = createLucideIcon("database", [
+	["ellipse", {
+		cx: "12",
+		cy: "5",
+		rx: "9",
+		ry: "3",
+		key: "msslwz"
+	}],
+	["path", {
+		d: "M3 5V19A9 3 0 0 0 21 19V5",
+		key: "1wlel7"
+	}],
+	["path", {
+		d: "M3 12A9 3 0 0 0 21 12",
+		key: "mv7ke4"
+	}]
+]);
 /**
 * @license lucide-react v0.546.0 - ISC
 *
@@ -11638,6 +11657,34 @@ var Droplets = createLucideIcon("droplets", [["path", {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
+var FileText = createLucideIcon("file-text", [
+	["path", {
+		d: "M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z",
+		key: "1rqfz7"
+	}],
+	["path", {
+		d: "M14 2v4a2 2 0 0 0 2 2h4",
+		key: "tnqrlb"
+	}],
+	["path", {
+		d: "M10 9H8",
+		key: "b1mrlr"
+	}],
+	["path", {
+		d: "M16 13H8",
+		key: "t4e002"
+	}],
+	["path", {
+		d: "M16 17H8",
+		key: "z1uh3a"
+	}]
+]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
 var History = createLucideIcon("history", [
 	["path", {
 		d: "M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8",
@@ -11650,6 +11697,48 @@ var History = createLucideIcon("history", [
 	["path", {
 		d: "M12 7v5l4 2",
 		key: "1fdv2h"
+	}]
+]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Info = createLucideIcon("info", [
+	["circle", {
+		cx: "12",
+		cy: "12",
+		r: "10",
+		key: "1mglay"
+	}],
+	["path", {
+		d: "M12 16v-4",
+		key: "1dtifu"
+	}],
+	["path", {
+		d: "M12 8h.01",
+		key: "e9boi3"
+	}]
+]);
+/**
+* @license lucide-react v0.546.0 - ISC
+*
+* This source code is licensed under the ISC license.
+* See the LICENSE file in the root directory of this source tree.
+*/
+var Layers = createLucideIcon("layers", [
+	["path", {
+		d: "M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z",
+		key: "zw3jo"
+	}],
+	["path", {
+		d: "M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12",
+		key: "1wduqc"
+	}],
+	["path", {
+		d: "M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17",
+		key: "kqbvx6"
 	}]
 ]);
 /**
@@ -11816,19 +11905,6 @@ var Table2 = createLucideIcon("table-2", [["path", {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var Terminal = createLucideIcon("terminal", [["path", {
-	d: "M12 19h8",
-	key: "baeox8"
-}], ["path", {
-	d: "m4 17 6-6-6-6",
-	key: "1yngyt"
-}]]);
-/**
-* @license lucide-react v0.546.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
 var TrendingDown = createLucideIcon("trending-down", [["path", {
 	d: "M16 17h6v-6",
 	key: "t6n2it"
@@ -11855,26 +11931,6 @@ var TrendingUp = createLucideIcon("trending-up", [["path", {
 * This source code is licensed under the ISC license.
 * See the LICENSE file in the root directory of this source tree.
 */
-var Waves = createLucideIcon("waves", [
-	["path", {
-		d: "M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1",
-		key: "knzxuh"
-	}],
-	["path", {
-		d: "M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1",
-		key: "2jd2cc"
-	}],
-	["path", {
-		d: "M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1",
-		key: "rd2r6e"
-	}]
-]);
-/**
-* @license lucide-react v0.546.0 - ISC
-*
-* This source code is licensed under the ISC license.
-* See the LICENSE file in the root directory of this source tree.
-*/
 var X$1 = createLucideIcon("x", [["path", {
 	d: "M18 6 6 18",
 	key: "1bl5f8"
@@ -11882,8 +11938,177 @@ var X$1 = createLucideIcon("x", [["path", {
 	d: "m6 6 12 12",
 	key: "d8bk6v"
 }]]);
-// src/utils/statusFormat.ts
+// node_modules/react/cjs/react-jsx-runtime.production.js
+/**
+* @license React
+* react-jsx-runtime.production.js
+*
+* Copyright (c) Meta Platforms, Inc. and affiliates.
+*
+* This source code is licensed under the MIT license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+var require_react_jsx_runtime_production = /* @__PURE__ */ __commonJSMin(((exports) => {
+	var REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element");
+	function jsxProd(type, config, maybeKey) {
+		var key = null;
+		void 0 !== maybeKey && (key = "" + maybeKey);
+		void 0 !== config.key && (key = "" + config.key);
+		if ("key" in config) {
+			maybeKey = {};
+			for (var propName in config) "key" !== propName && (maybeKey[propName] = config[propName]);
+		} else maybeKey = config;
+		config = maybeKey.ref;
+		return {
+			$$typeof: REACT_ELEMENT_TYPE,
+			type,
+			key,
+			ref: void 0 !== config ? config : null,
+			props: maybeKey
+		};
+	}
+	exports.jsx = jsxProd;
+	exports.jsxs = jsxProd;
+}));
+// node_modules/react/jsx-runtime.js
+var require_jsx_runtime = /* @__PURE__ */ __commonJSMin(((exports, module) => {
+	module.exports = require_react_jsx_runtime_production();
+}));
+// src/components/AboutView.tsx
 var import_client = require_client();
+var import_jsx_runtime = require_jsx_runtime();
+var AboutView = () => {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "space-y-6 max-w-4xl",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+			className: "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-4",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center gap-2.5 pb-3 border-b border-slate-200 dark:border-slate-800",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Database, { className: "w-5 h-5 text-sky-700 dark:text-sky-400 shrink-0" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+						className: "text-base font-bold text-slate-900 dark:text-slate-100",
+						children: "1. Surse Oficiale de Date Hidrologice și Meteorologice"
+					})]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "text-sm text-slate-700 dark:text-slate-300 leading-relaxed",
+					children: "Sunt utilizate exclusiv date hidrologice și meteorologice oficiale (76 de localități pe întreg cursul Dunării, inclusiv toate cele 26 de porturi oficiale din România, de la Baziaș până la Sulina):"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ul", {
+					className: "space-y-3 text-sm text-slate-700 dark:text-slate-300 leading-relaxed list-disc pl-5",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+								className: "text-slate-900 dark:text-slate-100",
+								children: "OVF Hydroinfo Danube Exchange"
+							}),
+							" ",
+							"(schimbul internațional oficial de date al bazinului Dunării — include cotele zilnice AFDJ Galați / INHGA, RHMZ Serbia, SHMÚ Slovacia, EAEMDR Bulgaria): cotă curentă (cm), variație 24h, debit (m³/s), temperatură apă și regim de gheață."
+						] }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+							className: "text-slate-900 dark:text-slate-100",
+							children: "WSV / VIA DONAU Pegelonline REST API v2"
+						}), ": telemetrie de înaltă frecvență (15 min) și istoric real pe 30 de zile pentru sectorul german și austriac."] }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+							className: "text-slate-900 dark:text-slate-100",
+							children: "Copernicus EMS GloFAS v4 (ECMWF)"
+						}), ": reanaliză zilnică pe 10 ani (2016–2025) pentru calculul mediei anuale multianuale pe 10 ani la fiecare stație și prognoză hidrologică de debit."] }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+							className: "text-slate-900 dark:text-slate-100",
+							children: "ECMWF / DWD ICON (Open-Meteo)"
+						}), ": prognoză pluviometrică zilnică pe 14 zile pentru cele 6 sub-bazine ale Dunării (Bavaria/Alpi, Bazin Pannonic, Drava–Sava–Tisa, Porțile de Fier & Banat, Dunărea Inferioară RO/BG, Delta & Siret–Prut)."] })
+					]
+				})
+			]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+			className: "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-5",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "flex items-center gap-2.5 pb-3 border-b border-slate-200 dark:border-slate-800",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Layers, { className: "w-5 h-5 text-sky-700 dark:text-sky-400 shrink-0" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+					className: "text-base font-bold text-slate-900 dark:text-slate-100",
+					children: "2. Funcționalități Principale Implementate"
+				})]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "space-y-4 text-sm text-slate-700 dark:text-slate-300 leading-relaxed",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-start gap-3",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TrendingUp, { className: "w-4 h-4 text-sky-700 dark:text-sky-400 mt-1 shrink-0" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+								className: "text-slate-900 dark:text-slate-100",
+								children: "Cotă curentă, Prognoză 3 zile & Prognoză 14 zile pluviometrică:"
+							}),
+							" ",
+							"hidrograf interactiv SVG cu citire punctuală, bandă de incertitudine, bare de precipitații pe 14 zile propagate din amonte cu timp de tranzit hidrologic și linii de referință pentru CA / CI / CP și Media 10 Ani."
+						] })]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-start gap-3",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BellRing, { className: "w-4 h-4 text-sky-700 dark:text-sky-400 mt-1 shrink-0" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+								className: "text-slate-900 dark:text-slate-100",
+								children: "Alerte Push în Timp Real"
+							}),
+							" ",
+							"pentru depășirea cotelor de atenție/inundație/pericol (CA/CI/CP), cu filtre pe localități și butoane de testare imediată a notificărilor push."
+						] })]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-start gap-3",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MapPin, { className: "w-4 h-4 text-sky-700 dark:text-sky-400 mt-1 shrink-0" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "space-y-3",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+									className: "text-slate-900 dark:text-slate-100",
+									children: "Hartă Interactivă & Istoric Detaliat:"
+								}),
+								" ",
+								"hartă cu traseul Dunării, markeri cu simboluri distincte pe stări hidrologice, strat de precipitații pe 14 zile, istoric pe 30 de zile și climatologie lunară pe 10 ani."
+							] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "pl-3 border-l-2 border-slate-200 dark:border-slate-700 space-y-2.5 text-xs sm:text-sm",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "font-semibold text-slate-900 dark:text-slate-100",
+										children: "Hartă Interactivă (OpenStreetMap):"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("ul", {
+										className: "list-disc pl-5 mt-1 space-y-1",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Toggle pentru afișarea zonelor de precipitații estimate pe 14 zile din cele 6 sub-bazine ale Dunării." })
+									})] }),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "font-semibold text-slate-900 dark:text-slate-100",
+										children: "Filtrare & Navigare Rapidă pe Hartă:"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ul", {
+										className: "list-disc pl-5 mt-1 space-y-1",
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Filtre directe pe sectoare: Tot Bazinul, România, Superior, Mijlociu, Inferior & Deltă (cu centrare automată a hărții)." }),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Filtru după stare hidrologică: Toate stările, Alerte Inundație (CA/CI/CP), Sub Media 10 Ani, Regim Nominal." }),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Căutare rapidă pe hartă cu sugestii instantanee și zoom automat, deschiderea popup-ului pe stația selectată." })
+										]
+									})] }),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "font-semibold text-slate-900 dark:text-slate-100",
+										children: "Acces Complet la Date Direct din Punctele Hărții:"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ul", {
+										className: "list-disc pl-5 mt-1 space-y-1",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Click pe orice punct de pe hartă deschide un popup interactiv cu cota curentă (cm), variația 24h, media multianuală pe 10 ani, previziunea pe 3 zile, prognoza pe 2 săptămâni și 3 butoane directe (Istoric, 3 Zile, 14 Zile) care deschid instantaneu graficul corespunzător în panoul de detalii." }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "Sub hartă este afișată o bară sincronizată cu valorile punctului selectat și un mini-grafic al evoluției pe ultimele 30 de zile." })]
+									})] })
+								]
+							})]
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-start gap-3",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FileText, { className: "w-4 h-4 text-sky-700 dark:text-sky-400 mt-1 shrink-0" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
+							className: "text-slate-900 dark:text-slate-100",
+							children: "Export PDF:"
+						}), " generare instantanee de buletine PDF atât pentru stația selectată (prognoze 3Z/14Z, pluviometrie, praguri, istoric), cât și pentru întregul tabel de localități și alerte."] })]
+					})
+				]
+			})]
+		})]
+	});
+};
+// src/utils/statusFormat.ts
 var COUNTRY_NAMES_RO = {
 	DE: "Germania",
 	AT: "Austria",
@@ -11945,45 +12170,9 @@ function formatSignedCm(val) {
 	if (val > 0) return `+${val} cm`;
 	return `${val} cm`;
 }
-// node_modules/react/cjs/react-jsx-runtime.production.js
-/**
-* @license React
-* react-jsx-runtime.production.js
-*
-* Copyright (c) Meta Platforms, Inc. and affiliates.
-*
-* This source code is licensed under the MIT license found in the
-* LICENSE file in the root directory of this source tree.
-*/
-var require_react_jsx_runtime_production = /* @__PURE__ */ __commonJSMin(((exports) => {
-	var REACT_ELEMENT_TYPE = Symbol.for("react.transitional.element");
-	function jsxProd(type, config, maybeKey) {
-		var key = null;
-		void 0 !== maybeKey && (key = "" + maybeKey);
-		void 0 !== config.key && (key = "" + config.key);
-		if ("key" in config) {
-			maybeKey = {};
-			for (var propName in config) "key" !== propName && (maybeKey[propName] = config[propName]);
-		} else maybeKey = config;
-		config = maybeKey.ref;
-		return {
-			$$typeof: REACT_ELEMENT_TYPE,
-			type,
-			key,
-			ref: void 0 !== config ? config : null,
-			props: maybeKey
-		};
-	}
-	exports.jsx = jsxProd;
-	exports.jsxs = jsxProd;
-}));
 // src/components/AlertsView.tsx
-var import_jsx_runtime = (/* @__PURE__ */ __commonJSMin(((exports, module) => {
-	module.exports = require_react_jsx_runtime_production();
-})))();
-var AlertsView = ({ alerts, stations, settings, setSettings, permissionState, nativeToken, onEnablePush, onSendTestPush, onSelectStation }) => {
+var AlertsView = ({ alerts, stations, settings, setSettings, permissionState, statusMessage, onEnablePush, onDisablePush, onSendTestPush, onSelectStation }) => {
 	const floodAlerts = alerts.filter((a) => a.type !== "below_10yr_avg");
-	const lowWaterAlerts = alerts.filter((a) => a.type === "below_10yr_avg");
 	const romanianStations = stations.filter((s) => s.country === "RO");
 	const toggleWatched = (id) => {
 		setSettings((prev) => {
@@ -12001,105 +12190,86 @@ var AlertsView = ({ alerts, stations, settings, setSettings, permissionState, na
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "flex flex-wrap items-start justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-						className: "text-base font-bold text-slate-900 dark:text-slate-100",
-						children: "Sistem Alerte Push în Timp Real"
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-center gap-2.5 flex-wrap",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+							className: "text-base font-bold text-slate-900 dark:text-slate-100",
+							children: "Sistem Alerte Push în Timp Real"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: `text-xs font-semibold px-2 py-0.5 rounded-md ${settings.enabled ? "bg-emerald-50 text-emerald-700 border border-emerald-200 dark:bg-emerald-950/50 dark:text-emerald-300 dark:border-emerald-800" : "bg-slate-100 text-slate-600 border border-slate-200 dark:bg-slate-800 dark:text-slate-400 dark:border-slate-700"}`,
+							children: settings.enabled ? "● Active" : "○ Dezactivate"
+						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 						className: "text-xs text-slate-500 dark:text-slate-400 mt-1 max-w-2xl",
-						children: "Monitorizare continuă prin flux SSE + Service Worker Web Push (și FCM/APNs în pachetul nativ Android/iOS) pentru depășirea cotelor oficiale CA/CI/CP și scăderea sub media anuală pe ultimii 10 ani (2016–2025)."
+						children: "Monitorizare continuă pentru depășirea cotelor oficiale de atenție, inundație și pericol (CA / CI / CP), cu notificări native pe telefon și în browser."
 					})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "flex flex-wrap items-center gap-2",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-								type: "button",
-								onClick: onEnablePush,
-								className: "inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-sky-700 text-white hover:bg-sky-800 transition-colors whitespace-nowrap shrink-0 cursor-pointer",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BellRing, { className: "w-3.5 h-3.5" }), settings.enabled && permissionState === "granted" ? "Notificări Push Active" : "Activează Alertele Push"]
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-								type: "button",
-								onClick: () => onSendTestPush("flood"),
-								className: "px-3 py-2 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors whitespace-nowrap shrink-0 cursor-pointer",
-								children: "Testează Push Inundație"
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-								type: "button",
-								onClick: () => onSendTestPush("below_avg"),
-								className: "px-3 py-2 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors whitespace-nowrap shrink-0 cursor-pointer",
-								children: "Testează Push Sub Media 10A"
-							})
-						]
+						children: [settings.enabled ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+							type: "button",
+							onClick: () => void onDisablePush(),
+							className: "inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-slate-800 text-white hover:bg-slate-900 dark:bg-slate-700 dark:hover:bg-slate-600 transition-colors whitespace-nowrap shrink-0 cursor-pointer",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BellOff, { className: "w-3.5 h-3.5" }), "Dezactivează Alertele Push"]
+						}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+							type: "button",
+							onClick: () => void onEnablePush(),
+							className: "inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-sky-700 text-white hover:bg-sky-800 transition-colors whitespace-nowrap shrink-0 cursor-pointer",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(BellRing, { className: "w-3.5 h-3.5" }), "Activează Alertele Push"]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+							type: "button",
+							onClick: () => void onSendTestPush(),
+							className: "px-3 py-2 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors whitespace-nowrap shrink-0 cursor-pointer",
+							children: "Testează Push Inundație"
+						})]
 					})]
 				}),
+				statusMessage && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "mt-3 px-3.5 py-2.5 rounded-lg bg-slate-50 dark:bg-slate-800/70 border border-slate-200 dark:border-slate-700 text-xs text-slate-700 dark:text-slate-200",
+					children: statusMessage
+				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "grid grid-cols-1 md:grid-cols-3 gap-4 pt-4 text-xs",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
-							className: "flex items-start gap-2.5 cursor-pointer",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-								type: "checkbox",
-								checked: settings.notifyFloodThresholds,
-								onChange: (e) => setSettings((p) => ({
-									...p,
-									notifyFloodThresholds: e.target.checked
-								})),
-								className: "mt-0.5 rounded border-slate-300 text-sky-700 focus:ring-sky-600"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "font-semibold text-slate-900 dark:text-slate-100",
-								children: "Depășire Cote de Apărare (CA / CI / CP)"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "text-slate-500 dark:text-slate-400",
-								children: "Alertă prioritară la atingerea Cotelor de Atenție, Inundație sau Pericol"
-							})] })]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
-							className: "flex items-start gap-2.5 cursor-pointer",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-								type: "checkbox",
-								checked: settings.notifyBelow10YrAvg,
-								onChange: (e) => setSettings((p) => ({
-									...p,
-									notifyBelow10YrAvg: e.target.checked
-								})),
-								className: "mt-0.5 rounded border-slate-300 text-sky-700 focus:ring-sky-600"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "font-semibold text-slate-900 dark:text-slate-100",
-								children: "Scădere Sub Media Anuală pe 10 Ani"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "text-slate-500 dark:text-slate-400",
-								children: "Notificare la scăderea cu minimum 15 cm sub media multianuală 2016–2025"
-							})] })]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
-							className: "flex items-start gap-2.5 cursor-pointer",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-								type: "checkbox",
-								checked: settings.romaniaOnly,
-								onChange: (e) => setSettings((p) => ({
-									...p,
-									romaniaOnly: e.target.checked
-								})),
-								className: "mt-0.5 rounded border-slate-300 text-sky-700 focus:ring-sky-600"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "font-semibold text-slate-900 dark:text-slate-100",
-								children: [
-									"Doar Sectorul Românesc (",
-									romanianStations.length,
-									" stații)"
-								]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "text-slate-500 dark:text-slate-400",
-								children: [
-									"Permisiune browser: ",
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "font-mono",
-										children: permissionState
-									}),
-									nativeToken ? ` · Token nativ: ${nativeToken.slice(0, 10)}...` : ""
-								]
-							})] })]
-						})
-					]
+					className: "grid grid-cols-1 md:grid-cols-2 gap-4 pt-4 text-xs",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
+						className: "flex items-start gap-2.5 cursor-pointer",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+							type: "checkbox",
+							checked: settings.notifyFloodThresholds,
+							onChange: (e) => setSettings((p) => ({
+								...p,
+								notifyFloodThresholds: e.target.checked
+							})),
+							className: "mt-0.5 rounded border-slate-300 text-sky-700 focus:ring-sky-600"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "font-semibold text-slate-900 dark:text-slate-100",
+							children: "Depășire Cote de Apărare (CA / CI / CP)"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "text-slate-500 dark:text-slate-400",
+							children: "Alertă prioritară la atingerea Cotelor de Atenție, Inundație sau Pericol"
+						})] })]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("label", {
+						className: "flex items-start gap-2.5 cursor-pointer",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+							type: "checkbox",
+							checked: settings.romaniaOnly,
+							onChange: (e) => setSettings((p) => ({
+								...p,
+								romaniaOnly: e.target.checked
+							})),
+							className: "mt-0.5 rounded border-slate-300 text-sky-700 focus:ring-sky-600"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "font-semibold text-slate-900 dark:text-slate-100",
+							children: [
+								"Doar Sectorul Românesc (",
+								romanianStations.length,
+								" stații)"
+							]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "text-slate-500 dark:text-slate-400",
+							children: ["Stare permisiune notificări: ", /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "font-mono",
+								children: permissionState
+							})]
+						})] })]
+					})]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "mt-4 pt-4 border-t border-slate-100 dark:border-slate-800",
@@ -12136,99 +12306,47 @@ var AlertsView = ({ alerts, stations, settings, setSettings, permissionState, na
 				})
 			]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "grid grid-cols-1 lg:grid-cols-2 gap-6",
+			className: "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden",
+				className: "flex items-center justify-between px-5 py-3.5 border-b border-slate-200 dark:border-slate-800",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "flex items-center justify-between px-5 py-3.5 border-b border-slate-200 dark:border-slate-800",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-center gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShieldAlert, { className: "w-4 h-4 text-red-600 dark:text-red-400" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-							className: "text-sm font-semibold text-slate-900 dark:text-slate-100",
-							children: "Depășiri Cote de Inundație / Atenție"
-						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-						className: "text-xs font-mono tabular-nums text-slate-500",
-						children: [floodAlerts.length, " active"]
+					className: "flex items-center gap-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShieldAlert, { className: "w-4 h-4 text-red-600 dark:text-red-400" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+						className: "text-sm font-semibold text-slate-900 dark:text-slate-100",
+						children: "Depășiri Cote de Atenție / Inundație / Pericol (CA / CI / CP)"
 					})]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "divide-y divide-slate-100 dark:divide-slate-800",
-					children: floodAlerts.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "p-6 text-xs text-slate-600 dark:text-slate-400",
-						children: "Nicio stație nu depășește în prezent Cota de Atenție (CA), Inundație (CI) sau Pericol (CP). Monitorizarea automată rulează continuu."
-					}) : floodAlerts.map((a) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						onClick: () => onSelectStation(a.stationId),
-						className: "p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-colors",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex items-center justify-between gap-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								className: "text-sm font-semibold text-red-700 dark:text-red-400",
-								children: [
-									"■ ",
-									a.stationName,
-									" (",
-									COUNTRY_NAMES_RO[a.country],
-									")"
-								]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								className: "text-xs font-mono tabular-nums text-slate-500",
-								children: ["km ", a.km.toFixed(1)]
-							})]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "text-xs text-slate-700 dark:text-slate-300 mt-1",
-							children: a.message
-						})]
-					}, a.id))
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+					className: "text-xs font-mono tabular-nums text-slate-500",
+					children: [floodAlerts.length, " active"]
 				})]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "flex items-center justify-between px-5 py-3.5 border-b border-slate-200 dark:border-slate-800",
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "divide-y divide-slate-100 dark:divide-slate-800",
+				children: floodAlerts.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "p-6 text-xs text-slate-600 dark:text-slate-400",
+					children: "Nicio stație nu depășește în prezent Cota de Atenție (CA), Inundație (CI) sau Pericol (CP). Monitorizarea automată rulează continuu."
+				}) : floodAlerts.map((a) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					onClick: () => onSelectStation(a.stationId),
+					className: "p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-colors",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-center gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Waves, { className: "w-4 h-4 text-sky-600 dark:text-sky-400" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-							className: "text-sm font-semibold text-slate-900 dark:text-slate-100",
-							children: "Scăderi Sub Media Anuală pe 10 Ani"
+						className: "flex items-center justify-between gap-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+							className: "text-sm font-semibold text-red-700 dark:text-red-400",
+							children: [
+								"■ ",
+								a.stationName,
+								" (",
+								COUNTRY_NAMES_RO[a.country],
+								")"
+							]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+							className: "text-xs font-mono tabular-nums text-slate-500",
+							children: ["km ", a.km.toFixed(1)]
 						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-						className: "text-xs font-mono tabular-nums text-slate-500",
-						children: [lowWaterAlerts.length, " active"]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "text-xs text-slate-700 dark:text-slate-300 mt-1",
+						children: a.message
 					})]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "divide-y divide-slate-100 dark:divide-slate-800 max-h-[480px] overflow-y-auto",
-					children: lowWaterAlerts.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "p-6 text-xs text-slate-600 dark:text-slate-400",
-						children: "Toate stațiile se situează în prezent peste media multianuală pe 10 ani."
-					}) : lowWaterAlerts.map((a) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						onClick: () => onSelectStation(a.stationId),
-						className: "p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 cursor-pointer transition-colors",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex items-center justify-between gap-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								className: "text-xs font-semibold text-sky-700 dark:text-sky-400",
-								children: [
-									"▼ ",
-									a.stationName,
-									" (",
-									COUNTRY_NAMES_RO[a.country],
-									")"
-								]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								className: "text-xs font-mono tabular-nums text-slate-500",
-								children: [
-									"km ",
-									a.km.toFixed(1),
-									" · ",
-									a.deltaCm,
-									" cm"
-								]
-							})]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "text-xs text-slate-600 dark:text-slate-300 mt-1",
-							children: a.message
-						})]
-					}, a.id))
-				})]
+				}, a.id))
 			})]
 		})]
 	});
@@ -19426,328 +19544,6 @@ var DanubeMap = ({ stations, basinZones, selectedStationId, selectedDetail, onSe
 				]
 			})
 		]
-	});
-};
-// src/hooks/usePWAInstall.ts
-function usePWAInstall() {
-	const [deferredPrompt, setDeferredPrompt] = (0, import_react.useState)(null);
-	const [isInstalled, setIsInstalled] = (0, import_react.useState)(false);
-	const [isIOS, setIsIOS] = (0, import_react.useState)(false);
-	(0, import_react.useEffect)(() => {
-		const isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
-		setIsInstalled(isStandalone);
-		const userAgent = window.navigator.userAgent.toLowerCase();
-		setIsIOS(/iphone|ipad|ipod/.test(userAgent));
-		const handleBeforeInstallPrompt = (e) => {
-			e.preventDefault();
-			setDeferredPrompt(e);
-		};
-		const handleAppInstalled = () => {
-			setIsInstalled(true);
-			setDeferredPrompt(null);
-		};
-		window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-		window.addEventListener("appinstalled", handleAppInstalled);
-		return () => {
-			window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
-			window.removeEventListener("appinstalled", handleAppInstalled);
-		};
-	}, []);
-	const install = async () => {
-		if (!deferredPrompt) return false;
-		await deferredPrompt.prompt();
-		const { outcome } = await deferredPrompt.userChoice;
-		if (outcome === "accepted") {
-			setIsInstalled(true);
-			setDeferredPrompt(null);
-			return true;
-		}
-		return false;
-	};
-	return {
-		isInstallable: !!deferredPrompt,
-		isInstalled,
-		isIOS,
-		install
-	};
-}
-function useOnlineStatus() {
-	const [isOnline, setIsOnline] = (0, import_react.useState)(typeof navigator !== "undefined" ? navigator.onLine : true);
-	(0, import_react.useEffect)(() => {
-		const handleOnline = () => setIsOnline(true);
-		const handleOffline = () => setIsOnline(false);
-		window.addEventListener("online", handleOnline);
-		window.addEventListener("offline", handleOffline);
-		return () => {
-			window.removeEventListener("online", handleOnline);
-			window.removeEventListener("offline", handleOffline);
-		};
-	}, []);
-	return isOnline;
-}
-// src/components/MobileDeployView.tsx
-var MobileDeployView = () => {
-	const { isInstallable, isInstalled, isIOS, install } = usePWAInstall();
-	const [showIOSGuide, setShowIOSGuide] = (0, import_react.useState)(false);
-	const [copiedId, setCopiedId] = (0, import_react.useState)(null);
-	const copySnippet = (id, text) => {
-		navigator.clipboard?.writeText(text);
-		setCopiedId(id);
-		setTimeout(() => setCopiedId(null), 1800);
-	};
-	const androidScript = `./scripts/build-release-apk.sh`;
-	const iosCommands = `npm run build
-npx cap sync ios
-cd ios/App && pod install
-open App.xcworkspace`;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "space-y-6",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "flex flex-wrap items-center justify-between gap-4",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "space-y-1",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-						className: "text-base font-bold text-slate-900 dark:text-slate-100",
-						children: "Instalare Directă pe Telefon (PWA Android & iOS Safari)"
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						className: "text-xs text-slate-500 dark:text-slate-400 max-w-2xl",
-						children: "Aplicația funcționează nativ în mod standalone cu caching offline (Service Worker Workbox) și notificări push pe Android Chrome și iOS 16.4+ Safari (Adăugare la Ecranul Principal)."
-					})]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "flex flex-wrap items-center gap-2.5",
-					children: isInstalled ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						className: "text-xs font-semibold text-emerald-700 dark:text-emerald-400",
-						children: "● Aplicația rulează deja în mod instalat"
-					}) : isInstallable ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-						type: "button",
-						onClick: install,
-						className: "inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-sky-700 text-white hover:bg-sky-800 transition-colors whitespace-nowrap shrink-0 cursor-pointer",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Download, { className: "w-3.5 h-3.5" }), "Instalează Aplicația (Android / Desktop)"]
-					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-						type: "button",
-						onClick: () => setShowIOSGuide((v) => !v),
-						className: "inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg border border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors whitespace-nowrap shrink-0 cursor-pointer",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Smartphone, { className: "w-3.5 h-3.5" }), isIOS ? "Instrucțiuni Instalare iPhone / iPad" : "Ghid Instalare Mobilă PWA"]
-					})
-				})]
-			}), (showIOSGuide || isIOS) && !isInstalled && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "mt-4 pt-4 border-t border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 space-y-1",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "font-semibold text-slate-900 dark:text-slate-100",
-						children: "Instalare pe iOS (iPhone / iPad):"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", { children: "1. Deschideți aplicația în Safari pe iOS 16.4 sau mai nou." }),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-						"2. Apăsați butonul ",
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: "Share (Partajare)" }),
-						" din bara inferioară Safari."
-					] }),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
-						"3. Selectați ",
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: "Add to Home Screen (Adaugă pe ecranul principal)" }),
-						" pentru mod standalone și Web Push iOS."
-					] })
-				]
-			})]
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "grid grid-cols-1 lg:grid-cols-2 gap-6",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-4",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-center justify-between gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-							className: "text-sm font-bold text-slate-900 dark:text-slate-100",
-							children: "Android · Compilare și Semnare APK (Capacitor)"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "text-xs font-mono text-sky-700 dark:text-sky-400",
-							children: "ro.hidrodunare.app"
-						})]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-						className: "text-xs leading-relaxed text-slate-600 dark:text-slate-300",
-						children: [
-							"Proiectul nativ Android este configurat cu ",
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: "Capacitor 8" }),
-							", manifest cu permisiuni ",
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "font-mono",
-								children: "POST_NOTIFICATIONS"
-							}),
-							" și ",
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "font-mono",
-								children: "INTERNET"
-							}),
-							", configurare Gradle pentru semnare Release (",
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "font-mono",
-								children: "signingConfigs.release"
-							}),
-							") și pipeline CI GitHub Actions gata să compileze și să semneze fișierul ",
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "font-mono",
-								children: "app-release.apk"
-							}),
-							"."
-						]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "space-y-2 text-xs",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "font-semibold text-slate-900 dark:text-slate-100",
-							children: "Fișiere native pregătite în proiect:"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ul", {
-							className: "space-y-1 text-slate-600 dark:text-slate-400 font-mono text-[11px]",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "· capacitor.config.ts (Configurație Android + iOS + Push)" }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "· android/app/build.gradle (Semnare Release JKS / keystore.properties)" }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "· android/app/src/main/AndroidManifest.xml (Permisiuni Push Android 13+)" }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "· scripts/build-release-apk.sh (Generare Keystore + Build & Sign APK)" }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("li", { children: "· .github/workflows/mobile-build.yml (Build APK semnat automat în CI)" })
-							]
-						})]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "bg-slate-950 text-slate-100 rounded-lg p-3 font-mono text-[11px] flex items-center justify-between gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex items-center gap-2 overflow-x-auto",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Terminal, { className: "w-3.5 h-3.5 text-sky-400 shrink-0" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("code", { children: androidScript })]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-							type: "button",
-							onClick: () => copySnippet("apk", androidScript),
-							className: "p-1.5 text-slate-300 hover:text-white cursor-pointer shrink-0",
-							"aria-label": "Copiază comanda Android",
-							children: copiedId === "apk" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: "w-3.5 h-3.5 text-emerald-400" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Copy, { className: "w-3.5 h-3.5" })
-						})]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "text-[11px] text-slate-500 dark:text-slate-400 leading-relaxed",
-						children: [
-							"Cerințe locale pentru rularea scriptului: JDK 17+, Android SDK (Build-Tools 35) și Gradle. Dacă nu aveți Android Studio instalat local, rulați workflow-ul ",
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "font-mono",
-								children: ".github/workflows/mobile-build.yml"
-							}),
-							" pe GitHub Actions pentru a descărca direct ",
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "font-mono",
-								children: "HidroDunare-signed.apk"
-							}),
-							"."
-						]
-					})
-				]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-4",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-center justify-between gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-							className: "text-sm font-bold text-slate-900 dark:text-slate-100",
-							children: "iOS · Arhitectură Xcode, APNs Push & TestFlight"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "text-xs font-mono text-sky-700 dark:text-sky-400",
-							children: "iOS 15.0+ · Swift/WKWebView"
-						})]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "space-y-2.5 text-xs text-slate-600 dark:text-slate-300 leading-relaxed",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
-									className: "text-slate-900 dark:text-slate-100",
-									children: "1. Mediu necesar macOS:"
-								}),
-								" Xcode 16+, CocoaPods (",
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "font-mono",
-									children: "sudo gem install cocoapods"
-								}),
-								") și cont Apple Developer (pentru TestFlight / App Store sau dispozitiv fizic prin provisioning gratuit 7 zile)."
-							] }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
-								className: "text-slate-900 dark:text-slate-100",
-								children: "2. Capabilități Xcode (Signing & Capabilities):"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("ul", {
-								className: "mt-1 space-y-0.5 pl-3",
-								children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [
-										"· Activați ",
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: "Push Notifications" }),
-										" și generați cheia ",
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: "APNs Auth Key (.p8)" }),
-										" din Apple Developer Portal."
-									] }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [
-										"· Activați ",
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", { children: "Background Modes" }),
-										": bifați ",
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("em", { children: "Remote notifications" }),
-										" și ",
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("em", { children: "Background fetch" }),
-										" pentru verificarea periodică a cotelor de inundație."
-									] }),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("li", { children: [
-										"· În ",
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "font-mono",
-											children: "ios/App/App/Info.plist"
-										}),
-										" sunt configurate cheile ",
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "font-mono",
-											children: "UIBackgroundModes"
-										}),
-										", ",
-										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "font-mono",
-											children: "ITSAppUsesNonExemptEncryption=false"
-										}),
-										" și descrierea permisiunilor."
-									] })
-								]
-							})] }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("strong", {
-									className: "text-slate-900 dark:text-slate-100",
-									children: "3. Backend & Export PDF pe iOS:"
-								}),
-								" Schimbați ",
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "font-mono",
-									children: "server.url"
-								}),
-								" în ",
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "font-mono",
-									children: "capacitor.config.ts"
-								}),
-								" către URL-ul public HTTPS al serverului Express (ex. Cloud Run), apoi arhivați din Xcode cu ",
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("em", { children: "Product → Archive → Distribute App → TestFlight" }),
-								"."
-							] })
-						]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "bg-slate-950 text-slate-100 rounded-lg p-3 font-mono text-[11px] flex items-start justify-between gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("pre", {
-							className: "overflow-x-auto leading-relaxed",
-							children: iosCommands
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-							type: "button",
-							onClick: () => copySnippet("ios", iosCommands),
-							className: "p-1.5 text-slate-300 hover:text-white cursor-pointer shrink-0",
-							"aria-label": "Copiază comenzile iOS",
-							children: copiedId === "ios" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: "w-3.5 h-3.5 text-emerald-400" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Copy, { className: "w-3.5 h-3.5" })
-						})]
-					})
-				]
-			})]
-		})]
 	});
 };
 // node_modules/@babel/runtime/helpers/esm/typeof.js
@@ -39192,7 +38988,7 @@ function le() {
 	}, t.allowFsRead = void 0, t.loadImageFile = t.loadFile;
 }(E.API), function(e) {
 	function r() {
-		return (i.html2canvas ? Promise.resolve(i.html2canvas) : __vitePreload(() => import("./html2canvas-CSlM0YhM.js").then((m) => /* @__PURE__ */ __toESM(m.default)), [])).catch(function(t) {
+		return (i.html2canvas ? Promise.resolve(i.html2canvas) : __vitePreload(() => import("./html2canvas-Jqydttpq.js").then((m) => /* @__PURE__ */ __toESM(m.default)), [])).catch(function(t) {
 			return Promise.reject(/* @__PURE__ */ new Error("Could not load html2canvas: " + t));
 		}).then(function(t) {
 			return t.default ? t.default : t;
@@ -40359,7 +40155,7 @@ function le() {
 		ignoreAnimation: !0,
 		ignoreDimensions: !0
 	}, d = this;
-	return (i.canvg ? Promise.resolve(i.canvg) : __vitePreload(() => import("./index.es-DmCW8_6n.js"), [])).catch(function(t) {
+	return (i.canvg ? Promise.resolve(i.canvg) : __vitePreload(() => import("./index.es-B_T9MKSx.js"), [])).catch(function(t) {
 		return Promise.reject(/* @__PURE__ */ new Error("Could not load canvg: " + t));
 	}).then(function(t) {
 		return t.default ? t.default : t;
@@ -46450,6 +46246,63 @@ var StationsTableView = ({ stations, selectedStationId, onInspectStation, onExpo
 		})]
 	});
 };
+// src/hooks/usePWAInstall.ts
+function usePWAInstall() {
+	const [deferredPrompt, setDeferredPrompt] = (0, import_react.useState)(null);
+	const [isInstalled, setIsInstalled] = (0, import_react.useState)(false);
+	const [isIOS, setIsIOS] = (0, import_react.useState)(false);
+	(0, import_react.useEffect)(() => {
+		const isStandalone = window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true;
+		setIsInstalled(isStandalone);
+		const userAgent = window.navigator.userAgent.toLowerCase();
+		setIsIOS(/iphone|ipad|ipod/.test(userAgent));
+		const handleBeforeInstallPrompt = (e) => {
+			e.preventDefault();
+			setDeferredPrompt(e);
+		};
+		const handleAppInstalled = () => {
+			setIsInstalled(true);
+			setDeferredPrompt(null);
+		};
+		window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+		window.addEventListener("appinstalled", handleAppInstalled);
+		return () => {
+			window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+			window.removeEventListener("appinstalled", handleAppInstalled);
+		};
+	}, []);
+	const install = async () => {
+		if (!deferredPrompt) return false;
+		await deferredPrompt.prompt();
+		const { outcome } = await deferredPrompt.userChoice;
+		if (outcome === "accepted") {
+			setIsInstalled(true);
+			setDeferredPrompt(null);
+			return true;
+		}
+		return false;
+	};
+	return {
+		isInstallable: !!deferredPrompt,
+		isInstalled,
+		isIOS,
+		install
+	};
+}
+function useOnlineStatus() {
+	const [isOnline, setIsOnline] = (0, import_react.useState)(typeof navigator !== "undefined" ? navigator.onLine : true);
+	(0, import_react.useEffect)(() => {
+		const handleOnline = () => setIsOnline(true);
+		const handleOffline = () => setIsOnline(false);
+		window.addEventListener("online", handleOnline);
+		window.addEventListener("offline", handleOffline);
+		return () => {
+			window.removeEventListener("online", handleOnline);
+			window.removeEventListener("offline", handleOffline);
+		};
+	}, []);
+	return isOnline;
+}
 // node_modules/@capacitor/core/dist/index.js
 /*! Capacitor: https://capacitorjs.com/ - MIT License */
 var ExceptionCode;
@@ -46959,41 +46812,118 @@ var SystemBarsPluginWeb = class extends WebPlugin {
 	}
 };
 registerPlugin("SystemBars", { web: () => new SystemBarsPluginWeb() });
-// node_modules/@capacitor/push-notifications/dist/esm/index.js
-var PushNotifications = registerPlugin("PushNotifications", {});
+// node_modules/@capacitor/local-notifications/dist/esm/definitions.js
+/**
+* Day of the week. Used for scheduling notifications on a particular weekday.
+*/
+var Weekday;
+(function(Weekday) {
+	Weekday[Weekday["Sunday"] = 1] = "Sunday";
+	Weekday[Weekday["Monday"] = 2] = "Monday";
+	Weekday[Weekday["Tuesday"] = 3] = "Tuesday";
+	Weekday[Weekday["Wednesday"] = 4] = "Wednesday";
+	Weekday[Weekday["Thursday"] = 5] = "Thursday";
+	Weekday[Weekday["Friday"] = 6] = "Friday";
+	Weekday[Weekday["Saturday"] = 7] = "Saturday";
+})(Weekday || (Weekday = {}));
+// node_modules/@capacitor/local-notifications/dist/esm/index.js
+var LocalNotifications = registerPlugin("LocalNotifications", { web: () => __vitePreload(() => import("./web-BzMiPi6R.js").then((m) => new m.LocalNotificationsWeb()), []) });
 // src/hooks/usePushAlerts.ts
-var STORAGE_KEY = "hidrodunare_push_settings_v1";
+var STORAGE_KEY = "hidrodunare_push_settings_v2";
+var ANDROID_CHANNEL_ID = "hidrodunare-flood-alerts";
 var DEFAULT_SETTINGS = {
 	enabled: false,
 	notifyFloodThresholds: true,
-	notifyBelow10YrAvg: true,
 	romaniaOnly: true,
 	watchedStationIds: []
 };
+var nextNotificationId = 1e3;
+function generateNumericNotificationId() {
+	nextNotificationId = nextNotificationId % 2e9 + 1;
+	return nextNotificationId;
+}
 function usePushAlerts(alerts) {
 	const [settings, setSettings] = (0, import_react.useState)(() => {
 		try {
 			const saved = localStorage.getItem(STORAGE_KEY);
-			if (saved) return {
-				...DEFAULT_SETTINGS,
-				...JSON.parse(saved)
-			};
+			if (saved) {
+				const parsed = JSON.parse(saved);
+				return {
+					enabled: Boolean(parsed.enabled),
+					notifyFloodThresholds: parsed.notifyFloodThresholds ?? true,
+					romaniaOnly: parsed.romaniaOnly ?? true,
+					watchedStationIds: Array.isArray(parsed.watchedStationIds) ? parsed.watchedStationIds : []
+				};
+			}
 		} catch {}
 		return DEFAULT_SETTINGS;
 	});
 	const [permissionState, setPermissionState] = (0, import_react.useState)(() => {
-		if (typeof window === "undefined" || !("Notification" in window)) return "unsupported";
+		if (typeof window === "undefined") return "unsupported";
+		if (Capacitor.isNativePlatform()) return "default";
+		if (!("Notification" in window)) return "unsupported";
 		return Notification.permission;
 	});
-	const [nativeToken, setNativeToken] = (0, import_react.useState)(null);
+	const [statusMessage, setStatusMessage] = (0, import_react.useState)(null);
 	const [inAppToast, setInAppToast] = (0, import_react.useState)(null);
 	const notifiedIdsRef = (0, import_react.useRef)(/* @__PURE__ */ new Set());
+	const channelCreatedRef = (0, import_react.useRef)(false);
 	(0, import_react.useEffect)(() => {
 		try {
 			localStorage.setItem(STORAGE_KEY, JSON.stringify(settings));
 		} catch {}
 	}, [settings]);
-	const dispatchBrowserNotification = (0, import_react.useCallback)(async (title, body, tag) => {
+	(0, import_react.useEffect)(() => {
+		if (!Capacitor.isNativePlatform()) return;
+		let active = true;
+		LocalNotifications.checkPermissions().then((res) => {
+			if (!active) return;
+			if (res.display === "granted") setPermissionState("granted");
+			else if (res.display === "denied") setPermissionState("denied");
+			else setPermissionState("default");
+		}).catch(() => {
+			if (active) setPermissionState("unsupported");
+		});
+		return () => {
+			active = false;
+		};
+	}, []);
+	const ensureNativeChannel = (0, import_react.useCallback)(async () => {
+		if (!Capacitor.isNativePlatform() || channelCreatedRef.current) return;
+		if (Capacitor.getPlatform() !== "android") {
+			channelCreatedRef.current = true;
+			return;
+		}
+		try {
+			await LocalNotifications.createChannel({
+				id: ANDROID_CHANNEL_ID,
+				name: "Alerte Inundații Dunăre (CA/CI/CP)",
+				description: "Notificări prioritare pentru depășirea cotelor oficiale de atenție, inundație și pericol.",
+				importance: 4,
+				visibility: 1,
+				vibration: true
+			});
+			channelCreatedRef.current = true;
+		} catch {}
+	}, []);
+	const dispatchNotification = (0, import_react.useCallback)(async (title, body, tag) => {
+		if (Capacitor.isNativePlatform()) {
+			try {
+				if ((await LocalNotifications.checkPermissions()).display !== "granted") return;
+				await ensureNativeChannel();
+				await LocalNotifications.schedule({ notifications: [{
+					id: generateNumericNotificationId(),
+					title,
+					body,
+					channelId: ANDROID_CHANNEL_ID,
+					schedule: { at: new Date(Date.now() + 250) },
+					extra: { tag }
+				}] });
+			} catch (err) {
+				console.warn("Native local notification dispatch warning:", err);
+			}
+			return;
+		}
 		if (typeof window === "undefined" || !("Notification" in window)) return;
 		if (Notification.permission !== "granted") return;
 		try {
@@ -47015,22 +46945,36 @@ function usePushAlerts(alerts) {
 				tag
 			});
 		} catch {}
-	}, []);
-	const requestPushPermission = (0, import_react.useCallback)(async () => {
+	}, [ensureNativeChannel]);
+	const enablePushAlerts = (0, import_react.useCallback)(async () => {
+		setStatusMessage(null);
 		if (Capacitor.isNativePlatform()) try {
-			if ((await PushNotifications.requestPermissions()).receive === "granted") {
-				await PushNotifications.register();
-				PushNotifications.addListener("registration", (token) => {
-					setNativeToken(token.value);
-				});
+			await ensureNativeChannel();
+			if ((await LocalNotifications.requestPermissions()).display === "granted") {
+				setPermissionState("granted");
 				setSettings((prev) => ({
 					...prev,
 					enabled: true
 				}));
+				setStatusMessage("Alertele push pentru depășirea cotelor CA / CI / CP au fost activate.");
+				await dispatchNotification("HidroDunăre · Alerte Push Active", "Veți primi notificări în timp real pentru depășirea cotelor oficiale de atenție, inundație și pericol (CA / CI / CP).", "hidrodunare-welcome");
 				return true;
 			}
+			setPermissionState("denied");
+			setSettings((prev) => ({
+				...prev,
+				enabled: false
+			}));
+			setStatusMessage("Permisiunea de notificări a fost refuzată. Activați notificările pentru HidroDunăre din Setările telefonului.");
+			return false;
 		} catch (err) {
-			console.warn("Native push registration error:", err);
+			console.warn("Native notification permission error:", err);
+			setSettings((prev) => ({
+				...prev,
+				enabled: true
+			}));
+			setStatusMessage("Alertele în aplicație au fost activate.");
+			return true;
 		}
 		if (typeof window !== "undefined" && "Notification" in window) try {
 			const perm = await Notification.requestPermission();
@@ -47040,46 +46984,70 @@ function usePushAlerts(alerts) {
 					...prev,
 					enabled: true
 				}));
-				await dispatchBrowserNotification("HidroDunăre · Alerte Push Activate", "Veți primi notificări în timp real pentru depășirea cotelor de inundație și scăderea sub media pe 10 ani.", "hidrodunare-welcome");
+				setStatusMessage("Alertele push pentru depășirea cotelor CA / CI / CP au fost activate.");
+				await dispatchNotification("HidroDunăre · Alerte Push Active", "Veți primi notificări în timp real pentru depășirea cotelor oficiale de atenție, inundație și pericol (CA / CI / CP).", "hidrodunare-welcome");
 				return true;
+			}
+			if (perm === "denied") {
+				setSettings((prev) => ({
+					...prev,
+					enabled: false
+				}));
+				setStatusMessage("Notificările browser sunt blocate. Permiteți notificările din setările browserului.");
+				return false;
 			}
 		} catch {}
 		setSettings((prev) => ({
 			...prev,
 			enabled: true
 		}));
+		setStatusMessage("Alertele în aplicație au fost activate.");
 		return true;
-	}, [dispatchBrowserNotification]);
+	}, [dispatchNotification, ensureNativeChannel]);
+	const disablePushAlerts = (0, import_react.useCallback)(async () => {
+		setSettings((prev) => ({
+			...prev,
+			enabled: false
+		}));
+		setInAppToast(null);
+		notifiedIdsRef.current.clear();
+		setStatusMessage("Alertele push au fost dezactivate. Nu veți mai primi notificări până la reactivare.");
+		if (Capacitor.isNativePlatform()) try {
+			const pending = await LocalNotifications.getPending();
+			if (pending.notifications.length > 0) await LocalNotifications.cancel({ notifications: pending.notifications });
+			await LocalNotifications.removeAllDeliveredNotifications();
+		} catch {}
+	}, []);
 	(0, import_react.useEffect)(() => {
-		if (!settings.enabled || alerts.length === 0) return;
+		if (!settings.enabled || !settings.notifyFloodThresholds || alerts.length === 0) return;
 		const firstUnnotified = alerts.filter((a) => {
+			if (a.type === "below_10yr_avg") return false;
 			if (settings.romaniaOnly && a.country !== "RO") return false;
 			if (settings.watchedStationIds.length > 0 && !settings.watchedStationIds.includes(a.stationId)) return false;
-			if (a.type === "below_10yr_avg" && !settings.notifyBelow10YrAvg) return false;
-			if (a.type !== "below_10yr_avg" && !settings.notifyFloodThresholds) return false;
 			return true;
 		}).find((a) => !notifiedIdsRef.current.has(a.id));
 		if (firstUnnotified) {
 			notifiedIdsRef.current.add(firstUnnotified.id);
-			const title = firstUnnotified.type === "below_10yr_avg" ? `Nivel Scăzut · ${firstUnnotified.stationName}` : `Alertă Inundație · ${firstUnnotified.stationName}`;
-			dispatchBrowserNotification(title, firstUnnotified.message, firstUnnotified.id);
+			const title = `Alertă Inundație · ${firstUnnotified.stationName}`;
+			dispatchNotification(title, firstUnnotified.message, firstUnnotified.id);
 			setInAppToast(firstUnnotified);
 		}
 	}, [
 		alerts,
 		settings,
-		dispatchBrowserNotification
+		dispatchNotification
 	]);
 	return {
 		settings,
 		setSettings,
 		permissionState,
-		nativeToken,
+		statusMessage,
 		inAppToast,
 		dismissToast: () => setInAppToast(null),
-		requestPushPermission,
-		sendTestPushAlert: (0, import_react.useCallback)(async (kind) => {
-			const sample = kind === "flood" ? {
+		enablePushAlerts,
+		disablePushAlerts,
+		sendTestPushAlert: (0, import_react.useCallback)(async () => {
+			const sample = {
 				id: `test-flood-${Date.now()}`,
 				stationId: "742052",
 				stationName: "Galați",
@@ -47092,23 +47060,13 @@ function usePushAlerts(alerts) {
 				deltaCm: 14,
 				message: "TEST ALERTĂ: Galați (km 150) — Cota simulată 614 cm depășește Cota de Inundație (600 cm) cu +14 cm.",
 				timestamp: (/* @__PURE__ */ new Date()).toISOString()
-			} : {
-				id: `test-low-${Date.now()}`,
-				stationId: "742027",
-				stationName: "Giurgiu",
-				country: "RO",
-				km: 493,
-				type: "below_10yr_avg",
-				severity: "warning",
-				currentLevelCm: -114,
-				referenceCm: 72,
-				deltaCm: -186,
-				message: "TEST ALERTĂ: Giurgiu (km 493) — Cota -114 cm este cu 186 cm sub media multianuală pe 10 ani (+72 cm).",
-				timestamp: (/* @__PURE__ */ new Date()).toISOString()
 			};
+			if (Capacitor.isNativePlatform() && permissionState !== "granted") try {
+				if ((await LocalNotifications.requestPermissions()).display === "granted") setPermissionState("granted");
+			} catch {}
 			setInAppToast(sample);
-			await dispatchBrowserNotification(kind === "flood" ? "Alertă Inundație · Galați (TEST)" : "Sub Media 10 Ani · Giurgiu (TEST)", sample.message, sample.id);
-		}, [dispatchBrowserNotification])
+			await dispatchNotification("Alertă Inundație · Galați (TEST)", sample.message, sample.id);
+		}, [dispatchNotification, permissionState])
 	};
 }
 // src/data/danubeStationsMeta.ts
@@ -49473,20 +49431,6 @@ function evaluateAlerts(stations) {
 		message: `${st.name} (km ${st.km}): Cota curentă ${st.currentLevelCm} cm depășește Cota de Atenție (${st.thresholds.ca} cm).`,
 		timestamp: nowIso
 	});
-	else if (st.deviationFrom10YrCm <= -15) alerts.push({
-		id: `${st.id}-low10y`,
-		stationId: st.id,
-		stationName: st.name,
-		country: st.country,
-		km: st.km,
-		type: "below_10yr_avg",
-		severity: st.deviationFrom10YrCm <= -90 ? "warning" : "info",
-		currentLevelCm: st.currentLevelCm,
-		referenceCm: st.tenYearAvgCm,
-		deltaCm: st.deviationFrom10YrCm,
-		message: `${st.name} (km ${st.km}): Nivel scăzut (${st.currentLevelCm} cm), cu ${Math.abs(st.deviationFrom10YrCm)} cm sub media multianuală pe 10 ani (${st.tenYearAvgCm} cm).`,
-		timestamp: nowIso
-	});
 	const rank = {
 		critical: 0,
 		high: 1,
@@ -49957,8 +49901,8 @@ function App() {
 								label: "Alerte Push"
 							},
 							{
-								id: "mobile",
-								label: "Mobil APK & iOS"
+								id: "about",
+								label: "Despre"
 							}
 						].map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
 							type: "button",
@@ -50250,12 +50194,13 @@ function App() {
 						settings: push.settings,
 						setSettings: push.setSettings,
 						permissionState: push.permissionState,
-						nativeToken: push.nativeToken,
-						onEnablePush: push.requestPushPermission,
+						statusMessage: push.statusMessage,
+						onEnablePush: push.enablePushAlerts,
+						onDisablePush: push.disablePushAlerts,
 						onSendTestPush: push.sendTestPushAlert,
 						onSelectStation: handleSelectStationFromAnyView
 					}),
-					activeTab === "mobile" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MobileDeployView, {})
+					activeTab === "about" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AboutView, {})
 				]
 			}),
 			!isOnline && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
@@ -50300,9 +50245,9 @@ function App() {
 						Icon: BellRing
 					},
 					{
-						id: "mobile",
-						label: "APK/iOS",
-						Icon: Smartphone
+						id: "about",
+						label: "Despre",
+						Icon: Info
 					}
 				].map(({ id, label, Icon }) => {
 					return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
@@ -50318,4 +50263,4 @@ function App() {
 }
 // src/main.tsx
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App, {}));
-export { __commonJSMin as n, __toESM as r, _typeof as t };
+export { __toESM as i, _typeof as n, __commonJSMin as r, WebPlugin as t };

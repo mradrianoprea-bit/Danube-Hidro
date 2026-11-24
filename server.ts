@@ -1,5 +1,6 @@
 import 'dotenv/config';
 import express from 'express';
+import http from 'http';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { createServer as createViteServer } from 'vite';
@@ -73,9 +74,15 @@ async function startServer() {
     });
   });
 
+  const httpServer = http.createServer(app);
+
   if (!IS_PROD) {
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: {
+        middlewareMode: true,
+        hmr: { server: httpServer },
+        watch: process.env.DISABLE_HMR === 'true' ? null : {},
+      },
       appType: 'spa',
     });
     app.use(vite.middlewares);
@@ -87,7 +94,7 @@ async function startServer() {
     });
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
+  httpServer.listen(PORT, '0.0.0.0', () => {
     console.log(`HidroDunăre server listening on http://0.0.0.0:${PORT}`);
   });
 }

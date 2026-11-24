@@ -629,21 +629,6 @@ function evaluateAlerts(stations: DanubeStation[]): PushAlertItem[] {
         message: `${st.name} (km ${st.km}): Cota curentă ${st.currentLevelCm} cm depășește Cota de Atenție (${st.thresholds.ca} cm).`,
         timestamp: nowIso,
       });
-    } else if (st.deviationFrom10YrCm <= -15) {
-      alerts.push({
-        id: `${st.id}-low10y`,
-        stationId: st.id,
-        stationName: st.name,
-        country: st.country,
-        km: st.km,
-        type: 'below_10yr_avg',
-        severity: st.deviationFrom10YrCm <= -90 ? 'warning' : 'info',
-        currentLevelCm: st.currentLevelCm,
-        referenceCm: st.tenYearAvgCm,
-        deltaCm: st.deviationFrom10YrCm,
-        message: `${st.name} (km ${st.km}): Nivel scăzut (${st.currentLevelCm} cm), cu ${Math.abs(st.deviationFrom10YrCm)} cm sub media multianuală pe 10 ani (${st.tenYearAvgCm} cm).`,
-        timestamp: nowIso,
-      });
     }
   }
 
