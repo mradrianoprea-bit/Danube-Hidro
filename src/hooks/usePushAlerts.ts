@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Capacitor } from '@capacitor/core';
 import { LocalNotifications } from '@capacitor/local-notifications';
+import type { Language } from '../i18n/LanguageContext';
 import type { PushAlertItem } from '../types/hydrology';
 
 export interface PushSettings {
@@ -27,7 +28,21 @@ function generateNumericNotificationId(): number {
   return nextNotificationId;
 }
 
-export function usePushAlerts(alerts: PushAlertItem[]) {
+export function formatAlertMessage(alert: PushAlertItem, lang: Language): string {
+  if (lang === 'ro') return alert.message;
+  if (alert.type === 'flood_cp') {
+    return `${alert.stationName} (km ${alert.km}): Current stage ${alert.currentLevelCm} cm exceeds Danger Threshold (${alert.referenceCm} cm) by +${alert.deltaCm} cm.`;
+  }
+  if (alert.type === 'flood_ci') {
+    return `${alert.stationName} (km ${alert.km}): Current stage ${alert.currentLevelCm} cm exceeds Flood Threshold (${alert.referenceCm} cm) by +${alert.deltaCm} cm.`;
+  }
+  if (alert.type === 'flood_ca') {
+    return `${alert.stationName} (km ${alert.km}): Current stage ${alert.currentLevelCm} cm exceeds Attention Threshold (${alert.referenceCm} cm).`;
+  }
+  return alert.message;
+}
+
+export function usePushAlerts(alerts: PushAlertItem[], lang: Language) {
   const [settings, setSettings] = useState<PushSettings>(() => {
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
@@ -98,8 +113,11 @@ export function usePushAlerts(alerts: PushAlertItem[]) {
     try {
       await LocalNotifications.createChannel({
         id: ANDROID_CHANNEL_ID,
-        name: 'Alerte Inundații Dunăre (CA/CI/CP)',
-        description: 'Notificări prioritare pentru depășirea cotelor oficiale de atenție, inundație și pericol.',
+        name: lang === 'en' ? 'Danube Flood Alerts (CA/CI/CP)' : 'Alerte Inundații Dunăre (CA/CI/CP)',
+        description:
+          lang === 'en'
+            ? 'Priority alerts based on official sources when Attention, Flood, or Danger thresholds are exceeded.'
+            : 'Notificări prioritare (pe baza surselor oficiale) pentru depășirea cotelor de atenție, inundație și pericol.',
         importance: 4,
         visibility: 1,
         vibration: true,
@@ -108,11 +126,10 @@ export function usePushAlerts(alerts: PushAlertItem[]) {
     } catch {
       // ignore channel creation issues on older Android versions
     }
-  }, []);
+  }, [lang]);
 
   const dispatchNotification = useCallback(
     async (title: string, body: string, tag: string) => {
-      // 1. Native Android / iOS notifications via LocalNotifications (no Firebase crash!)
       if (Capacitor.isNativePlatform()) {
         try {
           const perm = await LocalNotifications.checkPermissions();
@@ -136,7 +153,6 @@ export function usePushAlerts(alerts: PushAlertItem[]) {
         return;
       }
 
-      // 2. Web / PWA Notification API
       if (typeof window === 'undefined' || !('Notification' in window)) return;
       if (Notification.permission !== 'granted') return;
 
@@ -163,8 +179,17 @@ export function usePushAlerts(alerts: PushAlertItem[]) {
 
   const enablePushAlerts = useCallback(async () => {
     setStatusMessage(null);
+    const welcomeTitle =
+      lang === 'en' ? 'HidroDunăre · Push Alerts Enabled' : 'HidroDunăre · Alerte Push Active';
+    const welcomeBody =
+      lang === 'en'
+        ? 'This application is not official, but uses information from official sources for Attention, Flood, or Danger (CA / CI / CP) alerts.'
+        : 'Aplicația nu este oficială, dar folosește informații din surse oficiale pentru alertele de depășire a cotelor CA / CI / CP.';
+    const enabledMsg =
+      lang === 'en'
+        ? 'Push alerts for CA / CI / CP flood thresholds are now enabled.'
+        : 'Alertele push pentru depășirea cotelor CA / CI / CP au fost activate.';
 
-    // 1. Native Capacitor Android/iOS via LocalNotifications (zero Firebase dependency)
     if (Capacitor.isNativePlatform()) {
       try {
         await ensureNativeChannel();
@@ -172,46 +197,45 @@ export function usePushAlerts(alerts: PushAlertItem[]) {
         if (perm.display === 'granted') {
           setPermissionState('granted');
           setSettings((prev) => ({ ...prev, enabled: true }));
-          setStatusMessage('Alertele push pentru depășirea cotelor CA / CI / CP au fost activate.');
-          await dispatchNotification(
-            'HidroDunăre · Alerte Push Active',
-            'Veți primi notificări în timp real pentru depășirea cotelor oficiale de atenție, inundație și pericol (CA / CI / CP).',
-            'hidrodunare-welcome',
-          );
+          setStatusMessage(enabledMsg);
+          await dispatchNotification(welcomeTitle, welcomeBody, 'hidrodunare-welcome');
           return true;
         }
         setPermissionState('denied');
         setSettings((prev) => ({ ...prev, enabled: false }));
         setStatusMessage(
-          'Permisiunea de notificări a fost refuzată. Activați notificările pentru HidroDunăre din Setările telefonului.',
+          lang === 'en'
+            ? 'Notification permission was denied. Enable notifications for HidroDunăre in your device Settings.'
+            : 'Permisiunea de notificări a fost refuzată. Activați notificările pentru HidroDunăre din Setările telefonului.',
         );
         return false;
       } catch (err) {
         console.warn('Native notification permission error:', err);
         setSettings((prev) => ({ ...prev, enabled: true }));
-        setStatusMessage('Alertele în aplicație au fost activate.');
+        setStatusMessage(
+          lang === 'en' ? 'In-app alerts have been enabled.' : 'Alertele în aplicație au fost activate.',
+        );
         return true;
       }
     }
 
-    // 2. Web Push / Notification API for PWA & Desktop
     if (typeof window !== 'undefined' && 'Notification' in window) {
       try {
         const perm = await Notification.requestPermission();
         setPermissionState(perm);
         if (perm === 'granted') {
           setSettings((prev) => ({ ...prev, enabled: true }));
-          setStatusMessage('Alertele push pentru depășirea cotelor CA / CI / CP au fost activate.');
-          await dispatchNotification(
-            'HidroDunăre · Alerte Push Active',
-            'Veți primi notificări în timp real pentru depășirea cotelor oficiale de atenție, inundație și pericol (CA / CI / CP).',
-            'hidrodunare-welcome',
-          );
+          setStatusMessage(enabledMsg);
+          await dispatchNotification(welcomeTitle, welcomeBody, 'hidrodunare-welcome');
           return true;
         }
         if (perm === 'denied') {
           setSettings((prev) => ({ ...prev, enabled: false }));
-          setStatusMessage('Notificările browser sunt blocate. Permiteți notificările din setările browserului.');
+          setStatusMessage(
+            lang === 'en'
+              ? 'Browser notifications are blocked. Allow notifications in your browser settings.'
+              : 'Notificările browser sunt blocate. Permiteți notificările din setările browserului.',
+          );
           return false;
         }
       } catch {
@@ -220,15 +244,21 @@ export function usePushAlerts(alerts: PushAlertItem[]) {
     }
 
     setSettings((prev) => ({ ...prev, enabled: true }));
-    setStatusMessage('Alertele în aplicație au fost activate.');
+    setStatusMessage(
+      lang === 'en' ? 'In-app alerts have been enabled.' : 'Alertele în aplicație au fost activate.',
+    );
     return true;
-  }, [dispatchNotification, ensureNativeChannel]);
+  }, [dispatchNotification, ensureNativeChannel, lang]);
 
   const disablePushAlerts = useCallback(async () => {
     setSettings((prev) => ({ ...prev, enabled: false }));
     setInAppToast(null);
     notifiedIdsRef.current.clear();
-    setStatusMessage('Alertele push au fost dezactivate. Nu veți mai primi notificări până la reactivare.');
+    setStatusMessage(
+      lang === 'en'
+        ? 'Push alerts have been disabled. You will not receive notifications until re-enabled.'
+        : 'Alertele push au fost dezactivate. Nu veți mai primi notificări până la reactivare.',
+    );
 
     if (Capacitor.isNativePlatform()) {
       try {
@@ -241,7 +271,7 @@ export function usePushAlerts(alerts: PushAlertItem[]) {
         // ignore native cleanup errors
       }
     }
-  }, []);
+  }, [lang]);
 
   // Evaluate incoming flood threshold alerts (CA/CI/CP only) and dispatch notifications
   useEffect(() => {
@@ -257,11 +287,15 @@ export function usePushAlerts(alerts: PushAlertItem[]) {
     const firstUnnotified = matching.find((a) => !notifiedIdsRef.current.has(a.id));
     if (firstUnnotified) {
       notifiedIdsRef.current.add(firstUnnotified.id);
-      const title = `Alertă Inundație · ${firstUnnotified.stationName}`;
-      void dispatchNotification(title, firstUnnotified.message, firstUnnotified.id);
-      setInAppToast(firstUnnotified);
+      const title =
+        lang === 'en'
+          ? `Flood Alert · ${firstUnnotified.stationName}`
+          : `Alertă Inundație · ${firstUnnotified.stationName}`;
+      const body = formatAlertMessage(firstUnnotified, lang);
+      void dispatchNotification(title, body, firstUnnotified.id);
+      setInAppToast({ ...firstUnnotified, message: body });
     }
-  }, [alerts, settings, dispatchNotification]);
+  }, [alerts, settings, dispatchNotification, lang]);
 
   const sendTestPushAlert = useCallback(async () => {
     const sample: PushAlertItem = {
@@ -276,7 +310,9 @@ export function usePushAlerts(alerts: PushAlertItem[]) {
       referenceCm: 600,
       deltaCm: 14,
       message:
-        'TEST ALERTĂ: Galați (km 150) — Cota simulată 614 cm depășește Cota de Inundație (600 cm) cu +14 cm.',
+        lang === 'en'
+          ? 'TEST ALERT: Galați (km 150) — Simulated stage 614 cm exceeds Flood Threshold (600 cm) by +14 cm.'
+          : 'TEST ALERTĂ: Galați (km 150) — Cota simulată 614 cm depășește Cota de Inundație (600 cm) cu +14 cm.',
       timestamp: new Date().toISOString(),
     };
 
@@ -292,8 +328,12 @@ export function usePushAlerts(alerts: PushAlertItem[]) {
     }
 
     setInAppToast(sample);
-    await dispatchNotification('Alertă Inundație · Galați (TEST)', sample.message, sample.id);
-  }, [dispatchNotification, permissionState]);
+    await dispatchNotification(
+      lang === 'en' ? 'Flood Alert · Galați (TEST)' : 'Alertă Inundație · Galați (TEST)',
+      sample.message,
+      sample.id,
+    );
+  }, [dispatchNotification, permissionState, lang]);
 
   return {
     settings,

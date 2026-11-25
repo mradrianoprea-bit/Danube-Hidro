@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from 'react';
+import { useLanguage } from '../i18n/LanguageContext';
 import type { StationDetailPayload } from '../types/hydrology';
+import { translateMonthLabel } from '../utils/statusFormat';
 
 export type ChartMode = 'forecast_3d' | 'forecast_14d' | 'history_30d' | 'climatology_10y';
 
@@ -9,6 +11,8 @@ interface HydrographChartProps {
 }
 
 export const HydrographChart: React.FC<HydrographChartProps> = ({ detail, requestedMode }) => {
+  const { lang } = useLanguage();
+  const isEn = lang === 'en';
   const [mode, setMode] = useState<ChartMode>('forecast_14d');
   const [hoverIdx, setHoverIdx] = useState<number | null>(null);
 
@@ -25,7 +29,7 @@ export const HydrographChart: React.FC<HydrographChartProps> = ({ detail, reques
     if (mode === 'forecast_3d') {
       return [
         {
-          label: 'Astăzi',
+          label: isEn ? 'Today' : 'Astăzi',
           value: station.currentLevelCm,
           min: station.currentLevelCm,
           max: station.currentLevelCm,
@@ -38,7 +42,9 @@ export const HydrographChart: React.FC<HydrographChartProps> = ({ detail, reques
           min: f.minCm,
           max: f.maxCm,
           precip: f.localPrecipMm + f.upstreamBasinPrecipMm * 0.4,
-          sub: `${f.dischargeM3s} m³/s · Ploaie ${f.localPrecipMm.toFixed(1)} mm`,
+          sub: isEn
+            ? `${f.dischargeM3s} m³/s · Rain ${f.localPrecipMm.toFixed(1)} mm`
+            : `${f.dischargeM3s} m³/s · Ploaie ${f.localPrecipMm.toFixed(1)} mm`,
         })),
       ];
     }
@@ -49,7 +55,9 @@ export const HydrographChart: React.FC<HydrographChartProps> = ({ detail, reques
         min: f.minCm,
         max: f.maxCm,
         precip: Number((f.localPrecipMm + f.upstreamBasinPrecipMm).toFixed(1)),
-        sub: `Local ${f.localPrecipMm.toFixed(1)} mm · Aport amonte ${f.upstreamBasinPrecipMm.toFixed(1)} mm`,
+        sub: isEn
+          ? `Local ${f.localPrecipMm.toFixed(1)} mm · Upstream ${f.upstreamBasinPrecipMm.toFixed(1)} mm`
+          : `Local ${f.localPrecipMm.toFixed(1)} mm · Aport amonte ${f.upstreamBasinPrecipMm.toFixed(1)} mm`,
       }));
     }
     if (mode === 'history_30d') {
@@ -59,18 +67,22 @@ export const HydrographChart: React.FC<HydrographChartProps> = ({ detail, reques
         min: h.levelCm,
         max: h.levelCm,
         precip: 0,
-        sub: `Debit: ${h.dischargeM3s} m³/s · Media 10A: ${h.tenYearClimatologyCm} cm`,
+        sub: isEn
+          ? `Discharge: ${h.dischargeM3s} m³/s · 10Y Avg: ${h.tenYearClimatologyCm} cm`
+          : `Debit: ${h.dischargeM3s} m³/s · Media 10A: ${h.tenYearClimatologyCm} cm`,
       }));
     }
     return monthlyClimatology10Yr.map((m) => ({
-      label: m.month,
+      label: translateMonthLabel(m.month, lang),
       value: m.avgCm,
       min: m.minCm,
       max: m.maxCm,
       precip: 0,
-      sub: `Min 10A: ${m.minCm} cm · Max 10A: ${m.maxCm} cm`,
+      sub: isEn
+        ? `10Y Min: ${m.minCm} cm · 10Y Max: ${m.maxCm} cm`
+        : `Min 10A: ${m.minCm} cm · Max 10A: ${m.maxCm} cm`,
     }));
-  }, [mode, station, forecast3d, forecast14d, history30d, monthlyClimatology10Yr]);
+  }, [mode, station, forecast3d, forecast14d, history30d, monthlyClimatology10Yr, isEn, lang]);
 
   const width = 820;
   const height = 270;
@@ -128,10 +140,13 @@ export const HydrographChart: React.FC<HydrographChartProps> = ({ detail, reques
         <div className="flex flex-wrap items-center gap-1 p-1 bg-slate-100 dark:bg-slate-800 rounded-lg">
           {(
             [
-              { id: 'forecast_3d', label: 'Prognoză 3 Zile' },
-              { id: 'forecast_14d', label: 'Prognoză 14 Zile (Pluviometrie)' },
-              { id: 'history_30d', label: 'Istoric 30 Zile' },
-              { id: 'climatology_10y', label: 'Medie 10 Ani (2016–2025)' },
+              { id: 'forecast_3d', label: isEn ? '3-Day Forecast' : 'Prognoză 3 Zile' },
+              {
+                id: 'forecast_14d',
+                label: isEn ? '14-Day Forecast (Rainfall)' : 'Prognoză 14 Zile (Pluviometrie)',
+              },
+              { id: 'history_30d', label: isEn ? '30-Day History' : 'Istoric 30 Zile' },
+              { id: 'climatology_10y', label: isEn ? '10-Yr Mean (2016–2025)' : 'Medie 10 Ani (2016–2025)' },
             ] as const
           ).map((tab) => (
             <button
@@ -158,7 +173,9 @@ export const HydrographChart: React.FC<HydrographChartProps> = ({ detail, reques
               <strong className="text-slate-900 dark:text-white">{activePoint.label}</strong>: {activePoint.value} cm · {activePoint.sub}
             </span>
           ) : (
-            <span>Mișcați cursorul pe grafic pentru citire punctuală</span>
+            <span>
+              {isEn ? 'Hover or tap chart for point values' : 'Mișcați cursorul pe grafic pentru citire punctuală'}
+            </span>
           )}
         </div>
       </div>
@@ -202,7 +219,7 @@ export const HydrographChart: React.FC<HydrographChartProps> = ({ detail, reques
           </text>
           {mode === 'forecast_14d' && (
             <text x={width - padR + 8} y={11} textAnchor="start" className="fill-sky-600 dark:fill-sky-400 text-[10px] font-mono">
-              mm ploaie
+              {isEn ? 'mm rain' : 'mm ploaie'}
             </text>
           )}
 
@@ -261,7 +278,7 @@ export const HydrographChart: React.FC<HydrographChartProps> = ({ detail, reques
                 textAnchor="end"
                 className="fill-sky-700 dark:fill-sky-300 text-[10px] font-mono"
               >
-                Media 10 Ani ({station.tenYearAvgCm} cm)
+                {isEn ? `10-Yr Mean (${station.tenYearAvgCm} cm)` : `Media 10 Ani (${station.tenYearAvgCm} cm)`}
               </text>
             </g>
           )}

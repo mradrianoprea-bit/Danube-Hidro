@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { BellRing, Download, Info, MapPin, Moon, RefreshCw, Search, ShieldAlert, Smartphone, Sun, Table2, X } from 'lucide-react';
+import { BellRing, Download, Info, Languages, MapPin, Moon, RefreshCw, Search, ShieldAlert, Smartphone, Sun, Table2, X } from 'lucide-react';
 import { AboutView } from './components/AboutView';
 import { AlertsView } from './components/AlertsView';
 import { DanubeMap } from './components/DanubeMap';
@@ -8,15 +8,19 @@ import { StationDetailPanel } from './components/StationDetailPanel';
 import { StationsTableView } from './components/StationsTableView';
 import { useOnlineStatus, usePWAInstall } from './hooks/usePWAInstall';
 import { usePushAlerts } from './hooks/usePushAlerts';
+import { useLanguage } from './i18n/LanguageContext';
 import { fetchOverviewData, fetchStationDetailData, isStandaloneNativeApp } from './services/apiClient';
 import type { DanubeStation, OverviewResponse, StationDetailPayload } from './types/hydrology';
 import { exportBasinBulletinPdf } from './utils/pdfReport';
-import { COUNTRY_NAMES_RO, formatSignedCm, getStatusPresentation } from './utils/statusFormat';
+import { formatSignedCm, getCountryName, getStatusPresentation } from './utils/statusFormat';
 
 type WorkspaceTab = 'dashboard' | 'table' | 'alerts' | 'about';
 type StationListFilter = 'all' | 'ro' | 'flood' | 'below_avg';
 
 export default function App() {
+  const { lang, setLang } = useLanguage();
+  const isEn = lang === 'en';
+
   const [activeTab, setActiveTab] = useState<WorkspaceTab>('dashboard');
   const [overview, setOverview] = useState<OverviewResponse | null>(null);
   const [loadingOverview, setLoadingOverview] = useState(true);
@@ -51,7 +55,11 @@ export default function App() {
         return roDefault?.id ?? data.stations[0]?.id ?? '';
       });
     } catch (err) {
-      setOverviewError(err instanceof Error ? err.message : 'Eroare de conexiune la sursele oficiale.');
+      setOverviewError(
+        err instanceof Error
+          ? err.message
+          : 'Eroare de conexiune la sursele oficiale.',
+      );
     } finally {
       setLoadingOverview(false);
     }
@@ -106,7 +114,7 @@ export default function App() {
   }, [fetchOverview]);
 
   const alerts = overview?.alerts ?? [];
-  const push = usePushAlerts(alerts);
+  const push = usePushAlerts(alerts, lang);
 
   const stations = overview?.stations ?? [];
 
@@ -118,7 +126,12 @@ export default function App() {
         return false;
       }
       if (listFilter === 'below_avg' && s.status !== 'below_avg') return false;
-      if (q && !s.name.toLowerCase().includes(q) && !COUNTRY_NAMES_RO[s.country].toLowerCase().includes(q)) {
+      if (
+        q &&
+        !s.name.toLowerCase().includes(q) &&
+        !getCountryName(s.country, 'ro').toLowerCase().includes(q) &&
+        !getCountryName(s.country, 'en').toLowerCase().includes(q)
+      ) {
         return false;
       }
       return true;
@@ -146,7 +159,7 @@ export default function App() {
   const handleExportGlobalPdf = () => {
     if (!overview) return;
     const targetStations = listFilter === 'ro' ? stations.filter((s) => s.country === 'RO') : stations;
-    exportBasinBulletinPdf(overview, targetStations);
+    exportBasinBulletinPdf(overview, targetStations, lang);
   };
 
   return (
@@ -167,10 +180,10 @@ export default function App() {
         <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600 dark:text-slate-300">
           {(
             [
-              { id: 'dashboard', label: 'Panou & Hartă' },
-              { id: 'table', label: 'Stații Dunăre' },
-              { id: 'alerts', label: 'Alerte Push' },
-              { id: 'about', label: 'Despre' },
+              { id: 'dashboard', label: isEn ? 'Dashboard & Map' : 'Panou & Hartă' },
+              { id: 'table', label: isEn ? 'Danube Stations' : 'Stații Dunăre' },
+              { id: 'alerts', label: isEn ? 'Push Alerts' : 'Alerte Push' },
+              { id: 'about', label: isEn ? 'About' : 'Despre' },
             ] as const
           ).map((item) => (
             <button
@@ -196,7 +209,7 @@ export default function App() {
             className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-sky-700 text-white hover:bg-sky-800 disabled:opacity-50 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
           >
             <Download className="w-3.5 h-3.5" />
-            Exportă PDF
+            {isEn ? 'Export PDF' : 'Exportă PDF'}
           </button>
         </div>
       </header>
@@ -207,17 +220,51 @@ export default function App() {
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="text-xs text-slate-500 dark:text-slate-400 flex flex-wrap items-center gap-2">
             <span className="font-medium text-slate-800 dark:text-slate-200">
-              Cotele Apelor Dunării · Surse Oficiale
+              {isEn
+                ? 'Danube Water Levels · This application is not official, but uses information from official sources'
+                : 'Cotele Apelor Dunării · Aplicația nu este oficială, dar folosește informații din surse oficiale'}
             </span>
             <span aria-hidden="true">·</span>
             <span>
-              Observație: {overview?.observedDateLabel ?? 'Se încarcă...'}
+              {isEn ? 'Observation:' : 'Observație:'}{' '}
+              {overview?.observedDateLabel ?? (isEn ? 'Loading...' : 'Se încarcă...')}
             </span>
             <span aria-hidden="true">·</span>
             <span>OVF Hydroinfo / AFDJ Galați / WSV Pegelonline / Copernicus GloFAS</span>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
+            {/* Language Switcher RO / EN */}
+            <div
+              role="group"
+              aria-label={isEn ? 'Select language' : 'Selectare limbă'}
+              className="inline-flex items-center rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-0.5 text-xs"
+            >
+              <Languages className="w-3.5 h-3.5 text-slate-400 mx-1.5 shrink-0" />
+              <button
+                type="button"
+                onClick={() => setLang('ro')}
+                className={`px-2 py-1 rounded-md font-semibold transition-colors cursor-pointer ${
+                  lang === 'ro'
+                    ? 'bg-sky-700 text-white'
+                    : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
+                }`}
+              >
+                RO
+              </button>
+              <button
+                type="button"
+                onClick={() => setLang('en')}
+                className={`px-2 py-1 rounded-md font-semibold transition-colors cursor-pointer ${
+                  lang === 'en'
+                    ? 'bg-sky-700 text-white'
+                    : 'text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white'
+                }`}
+              >
+                EN
+              </button>
+            </div>
+
             {isInstallable && !isInstalled && (
               <button
                 type="button"
@@ -225,7 +272,7 @@ export default function App() {
                 className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-sky-200 bg-sky-50 text-sky-800 hover:bg-sky-100 dark:border-sky-800 dark:bg-sky-950/60 dark:text-sky-300 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
               >
                 <Smartphone className="w-3.5 h-3.5" />
-                Instalează App
+                {isEn ? 'Install App' : 'Instalează App'}
               </button>
             )}
             <button
@@ -235,16 +282,16 @@ export default function App() {
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
               <RefreshCw className={`w-3.5 h-3.5 ${loadingOverview ? 'animate-spin' : ''}`} />
-              Actualizează Datele
+              {isEn ? 'Refresh Data' : 'Actualizează Datele'}
             </button>
             <button
               type="button"
               onClick={() => setDarkMode((v) => !v)}
-              aria-label="Comută tema zi/noapte"
+              aria-label={isEn ? 'Toggle light/dark theme' : 'Comută tema zi/noapte'}
               className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
             >
               {darkMode ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
-              {darkMode ? 'Mod Zi' : 'Mod Noapte'}
+              {darkMode ? (isEn ? 'Light Mode' : 'Mod Zi') : isEn ? 'Dark Mode' : 'Mod Noapte'}
             </button>
           </div>
         </div>
@@ -252,13 +299,17 @@ export default function App() {
         {/* Error banner if API unavailable */}
         {overviewError && (
           <div className="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800 rounded-xl p-4 flex items-center justify-between gap-3 text-xs text-red-800 dark:text-red-300">
-            <span>Eroare la conectarea cu sursele hidrologice oficiale: {overviewError}</span>
+            <span>
+              {isEn
+                ? `Error connecting to official hydrological sources: ${overviewError}`
+                : `Eroare la conectarea cu sursele hidrologice oficiale: ${overviewError}`}
+            </span>
             <button
               type="button"
               onClick={() => void fetchOverview(true)}
               className="px-3 py-1.5 font-semibold rounded-md bg-red-700 text-white hover:bg-red-800 cursor-pointer shrink-0"
             >
-              Reîncearcă
+              {isEn ? 'Retry' : 'Reîncearcă'}
             </button>
           </div>
         )}
@@ -266,42 +317,58 @@ export default function App() {
         {/* 4-Column Hydrological Summary Strip */}
         <section className="grid grid-cols-2 lg:grid-cols-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl divide-y lg:divide-y-0 lg:divide-x divide-slate-200 dark:divide-slate-800">
           <div className="p-4">
-            <div className="text-xs text-slate-500 dark:text-slate-400">Localități Monitorizate</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400">
+              {isEn ? 'Monitored Localities' : 'Localități Monitorizate'}
+            </div>
             <div className="mt-1 text-2xl font-bold font-mono tabular-nums text-slate-900 dark:text-slate-100">
               {stations.length || '—'}
             </div>
             <div className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-              {stats.roCount} porturi oficiale în România
+              {isEn
+                ? `${stats.roCount} ports in Romania`
+                : `${stats.roCount} porturi în România`}
             </div>
           </div>
 
           <div className="p-4">
-            <div className="text-xs text-slate-500 dark:text-slate-400">Depășiri Cote Inundație</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400">
+              {isEn ? 'Flood Threshold Exceedances' : 'Depășiri Cote Inundație'}
+            </div>
             <div className="mt-1 text-2xl font-bold font-mono tabular-nums text-slate-900 dark:text-slate-100">
               {stats.floodCount}
             </div>
             <div className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-              {stats.floodCount > 0 ? '■ Praguri CA / CI / CP atinse' : '● Nicio depășire de prag CA/CI/CP'}
+              {stats.floodCount > 0
+                ? isEn
+                  ? '■ CA / CI / CP thresholds reached'
+                  : '■ Praguri CA / CI / CP atinse'
+                : isEn
+                  ? '● No CA/CI/CP threshold exceeded'
+                  : '● Nicio depășire de prag CA/CI/CP'}
             </div>
           </div>
 
           <div className="p-4">
-            <div className="text-xs text-slate-500 dark:text-slate-400">Sub Media Anuală 10 Ani</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400">
+              {isEn ? 'Below 10-Yr Annual Mean' : 'Sub Media Anuală 10 Ani'}
+            </div>
             <div className="mt-1 text-2xl font-bold font-mono tabular-nums text-sky-700 dark:text-sky-400">
               {stats.belowAvgCount}
             </div>
             <div className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-              ▼ Față de media 2016–2025 (GloFAS)
+              {isEn ? '▼ vs. 2016–2025 mean (GloFAS)' : '▼ Față de media 2016–2025 (GloFAS)'}
             </div>
           </div>
 
           <div className="p-4">
-            <div className="text-xs text-slate-500 dark:text-slate-400">Precipitații Bazin (14 Zile)</div>
+            <div className="text-xs text-slate-500 dark:text-slate-400">
+              {isEn ? 'Basin Precipitation (14 Days)' : 'Precipitații Bazin (14 Zile)'}
+            </div>
             <div className="mt-1 text-2xl font-bold font-mono tabular-nums text-slate-900 dark:text-slate-100">
               {stats.avgRain14d.toFixed(1)} <span className="text-xs font-normal text-slate-400">mm</span>
             </div>
             <div className="mt-0.5 text-xs text-slate-500 dark:text-slate-400">
-              Medie ECMWF pe 6 sub-bazine Dunăre
+              {isEn ? 'ECMWF average across 6 Danube sub-basins' : 'Medie ECMWF pe 6 sub-bazine Dunăre'}
             </div>
           </div>
         </section>
@@ -318,7 +385,7 @@ export default function App() {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Caută stație sau țară..."
+                    placeholder={isEn ? 'Search station or country...' : 'Caută stație sau țară...'}
                     className="w-full pl-8 pr-3 py-2 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-600"
                   />
                 </div>
@@ -326,10 +393,10 @@ export default function App() {
                 <div className="grid grid-cols-4 gap-1 p-1 bg-slate-100 dark:bg-slate-800 rounded-lg">
                   {(
                     [
-                      { id: 'ro', label: 'România' },
-                      { id: 'all', label: 'Toate' },
-                      { id: 'flood', label: 'Inundații' },
-                      { id: 'below_avg', label: 'Sub 10A' },
+                      { id: 'ro', label: isEn ? 'Romania' : 'România' },
+                      { id: 'all', label: isEn ? 'All' : 'Toate' },
+                      { id: 'flood', label: isEn ? 'Floods' : 'Inundații' },
+                      { id: 'below_avg', label: isEn ? '< 10Y' : 'Sub 10A' },
                     ] as const
                   ).map((tab) => (
                     <button
@@ -358,12 +425,12 @@ export default function App() {
                   ))
                 ) : filteredSidebarStations.length === 0 ? (
                   <div className="p-6 text-center text-xs text-slate-500 dark:text-slate-400">
-                    Nicio stație găsită pentru filtrul curent.
+                    {isEn ? 'No station found for the current filter.' : 'Nicio stație găsită pentru filtrul curent.'}
                   </div>
                 ) : (
                   filteredSidebarStations.map((st: DanubeStation) => {
                     const isSelected = st.id === selectedStationId;
-                    const pres = getStatusPresentation(st.status);
+                    const pres = getStatusPresentation(st.status, lang);
                     return (
                       <button
                         key={st.id}
@@ -380,7 +447,7 @@ export default function App() {
                             {st.name}
                           </div>
                           <div className="text-[11px] text-slate-500 dark:text-slate-400 truncate mt-0.5">
-                            {COUNTRY_NAMES_RO[st.country]} · km {st.km.toFixed(0)} ·{' '}
+                            {getCountryName(st.country, lang)} · km {st.km.toFixed(0)} ·{' '}
                             <span className={pres.textClass}>
                               {pres.glyph} {pres.shortLabel}
                             </span>
@@ -438,7 +505,7 @@ export default function App() {
             stations={stations}
             selectedStationId={selectedStationId}
             onInspectStation={handleSelectStationFromAnyView}
-            onExportBulletin={(filtered) => overview && exportBasinBulletinPdf(overview, filtered)}
+            onExportBulletin={(filtered) => overview && exportBasinBulletinPdf(overview, filtered, lang)}
           />
         )}
 
@@ -463,7 +530,9 @@ export default function App() {
       {/* Offline Connectivity Indicator */}
       {!isOnline && (
         <div className="fixed bottom-16 md:bottom-4 left-4 z-40 rounded-lg bg-amber-600 px-3.5 py-2 text-xs font-medium text-white shadow-lg">
-          Mod Offline — Se utilizează ultimele cote salvate în cache.
+          {isEn
+            ? 'Offline Mode — Showing latest cached levels.'
+            : 'Mod Offline — Se utilizează ultimele cote salvate în cache.'}
         </div>
       )}
 
@@ -473,12 +542,12 @@ export default function App() {
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-2 text-xs font-semibold text-sky-300">
               <ShieldAlert className="w-4 h-4 shrink-0" />
-              <span>Alertă Push Hidrologie</span>
+              <span>{isEn ? 'Hydrological Push Alert' : 'Alertă Push Hidrologie'}</span>
             </div>
             <button
               type="button"
               onClick={push.dismissToast}
-              aria-label="Închide alerta"
+              aria-label={isEn ? 'Dismiss alert' : 'Închide alerta'}
               className="text-slate-400 hover:text-white cursor-pointer"
             >
               <X className="w-4 h-4" />
@@ -488,14 +557,14 @@ export default function App() {
         </div>
       )}
 
-      {/* Mobile Bottom Navigation Bar (56px, combined with 52px header = 108px <= 15% of 844px mobile viewport) */}
+      {/* Mobile Bottom Navigation Bar */}
       <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 h-14 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 grid grid-cols-4 items-center">
         {(
           [
-            { id: 'dashboard', label: 'Hartă', Icon: MapPin },
-            { id: 'table', label: 'Stații', Icon: Table2 },
-            { id: 'alerts', label: 'Alerte', Icon: BellRing },
-            { id: 'about', label: 'Despre', Icon: Info },
+            { id: 'dashboard', label: isEn ? 'Map' : 'Hartă', Icon: MapPin },
+            { id: 'table', label: isEn ? 'Stations' : 'Stații', Icon: Table2 },
+            { id: 'alerts', label: isEn ? 'Alerts' : 'Alerte', Icon: BellRing },
+            { id: 'about', label: isEn ? 'About' : 'Despre', Icon: Info },
           ] as const
         ).map(({ id, label, Icon }) => {
           const active = activeTab === id;

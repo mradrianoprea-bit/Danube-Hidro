@@ -696,6 +696,19 @@ svg.leaflet-image-layer.leaflet-interactive path {
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-blur: initial;
+      --tw-brightness: initial;
+      --tw-contrast: initial;
+      --tw-grayscale: initial;
+      --tw-hue-rotate: initial;
+      --tw-invert: initial;
+      --tw-opacity: initial;
+      --tw-saturate: initial;
+      --tw-sepia: initial;
+      --tw-drop-shadow: initial;
+      --tw-drop-shadow-color: initial;
+      --tw-drop-shadow-alpha: 100%;
+      --tw-drop-shadow-size: initial;
       --tw-backdrop-blur: initial;
       --tw-backdrop-brightness: initial;
       --tw-backdrop-contrast: initial;
@@ -722,9 +735,13 @@ svg.leaflet-image-layer.leaflet-interactive path {
     --color-red-700: oklch(50.5% .213 27.518);
     --color-red-800: oklch(44.4% .177 26.899);
     --color-red-950: oklch(25.8% .092 26.042);
+    --color-amber-50: oklch(98.7% .022 95.277);
+    --color-amber-200: oklch(92.4% .12 95.746);
     --color-amber-400: oklch(82.8% .189 84.429);
     --color-amber-600: oklch(66.6% .179 58.318);
     --color-amber-700: oklch(55.5% .163 48.998);
+    --color-amber-800: oklch(47.3% .137 46.201);
+    --color-amber-950: oklch(27.9% .077 45.635);
     --color-emerald-50: oklch(97.9% .021 166.113);
     --color-emerald-200: oklch(90.5% .093 164.15);
     --color-emerald-300: oklch(84.5% .143 164.978);
@@ -1129,6 +1146,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
   .z-\[1000\] {
     z-index: 1000;
+  }
+
+  .mx-1\.5 {
+    margin-inline: calc(var(--spacing) * 1.5);
   }
 
   .mx-auto {
@@ -1569,6 +1590,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
     border-left-width: 2px;
   }
 
+  .border-amber-200 {
+    border-color: var(--color-amber-200);
+  }
+
   .border-emerald-200 {
     border-color: var(--color-emerald-200);
   }
@@ -1603,6 +1628,16 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
   .border-transparent {
     border-color: #0000;
+  }
+
+  .bg-amber-50\/80 {
+    background-color: #fffbebcc;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .bg-amber-50\/80 {
+      background-color: color-mix(in oklab, var(--color-amber-50) 80%, transparent);
+    }
   }
 
   .bg-amber-600 {
@@ -1765,6 +1800,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
   .stroke-white {
     stroke: var(--color-white);
+  }
+
+  .p-0\.5 {
+    padding: calc(var(--spacing) * .5);
   }
 
   .p-1 {
@@ -1987,6 +2026,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
     color: var(--color-amber-700);
   }
 
+  .text-amber-950 {
+    color: var(--color-amber-950);
+  }
+
   .text-emerald-600 {
     color: var(--color-emerald-600);
   }
@@ -2084,16 +2127,14 @@ svg.leaflet-image-layer.leaflet-interactive path {
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
 
+  .filter {
+    filter: var(--tw-blur, ) var(--tw-brightness, ) var(--tw-contrast, ) var(--tw-grayscale, ) var(--tw-hue-rotate, ) var(--tw-invert, ) var(--tw-saturate, ) var(--tw-sepia, ) var(--tw-drop-shadow, );
+  }
+
   .backdrop-blur-md {
     --tw-backdrop-blur: blur(var(--blur-md));
     -webkit-backdrop-filter: var(--tw-backdrop-blur, ) var(--tw-backdrop-brightness, ) var(--tw-backdrop-contrast, ) var(--tw-backdrop-grayscale, ) var(--tw-backdrop-hue-rotate, ) var(--tw-backdrop-invert, ) var(--tw-backdrop-opacity, ) var(--tw-backdrop-saturate, ) var(--tw-backdrop-sepia, );
     backdrop-filter: var(--tw-backdrop-blur, ) var(--tw-backdrop-brightness, ) var(--tw-backdrop-contrast, ) var(--tw-backdrop-grayscale, ) var(--tw-backdrop-hue-rotate, ) var(--tw-backdrop-invert, ) var(--tw-backdrop-opacity, ) var(--tw-backdrop-saturate, ) var(--tw-backdrop-sepia, );
-  }
-
-  .transition {
-    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
-    transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
-    transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
 
   .transition-colors {
@@ -2278,6 +2319,16 @@ svg.leaflet-image-layer.leaflet-interactive path {
     border-color: var(--color-slate-800);
   }
 
+  .dark\:border-amber-800\/70:where(.dark, .dark *) {
+    border-color: #953d00b3;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .dark\:border-amber-800\/70:where(.dark, .dark *) {
+      border-color: color-mix(in oklab, var(--color-amber-800) 70%, transparent);
+    }
+  }
+
   .dark\:border-emerald-800:where(.dark, .dark *) {
     border-color: var(--color-emerald-800);
   }
@@ -2300,6 +2351,16 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
   .dark\:border-slate-800:where(.dark, .dark *) {
     border-color: var(--color-slate-800);
+  }
+
+  .dark\:bg-amber-950\/30:where(.dark, .dark *) {
+    background-color: #4619014d;
+  }
+
+  @supports (color: color-mix(in lab, red, red)) {
+    .dark\:bg-amber-950\/30:where(.dark, .dark *) {
+      background-color: color-mix(in oklab, var(--color-amber-950) 30%, transparent);
+    }
   }
 
   .dark\:bg-emerald-950\/50:where(.dark, .dark *) {
@@ -2488,6 +2549,10 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
   .dark\:stroke-slate-900:where(.dark, .dark *) {
     stroke: var(--color-slate-900);
+  }
+
+  .dark\:text-amber-200:where(.dark, .dark *) {
+    color: var(--color-amber-200);
   }
 
   .dark\:text-amber-400:where(.dark, .dark *) {
@@ -2781,6 +2846,72 @@ svg.leaflet-image-layer.leaflet-interactive path {
   syntax: "*";
   inherits: false;
   initial-value: 0 0 #0000;
+}
+
+@property --tw-blur {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-brightness {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-contrast {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-grayscale {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-hue-rotate {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-invert {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-opacity {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-saturate {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-sepia {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow-color {
+  syntax: "*";
+  inherits: false
+}
+
+@property --tw-drop-shadow-alpha {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 100%;
+}
+
+@property --tw-drop-shadow-size {
+  syntax: "*";
+  inherits: false
 }
 
 @property --tw-backdrop-blur {

@@ -1,8 +1,15 @@
 import React from 'react';
 import { Download, Droplets, TrendingDown, TrendingUp } from 'lucide-react';
+import { useLanguage } from '../i18n/LanguageContext';
 import type { StationDetailPayload } from '../types/hydrology';
 import { exportStationReportPdf } from '../utils/pdfReport';
-import { BASIN_SHORT_NAMES, COUNTRY_NAMES_RO, formatSignedCm, getStatusPresentation } from '../utils/statusFormat';
+import {
+  formatSignedCm,
+  getBasinRegionName,
+  getBasinShortName,
+  getCountryName,
+  getStatusPresentation,
+} from '../utils/statusFormat';
 import { HydrographChart, type ChartMode } from './HydrographChart';
 
 interface StationDetailPanelProps {
@@ -12,6 +19,9 @@ interface StationDetailPanelProps {
 }
 
 export const StationDetailPanel: React.FC<StationDetailPanelProps> = ({ detail, loading, requestedChartMode }) => {
+  const { lang } = useLanguage();
+  const isEn = lang === 'en';
+
   if (loading && !detail) {
     return (
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 space-y-4">
@@ -30,15 +40,21 @@ export const StationDetailPanel: React.FC<StationDetailPanelProps> = ({ detail, 
     return (
       <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-8 text-center">
         <p className="text-sm text-slate-600 dark:text-slate-400">
-          Selectați o stație hidrometrică din listă sau de pe hartă pentru a vizualiza prognoza și istoricul detaliat.
+          {isEn
+            ? 'Select a hydrometric station from the list or map to view detailed forecasts and history.'
+            : 'Selectați o stație hidrometrică din listă sau de pe hartă pentru a vizualiza prognoza și istoricul detaliat.'}
         </p>
       </div>
     );
   }
 
   const { station, forecast3d, forecast14d, basinZones, methodologyNote } = detail;
-  const statusInfo = getStatusPresentation(station.status);
+  const statusInfo = getStatusPresentation(station.status, lang);
   const localBasin = basinZones.find((b) => b.id === station.basinZoneId);
+
+  const displayMethodologyNote = isEn
+    ? 'Current water levels come from the official Danube basin hydrological data exchange (OVF Hydroinfo / AFDJ Galați / INHGA / WSV Pegelonline). The 10-year annual mean (2016–2025) and 3-day / 14-day forecasts couple Copernicus GloFAS v4 modeled discharge with ECMWF/ICON precipitation across upstream sub-basins.'
+    : methodologyNote;
 
   return (
     <div className="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden">
@@ -46,13 +62,15 @@ export const StationDetailPanel: React.FC<StationDetailPanelProps> = ({ detail, 
       <div className="flex flex-wrap items-start justify-between gap-4 px-5 py-4 border-b border-slate-200 dark:border-slate-800">
         <div>
           <div className="flex flex-wrap items-center gap-2 text-xs text-slate-500 dark:text-slate-400">
-            <span>{COUNTRY_NAMES_RO[station.country]}</span>
+            <span>{getCountryName(station.country, lang)}</span>
             <span aria-hidden="true">·</span>
             <span className="font-mono tabular-nums">km {station.km.toFixed(1)}</span>
             <span aria-hidden="true">·</span>
             <span>{station.agency}</span>
             <span aria-hidden="true">·</span>
-            <span>Observație: {station.observedAt}</span>
+            <span>
+              {isEn ? 'Observation:' : 'Observație:'} {station.observedAt}
+            </span>
           </div>
           <div className="flex flex-wrap items-baseline gap-3 mt-1">
             <h2 className="text-xl font-bold text-slate-900 dark:text-slate-100 tracking-tight">
@@ -66,18 +84,20 @@ export const StationDetailPanel: React.FC<StationDetailPanelProps> = ({ detail, 
 
         <button
           type="button"
-          onClick={() => exportStationReportPdf(detail)}
+          onClick={() => exportStationReportPdf(detail, lang)}
           className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-slate-900 text-white hover:bg-slate-800 dark:bg-sky-700 dark:hover:bg-sky-600 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
         >
           <Download className="w-3.5 h-3.5" />
-          Exportă PDF Stație
+          {isEn ? 'Export Station PDF' : 'Exportă PDF Stație'}
         </button>
       </div>
 
-      {/* Key Metrics Strip (Flat hairline grid) */}
+      {/* Key Metrics Strip */}
       <div className="grid grid-cols-2 lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-slate-200 dark:divide-slate-800 border-b border-slate-200 dark:border-slate-800">
         <div className="p-4">
-          <div className="text-[11px] font-medium text-slate-500 dark:text-slate-400">Cotă Curentă</div>
+          <div className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
+            {isEn ? 'Current Level' : 'Cotă Curentă'}
+          </div>
           <div className="mt-1 flex items-baseline gap-2">
             <span className="text-2xl font-bold font-mono tabular-nums text-slate-900 dark:text-slate-100">
               {station.currentLevelCm}
@@ -90,7 +110,13 @@ export const StationDetailPanel: React.FC<StationDetailPanelProps> = ({ detail, 
             ) : (
               <TrendingDown className="w-3.5 h-3.5 text-amber-600 dark:text-amber-400" />
             )}
-            <span className={station.change24hCm >= 0 ? 'text-emerald-700 dark:text-emerald-400' : 'text-amber-700 dark:text-amber-400'}>
+            <span
+              className={
+                station.change24hCm >= 0
+                  ? 'text-emerald-700 dark:text-emerald-400'
+                  : 'text-amber-700 dark:text-amber-400'
+              }
+            >
               {formatSignedCm(station.change24hCm)} / 24h
             </span>
           </div>
@@ -98,7 +124,7 @@ export const StationDetailPanel: React.FC<StationDetailPanelProps> = ({ detail, 
 
         <div className="p-4">
           <div className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
-            Media Anuală 10 Ani (2016–2025)
+            {isEn ? '10-Year Annual Mean (2016–2025)' : 'Media Anuală 10 Ani (2016–2025)'}
           </div>
           <div className="mt-1 flex items-baseline gap-2">
             <span className="text-2xl font-bold font-mono tabular-nums text-slate-900 dark:text-slate-100">
@@ -107,13 +133,13 @@ export const StationDetailPanel: React.FC<StationDetailPanelProps> = ({ detail, 
             <span className="text-xs font-mono text-slate-400">cm</span>
           </div>
           <div className="mt-1 text-xs font-mono tabular-nums text-sky-700 dark:text-sky-400">
-            Deviație: {formatSignedCm(station.deviationFrom10YrCm)}
+            {isEn ? 'Deviation:' : 'Deviație:'} {formatSignedCm(station.deviationFrom10YrCm)}
           </div>
         </div>
 
         <div className="p-4">
           <div className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
-            Prognoză 3 Zile · 14 Zile
+            {isEn ? '3-Day · 14-Day Forecast' : 'Prognoză 3 Zile · 14 Zile'}
           </div>
           <div className="mt-1 flex items-baseline gap-2 font-mono tabular-nums">
             <span className="text-xl font-bold text-slate-900 dark:text-slate-100">
@@ -128,20 +154,24 @@ export const StationDetailPanel: React.FC<StationDetailPanelProps> = ({ detail, 
           <div className="mt-1 flex items-center gap-1 text-xs text-slate-500 dark:text-slate-400">
             <Droplets className="w-3.5 h-3.5 text-sky-600 dark:text-sky-400" />
             <span>
-              {localBasin ? `${localBasin.total14dMm.toFixed(1)} mm ploaie 14Z` : BASIN_SHORT_NAMES[station.basinZoneId]}
+              {localBasin
+                ? isEn
+                  ? `${localBasin.total14dMm.toFixed(1)} mm rain (14D)`
+                  : `${localBasin.total14dMm.toFixed(1)} mm ploaie 14Z`
+                : getBasinShortName(station.basinZoneId, lang)}
             </span>
           </div>
         </div>
 
         <div className="p-4">
           <div className="text-[11px] font-medium text-slate-500 dark:text-slate-400">
-            Cote Apărare (CA / CI / CP)
+            {isEn ? 'Defense Thresholds (CA / CI / CP)' : 'Cote Apărare (CA / CI / CP)'}
           </div>
           <div className="mt-1 text-base font-bold font-mono tabular-nums text-slate-900 dark:text-slate-100">
             {station.thresholds.ca ?? '—'} / {station.thresholds.ci ?? '—'} / {station.thresholds.cp ?? '—'}
           </div>
           <div className="mt-1 text-xs font-mono tabular-nums text-slate-500 dark:text-slate-400">
-            Debit: {station.dischargeM3s ?? station.glofasDischargeM3s} m³/s
+            {isEn ? 'Discharge:' : 'Debit:'} {station.dischargeM3s ?? station.glofasDischargeM3s} m³/s
             {station.waterTempC !== null ? ` · ${station.waterTempC} °C` : ''}
           </div>
         </div>
@@ -156,17 +186,19 @@ export const StationDetailPanel: React.FC<StationDetailPanelProps> = ({ detail, 
       <div className="grid grid-cols-1 xl:grid-cols-2 divide-y xl:divide-y-0 xl:divide-x divide-slate-200 dark:divide-slate-800">
         <div className="p-5">
           <h3 className="text-xs font-semibold text-slate-900 dark:text-slate-100 mb-3">
-            Previziune pe Termen Scurt (3 Zile) și Termen Lung (14 Zile)
+            {isEn
+              ? 'Short-Term (3-Day) and Long-Term (14-Day) Forecast'
+              : 'Previziune pe Termen Scurt (3 Zile) și Termen Lung (14 Zile)'}
           </h3>
           <div className="overflow-x-auto max-h-64 overflow-y-auto border border-slate-200 dark:border-slate-800 rounded-lg">
             <table className="w-full text-left text-xs">
               <thead className="bg-slate-50 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 sticky top-0">
                 <tr>
-                  <th className="px-3 py-2 font-medium">Data</th>
-                  <th className="px-3 py-2 font-medium text-right">Cotă (cm)</th>
-                  <th className="px-3 py-2 font-medium text-right">Interval</th>
-                  <th className="px-3 py-2 font-medium text-right">Debit (m³/s)</th>
-                  <th className="px-3 py-2 font-medium text-right">Ploaie (mm)</th>
+                  <th className="px-3 py-2 font-medium">{isEn ? 'Date' : 'Data'}</th>
+                  <th className="px-3 py-2 font-medium text-right">{isEn ? 'Level (cm)' : 'Cotă (cm)'}</th>
+                  <th className="px-3 py-2 font-medium text-right">{isEn ? 'Range' : 'Interval'}</th>
+                  <th className="px-3 py-2 font-medium text-right">{isEn ? 'Discharge (m³/s)' : 'Debit (m³/s)'}</th>
+                  <th className="px-3 py-2 font-medium text-right">{isEn ? 'Rain (mm)' : 'Ploaie (mm)'}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-mono tabular-nums">
@@ -180,7 +212,7 @@ export const StationDetailPanel: React.FC<StationDetailPanelProps> = ({ detail, 
                     }
                   >
                     <td className="px-3 py-1.5 text-slate-700 dark:text-slate-300">
-                      {f.date} {idx < 3 ? '· 3Z' : ''}
+                      {f.date} {idx < 3 ? (isEn ? '· 3D' : '· 3Z') : ''}
                     </td>
                     <td className="px-3 py-1.5 text-right font-semibold text-slate-900 dark:text-slate-100">
                       {f.predictedCm}
@@ -201,7 +233,9 @@ export const StationDetailPanel: React.FC<StationDetailPanelProps> = ({ detail, 
 
         <div className="p-5">
           <h3 className="text-xs font-semibold text-slate-900 dark:text-slate-100 mb-3">
-            Regimul Pluviometric pe 14 Zile în Zonele Traversate de Dunăre
+            {isEn
+              ? '14-Day Precipitation Regime Across Danube Basin Zones'
+              : 'Regimul Pluviometric pe 14 Zile în Zonele Traversate de Dunăre'}
           </h3>
           <div className="divide-y divide-slate-100 dark:divide-slate-800 border border-slate-200 dark:border-slate-800 rounded-lg">
             {basinZones.map((zone) => {
@@ -215,10 +249,14 @@ export const StationDetailPanel: React.FC<StationDetailPanelProps> = ({ detail, 
                 >
                   <div className="min-w-0">
                     <div className="font-medium text-slate-900 dark:text-slate-100 truncate">
-                      {zone.name} {isLocal ? '· Zonă Stație' : ''}
+                      {isEn ? getBasinShortName(zone.id, 'en') : zone.name}{' '}
+                      {isLocal ? (isEn ? '· Station Zone' : '· Zonă Stație') : ''}
                     </div>
                     <div className="text-[11px] text-slate-500 dark:text-slate-400">
-                      {zone.region} · Tranzit spre aval: {zone.lagDaysToLowerDanube} zile
+                      {getBasinRegionName(zone.id, zone.region, lang)} ·{' '}
+                      {isEn
+                        ? `Downstream lag: ${zone.lagDaysToLowerDanube} days`
+                        : `Tranzit spre aval: ${zone.lagDaysToLowerDanube} zile`}
                     </div>
                   </div>
                   <div className="text-right font-mono tabular-nums shrink-0">
@@ -226,7 +264,7 @@ export const StationDetailPanel: React.FC<StationDetailPanelProps> = ({ detail, 
                       {zone.total14dMm.toFixed(1)} mm
                     </div>
                     <div className="text-[11px] text-slate-500 dark:text-slate-400">
-                      Max/zi: {zone.maxDailyMm.toFixed(1)} mm
+                      {isEn ? 'Max/day:' : 'Max/zi:'} {zone.maxDailyMm.toFixed(1)} mm
                     </div>
                   </div>
                 </div>
@@ -234,7 +272,7 @@ export const StationDetailPanel: React.FC<StationDetailPanelProps> = ({ detail, 
             })}
           </div>
           <p className="mt-3 text-[11px] leading-relaxed text-slate-500 dark:text-slate-400">
-            {methodologyNote}
+            {displayMethodologyNote}
           </p>
         </div>
       </div>

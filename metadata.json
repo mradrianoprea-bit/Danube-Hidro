@@ -1,6 +1,6 @@
 {
   "name": "HidroDunăre — Cotele Apelor Dunării",
-  "description": "Date hidrologice și meteorologice exclusiv oficiale pentru 76 de localități pe cursul Dunării (inclusiv toate cele 26 de porturi oficiale din România, Baziaș–Sulina): OVF Hydroinfo, WSV Pegelonline, Copernicus EMS GloFAS v4 și ECMWF/DWD ICON. Cotă curentă, prognoză 3 zile și 14 zile pluviometrică, alerte push CA/CI/CP, hartă interactivă OpenStreetMap, istoric 30 zile, climatologie 10 ani și export PDF.",
+  "description": "Aplicația nu este oficială, dar folosește informații din surse oficiale pentru 76 de localități pe cursul Dunării (inclusiv toate cele 26 de porturi din România, Baziaș–Sulina): OVF Hydroinfo, WSV Pegelonline, Copernicus EMS GloFAS v4 și ECMWF/DWD ICON. Cotă curentă, prognoză 3 zile și 14 zile pluviometrică, alerte push CA/CI/CP, hartă interactivă OpenStreetMap, istoric 30 zile, climatologie 10 ani și export PDF.",
   "requestFramePermissions": [],
   "majorCapabilities": [
     "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"

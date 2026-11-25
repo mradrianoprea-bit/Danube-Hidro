@@ -1,0 +1,74 @@
+name: Build iOS App (Xcode / IPA)
+
+on:
+  workflow_dispatch:
+    inputs:
+      server_url:
+        description: 'Optional public HTTPS backend URL (leave empty for standalone native mode)'
+        required: false
+        default: ''
+  push:
+    branches: [main]
+
+jobs:
+  ios-ipa:
+    runs-on: macos-15
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Locate project directory (package.json)
+        id: locate
+        run: |
+          PKG_FILE=$(find . -maxdepth 4 -name "package.json" -not -path "*/node_modules/*" | head -n 1 || true)
+          if [ -z "$PKG_FILE" ]; then
+            echo "::error::package.json not found in repository."
+            ls -la
+            exit 1
+          fi
+          APP_DIR=$(dirname "$PKG_FILE")
+          echo "app_dir=$APP_DIR" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '22'
+
+      - name: Install dependencies, build web bundle & sync Capacitor iOS
+        working-directory: ${{ steps.locate.outputs.app_dir }}
+        env:
+          CAPACITOR_SERVER_URL: ${{ github.event.inputs.server_url || secrets.CAPACITOR_SERVER_URL || '' }}
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci --legacy-peer-deps
+          else
+            npm install --legacy-peer-deps --no-audit --no-fund
+          fi
+          npm run build
+          if [ ! -d ios ]; then
+            npx cap add ios
+          fi
+          npx cap sync ios
+
+      - name: Build Unsigned iOS App Bundle & Package IPA (SwiftPM / Xcode)
+        working-directory: ${{ steps.locate.outputs.app_dir }}/ios/App
+        run: |
+          xcodebuild \
+            -project App.xcodeproj \
+            -scheme App \
+            -configuration Release \
+            -destination 'generic/platform=iOS' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
+            build
+
+          mkdir -p build/Payload
+          cp -R build/Build/Products/Release-iphoneos/App.app build/Payload/
+          cd build
+          zip -r HidroDunare-ios-unsigned.ipa Payload
+
+      - name: Upload Unsigned iOS IPA Artifact (AltStore / Sideloadly / Xcode Re-Sign)
+        uses: actions/upload-artifact@v6
+        with:
+          name: HidroDunare-ios-unsigned-ipa
+          path: ${{ steps.locate.outputs.app_dir }}/ios/App/build/HidroDunare-ios-unsigned.ipa

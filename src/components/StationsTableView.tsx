@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import { ArrowUpDown, Download, Search } from 'lucide-react';
+import { useLanguage } from '../i18n/LanguageContext';
 import type { CountryCode, DanubeStation } from '../types/hydrology';
-import { COUNTRY_NAMES_RO, formatSignedCm, getStatusPresentation } from '../utils/statusFormat';
+import { formatSignedCm, getCountryName, getStatusPresentation } from '../utils/statusFormat';
 
 interface StationsTableViewProps {
   stations: DanubeStation[];
@@ -18,6 +19,8 @@ export const StationsTableView: React.FC<StationsTableViewProps> = ({
   onInspectStation,
   onExportBulletin,
 }) => {
+  const { lang } = useLanguage();
+  const isEn = lang === 'en';
   const [query, setQuery] = useState('');
   const [countryFilter, setCountryFilter] = useState<'ALL' | CountryCode>('ALL');
   const [sortKey, setSortKey] = useState<SortKey>('km');
@@ -50,10 +53,12 @@ export const StationsTableView: React.FC<StationsTableViewProps> = ({
       <div className="flex flex-wrap items-center justify-between gap-4 px-5 py-4 border-b border-slate-200 dark:border-slate-800">
         <div>
           <h2 className="text-base font-bold text-slate-900 dark:text-slate-100">
-            Registru Complet Stații Hidrometrice Dunăre
+            {isEn ? 'Complete Danube Hydrometric Stations Registry' : 'Registru Complet Stații Hidrometrice Dunăre'}
           </h2>
           <p className="text-xs text-slate-500 dark:text-slate-400">
-            {filtered.length} localități afișate din {stations.length} puncte oficiale monitorizate
+            {isEn
+              ? `${filtered.length} localities displayed out of ${stations.length} stations · This application is not official, but uses information from official sources`
+              : `${filtered.length} localități afișate din ${stations.length} stații · Aplicația nu este oficială, dar folosește informații din surse oficiale`}
           </p>
         </div>
 
@@ -64,7 +69,7 @@ export const StationsTableView: React.FC<StationsTableViewProps> = ({
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Caută localitate..."
+              placeholder={isEn ? 'Search locality...' : 'Caută localitate...'}
               className="pl-8 pr-3 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-600"
             />
           </div>
@@ -72,13 +77,15 @@ export const StationsTableView: React.FC<StationsTableViewProps> = ({
           <select
             value={countryFilter}
             onChange={(e) => setCountryFilter(e.target.value as 'ALL' | CountryCode)}
-            aria-label="Filtrare după țară"
+            aria-label={isEn ? 'Filter by country' : 'Filtrare după țară'}
             className="px-3 py-1.5 text-xs rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:outline-none focus:ring-2 focus:ring-sky-600"
           >
-            <option value="ALL">Toate țările ({stations.length})</option>
+            <option value="ALL">
+              {isEn ? `All countries (${stations.length})` : `Toate țările (${stations.length})`}
+            </option>
             {(['RO', 'DE', 'AT', 'SK', 'HU', 'HR', 'RS', 'BG'] as CountryCode[]).map((c) => (
               <option key={c} value={c}>
-                {COUNTRY_NAMES_RO[c]}
+                {getCountryName(c, lang)}
               </option>
             ))}
           </select>
@@ -89,7 +96,7 @@ export const StationsTableView: React.FC<StationsTableViewProps> = ({
             className="inline-flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-sky-700 text-white hover:bg-sky-800 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
           >
             <Download className="w-3.5 h-3.5" />
-            Exportă Tabel PDF
+            {isEn ? 'Export PDF Table' : 'Exportă Tabel PDF'}
           </button>
         </div>
       </div>
@@ -98,7 +105,7 @@ export const StationsTableView: React.FC<StationsTableViewProps> = ({
         <table className="w-full text-left text-xs">
           <thead className="bg-slate-50 dark:bg-slate-800/80 text-slate-600 dark:text-slate-300 border-b border-slate-200 dark:border-slate-800">
             <tr>
-              <th className="px-4 py-2.5 font-semibold">Localitate · Țară</th>
+              <th className="px-4 py-2.5 font-semibold">{isEn ? 'Locality · Country' : 'Localitate · Țară'}</th>
               <th className="px-3 py-2.5 font-semibold text-right">
                 <button type="button" onClick={() => toggleSort('km')} className="inline-flex items-center gap-1 cursor-pointer">
                   Km <ArrowUpDown className="w-3 h-3" />
@@ -106,37 +113,37 @@ export const StationsTableView: React.FC<StationsTableViewProps> = ({
               </th>
               <th className="px-3 py-2.5 font-semibold text-right">
                 <button type="button" onClick={() => toggleSort('currentLevelCm')} className="inline-flex items-center gap-1 cursor-pointer">
-                  Cotă (cm) <ArrowUpDown className="w-3 h-3" />
+                  {isEn ? 'Level (cm)' : 'Cotă (cm)'} <ArrowUpDown className="w-3 h-3" />
                 </button>
               </th>
               <th className="px-3 py-2.5 font-semibold text-right">
                 <button type="button" onClick={() => toggleSort('change24hCm')} className="inline-flex items-center gap-1 cursor-pointer">
-                  Var. 24h <ArrowUpDown className="w-3 h-3" />
+                  {isEn ? '24h Chg' : 'Var. 24h'} <ArrowUpDown className="w-3 h-3" />
                 </button>
               </th>
-              <th className="px-3 py-2.5 font-semibold text-right">Media 10A</th>
+              <th className="px-3 py-2.5 font-semibold text-right">{isEn ? '10Y Avg' : 'Media 10A'}</th>
               <th className="px-3 py-2.5 font-semibold text-right">
                 <button type="button" onClick={() => toggleSort('deviationFrom10YrCm')} className="inline-flex items-center gap-1 cursor-pointer">
-                  Deviație 10A <ArrowUpDown className="w-3 h-3" />
+                  {isEn ? '10Y Dev.' : 'Deviație 10A'} <ArrowUpDown className="w-3 h-3" />
                 </button>
               </th>
               <th className="px-3 py-2.5 font-semibold text-right">
                 <button type="button" onClick={() => toggleSort('forecast3dCm')} className="inline-flex items-center gap-1 cursor-pointer">
-                  Prog. 3Z <ArrowUpDown className="w-3 h-3" />
+                  {isEn ? '3D Fcst' : 'Prog. 3Z'} <ArrowUpDown className="w-3 h-3" />
                 </button>
               </th>
               <th className="px-3 py-2.5 font-semibold text-right">
                 <button type="button" onClick={() => toggleSort('forecast14dCm')} className="inline-flex items-center gap-1 cursor-pointer">
-                  Prog. 14Z <ArrowUpDown className="w-3 h-3" />
+                  {isEn ? '14D Fcst' : 'Prog. 14Z'} <ArrowUpDown className="w-3 h-3" />
                 </button>
               </th>
               <th className="px-3 py-2.5 font-semibold text-right">CA / CI / CP</th>
-              <th className="px-4 py-2.5 font-semibold">Stare</th>
+              <th className="px-4 py-2.5 font-semibold">{isEn ? 'Status' : 'Stare'}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100 dark:divide-slate-800">
             {filtered.map((s) => {
-              const pres = getStatusPresentation(s.status);
+              const pres = getStatusPresentation(s.status, lang);
               const isSelected = s.id === selectedStationId;
               return (
                 <tr
@@ -151,7 +158,7 @@ export const StationsTableView: React.FC<StationsTableViewProps> = ({
                   <td className="px-4 py-2.5">
                     <div className="font-semibold text-slate-900 dark:text-slate-100">{s.name}</div>
                     <div className="text-[11px] text-slate-500 dark:text-slate-400">
-                      {COUNTRY_NAMES_RO[s.country]} · {s.agency}
+                      {getCountryName(s.country, lang)} · {s.agency}
                     </div>
                   </td>
                   <td className="px-3 py-2.5 text-right font-mono tabular-nums text-slate-600 dark:text-slate-400">
@@ -201,7 +208,9 @@ export const StationsTableView: React.FC<StationsTableViewProps> = ({
             {filtered.length === 0 && (
               <tr>
                 <td colSpan={10} className="px-4 py-10 text-center text-slate-500 dark:text-slate-400">
-                  Nicio localitate nu corespunde criteriilor de căutare.
+                  {isEn
+                    ? 'No locality matches your search criteria.'
+                    : 'Nicio localitate nu corespunde criteriilor de căutare.'}
                 </td>
               </tr>
             )}

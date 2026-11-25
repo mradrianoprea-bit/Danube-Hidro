@@ -1,7 +1,8 @@
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import type { Language } from '../i18n/LanguageContext';
 import type { DanubeStation, OverviewResponse, StationDetailPayload } from '../types/hydrology';
-import { COUNTRY_NAMES_RO, getStatusPresentation } from './statusFormat';
+import { getBasinRegionName, getBasinShortName, getCountryName, getStatusPresentation } from './statusFormat';
 
 /**
  * Normalizes Romanian diacritics to clean ASCII for jsPDF built-in Helvetica font
@@ -20,10 +21,11 @@ function asciiRo(text: string): string {
     .replace(/[–—]/g, '-');
 }
 
-export function exportStationReportPdf(detail: StationDetailPayload): void {
+export function exportStationReportPdf(detail: StationDetailPayload, lang: Language = 'ro'): void {
+  const isEn = lang === 'en';
   const { station, forecast3d, forecast14d, history30d, basinZones } = detail;
   const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-  const statusInfo = getStatusPresentation(station.status);
+  const statusInfo = getStatusPresentation(station.status, lang);
 
   // Header band
   doc.setFillColor(3, 105, 161);
@@ -31,12 +33,22 @@ export function exportStationReportPdf(detail: StationDetailPayload): void {
   doc.setTextColor(255, 255, 255);
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(15);
-  doc.text(asciiRo(`BULETIN HIDROLOGIC DUNARE - STATIA ${station.name.toUpperCase()}`), 14, 12);
+  doc.text(
+    asciiRo(
+      isEn
+        ? `DANUBE HYDROLOGICAL BULLETIN - ${station.name.toUpperCase()} STATION`
+        : `BULETIN HIDROLOGIC DUNARE - STATIA ${station.name.toUpperCase()}`,
+    ),
+    14,
+    12,
+  );
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(9);
   doc.text(
     asciiRo(
-      `Km fluvial ${station.km.toFixed(1)} | Tara: ${COUNTRY_NAMES_RO[station.country]} | Sursa: ${station.agency} | Data observatie: ${station.observedAt}`,
+      isEn
+        ? `River km ${station.km.toFixed(1)} | Country: ${getCountryName(station.country, 'en')} | Source: ${station.agency} | Observation: ${station.observedAt}`
+        : `Km fluvial ${station.km.toFixed(1)} | Tara: ${getCountryName(station.country, 'ro')} | Sursa: ${station.agency} | Data observatie: ${station.observedAt}`,
     ),
     14,
     19,
@@ -46,21 +58,53 @@ export function exportStationReportPdf(detail: StationDetailPayload): void {
   doc.setTextColor(15, 23, 42);
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(11);
-  doc.text(asciiRo('1. Parametri Hidro-Meteorologici Curente si Praguri Oficiale'), 14, 35);
+  doc.text(
+    asciiRo(
+      isEn
+        ? '1. Current Hydro-Meteorological Parameters & Defense Thresholds'
+        : '1. Parametri Hidro-Meteorologici Curenti si Cote de Aparare',
+    ),
+    14,
+    35,
+  );
 
   autoTable(doc, {
     startY: 38,
     head: [[
-      asciiRo('Indicator'),
-      asciiRo('Valoare'),
-      asciiRo('Referinta / Prag'),
-      asciiRo('Evaluare'),
+      asciiRo(isEn ? 'Indicator' : 'Indicator'),
+      asciiRo(isEn ? 'Value' : 'Valoare'),
+      asciiRo(isEn ? 'Reference / Threshold' : 'Referinta / Prag'),
+      asciiRo(isEn ? 'Assessment' : 'Evaluare'),
     ]],
     body: [
-      [asciiRo('Cota curenta'), `${station.currentLevelCm} cm`, `Var. 24h: ${station.change24hCm >= 0 ? '+' : ''}${station.change24hCm} cm`, asciiRo(statusInfo.label)],
-      [asciiRo('Media anuala 10 ani (2016-2025)'), `${station.tenYearAvgCm} cm`, `Min/Max: ${station.tenYearMinCm} / ${station.tenYearMaxCm} cm`, asciiRo(`Deviație: ${station.deviationFrom10YrCm >= 0 ? '+' : ''}${station.deviationFrom10YrCm} cm`)],
-      [asciiRo('Debit masurat / GloFAS'), `${station.dischargeM3s ?? station.glofasDischargeM3s} m3/s`, `GloFAS model: ${station.glofasDischargeM3s} m3/s`, station.waterTempC !== null ? `Temp. apa: ${station.waterTempC} C` : 'Temp. apa: -'],
-      [asciiRo('Cote de aparare (CA / CI / CP)'), `${station.thresholds.ca ?? '-'} / ${station.thresholds.ci ?? '-'} / ${station.thresholds.cp ?? '-'} cm`, asciiRo('Atentie / Inundatie / Pericol'), station.thresholds.ci && station.currentLevelCm >= station.thresholds.ci ? asciiRo('DEPAŞIRE CI!') : asciiRo('Sub praguri inundatie')],
+      [
+        asciiRo(isEn ? 'Current water level' : 'Cota curenta'),
+        `${station.currentLevelCm} cm`,
+        `${isEn ? '24h chg' : 'Var. 24h'}: ${station.change24hCm >= 0 ? '+' : ''}${station.change24hCm} cm`,
+        asciiRo(statusInfo.label),
+      ],
+      [
+        asciiRo(isEn ? '10-year annual mean (2016-2025)' : 'Media anuala 10 ani (2016-2025)'),
+        `${station.tenYearAvgCm} cm`,
+        `Min/Max: ${station.tenYearMinCm} / ${station.tenYearMaxCm} cm`,
+        asciiRo(`${isEn ? 'Deviation' : 'Deviatie'}: ${station.deviationFrom10YrCm >= 0 ? '+' : ''}${station.deviationFrom10YrCm} cm`),
+      ],
+      [
+        asciiRo(isEn ? 'Observed / GloFAS discharge' : 'Debit masurat / GloFAS'),
+        `${station.dischargeM3s ?? station.glofasDischargeM3s} m3/s`,
+        `GloFAS model: ${station.glofasDischargeM3s} m3/s`,
+        station.waterTempC !== null
+          ? `${isEn ? 'Water temp' : 'Temp. apa'}: ${station.waterTempC} C`
+          : `${isEn ? 'Water temp' : 'Temp. apa'}: -`,
+      ],
+      [
+        asciiRo(isEn ? 'Defense thresholds (CA / CI / CP)' : 'Cote de aparare (CA / CI / CP)'),
+        `${station.thresholds.ca ?? '-'} / ${station.thresholds.ci ?? '-'} / ${station.thresholds.cp ?? '-'} cm`,
+        asciiRo(isEn ? 'Attention / Flood / Danger' : 'Atentie / Inundatie / Pericol'),
+        station.thresholds.ci && station.currentLevelCm >= station.thresholds.ci
+          ? asciiRo(isEn ? 'FLOOD THRESHOLD EXCEEDED!' : 'DEPASIRE CI!')
+          : asciiRo(isEn ? 'Below flood thresholds' : 'Sub praguri inundatie'),
+      ],
     ],
     styles: { fontSize: 8.5, cellPadding: 2.5 },
     headStyles: { fillColor: [15, 23, 42], textColor: 255 },
@@ -70,22 +114,30 @@ export function exportStationReportPdf(detail: StationDetailPayload): void {
   const afterSummaryY = (doc as unknown as { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 8;
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(11);
-  doc.text(asciiRo('2. Prognoza pe Termen Scurt (3 Zile) si Termen Lung (14 Zile - Pluviometrie Bazin)'), 14, afterSummaryY);
+  doc.text(
+    asciiRo(
+      isEn
+        ? '2. Short-Term (3-Day) and Long-Term (14-Day Rainfall-Coupled) Forecast'
+        : '2. Prognoza pe Termen Scurt (3 Zile) si Termen Lung (14 Zile - Pluviometrie Bazin)',
+    ),
+    14,
+    afterSummaryY,
+  );
 
   autoTable(doc, {
     startY: afterSummaryY + 3,
     head: [[
-      'Data',
-      'Orizont',
-      'Cota prognozata (cm)',
-      'Interval (cm)',
-      'Debit est. (m3/s)',
-      'Ploaie locala (mm)',
-      'Aport amonte (mm)',
+      isEn ? 'Date' : 'Data',
+      isEn ? 'Horizon' : 'Orizont',
+      isEn ? 'Forecast (cm)' : 'Cota prognozata (cm)',
+      isEn ? 'Range (cm)' : 'Interval (cm)',
+      isEn ? 'Est. Q (m3/s)' : 'Debit est. (m3/s)',
+      isEn ? 'Local rain (mm)' : 'Ploaie locala (mm)',
+      isEn ? 'Upstream (mm)' : 'Aport amonte (mm)',
     ]],
     body: forecast14d.map((f, idx) => [
       f.date,
-      idx < 3 ? '3 Zile' : '14 Zile',
+      idx < 3 ? (isEn ? '3 Days' : '3 Zile') : isEn ? '14 Days' : '14 Zile',
       `${f.predictedCm}`,
       `${f.minCm} .. ${f.maxCm}`,
       `${f.dischargeM3s}`,
@@ -101,17 +153,31 @@ export function exportStationReportPdf(detail: StationDetailPayload): void {
   doc.addPage();
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(11);
-  doc.text(asciiRo('3. Regimul Pluviometric Cumulat pe 14 Zile in Zonele Bazinului Dunarii'), 14, 16);
+  doc.text(
+    asciiRo(
+      isEn
+        ? '3. 14-Day Cumulative Precipitation Regime Across Danube Sub-Basins'
+        : '3. Regimul Pluviometric Cumulat pe 14 Zile in Zonele Bazinului Dunarii',
+    ),
+    14,
+    16,
+  );
 
   autoTable(doc, {
     startY: 19,
-    head: [['Zona Bazin', 'Regiune', 'Cumul 14 zile (mm)', 'Max zilnic (mm)', 'Timp tranzit spre aval']],
+    head: [[
+      isEn ? 'Basin Zone' : 'Zona Bazin',
+      isEn ? 'Region' : 'Regiune',
+      isEn ? '14-Day Total (mm)' : 'Cumul 14 zile (mm)',
+      isEn ? 'Daily Max (mm)' : 'Max zilnic (mm)',
+      isEn ? 'Downstream lag' : 'Timp tranzit spre aval',
+    ]],
     body: basinZones.map((z) => [
-      asciiRo(z.name),
-      asciiRo(z.region),
+      asciiRo(isEn ? getBasinShortName(z.id, 'en') : z.name),
+      asciiRo(getBasinRegionName(z.id, z.region, lang)),
       `${z.total14dMm.toFixed(1)} mm`,
       `${z.maxDailyMm.toFixed(1)} mm`,
-      `${z.lagDaysToLowerDanube} zile`,
+      `${z.lagDaysToLowerDanube} ${isEn ? 'days' : 'zile'}`,
     ]),
     styles: { fontSize: 8.5, cellPadding: 2.3 },
     headStyles: { fillColor: [15, 23, 42], textColor: 255 },
@@ -120,11 +186,25 @@ export function exportStationReportPdf(detail: StationDetailPayload): void {
   const afterBasinY = (doc as unknown as { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 8;
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(11);
-  doc.text(asciiRo('4. Istoric Recent (Ultimele 14 zile inregistrate / reanalizate)'), 14, afterBasinY);
+  doc.text(
+    asciiRo(
+      isEn
+        ? '4. Recent History (Last 14 Observed / Reanalyzed Days)'
+        : '4. Istoric Recent (Ultimele 14 zile inregistrate / reanalizate)',
+    ),
+    14,
+    afterBasinY,
+  );
 
   autoTable(doc, {
     startY: afterBasinY + 3,
-    head: [['Data', 'Cota (cm)', 'Debit (m3/s)', 'Media 10 Ani (cm)', 'Sursa']],
+    head: [[
+      isEn ? 'Date' : 'Data',
+      isEn ? 'Level (cm)' : 'Cota (cm)',
+      isEn ? 'Discharge (m3/s)' : 'Debit (m3/s)',
+      isEn ? '10Y Mean (cm)' : 'Media 10 Ani (cm)',
+      isEn ? 'Source' : 'Sursa',
+    ]],
     body: history30d.slice(-14).map((h) => [
       h.date,
       `${h.levelCm}`,
@@ -136,38 +216,56 @@ export function exportStationReportPdf(detail: StationDetailPayload): void {
     headStyles: { fillColor: [51, 65, 85], textColor: 255 },
   });
 
-  // Footer
   const pageCount = doc.getNumberOfPages();
   for (let i = 1; i <= pageCount; i++) {
     doc.setPage(i);
     doc.setFontSize(7.5);
     doc.setTextColor(100, 116, 139);
     doc.text(
-      asciiRo(`HidroDunare · Surse oficiale: OVF Hydroinfo, AFDJ/INHGA, WSV Pegelonline, Copernicus GloFAS v4, ECMWF · Generat: ${new Date().toLocaleString('ro-RO')} · Pagina ${i}/${pageCount}`),
+      asciiRo(
+        isEn
+          ? `HidroDunare · This application is not official, but uses information from official sources (OVF Hydroinfo, AFDJ/INHGA, WSV Pegelonline, GloFAS v4, ECMWF) · Page ${i}/${pageCount}`
+          : `HidroDunare · Aplicatia nu este oficiala, dar foloseste informatii din surse oficiale (OVF Hydroinfo, AFDJ/INHGA, WSV Pegelonline, GloFAS v4, ECMWF) · Pagina ${i}/${pageCount}`,
+      ),
       14,
       290,
     );
   }
 
-  // Note: reference forecast3d count in metadata
   void forecast3d;
   doc.save(`HidroDunare_${station.name.replace(/\s+/g, '_')}_${new Date().toISOString().slice(0, 10)}.pdf`);
 }
 
-export function exportBasinBulletinPdf(overview: OverviewResponse, stations: DanubeStation[]): void {
+export function exportBasinBulletinPdf(
+  overview: OverviewResponse,
+  stations: DanubeStation[],
+  lang: Language = 'ro',
+): void {
+  const isEn = lang === 'en';
   const doc = new jsPDF({ orientation: 'landscape', unit: 'mm', format: 'a4' });
+  const floodAlerts = overview.alerts.filter((a) => a.type !== 'below_10yr_avg');
 
   doc.setFillColor(3, 105, 161);
   doc.rect(0, 0, 297, 22, 'F');
   doc.setTextColor(255, 255, 255);
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(14);
-  doc.text(asciiRo('BULETIN HIDROLOGIC OFICIAL - COTELE APELOR DUNARII'), 14, 10.5);
+  doc.text(
+    asciiRo(
+      isEn
+        ? 'HYDROLOGICAL BULLETIN - DANUBE WATER LEVELS'
+        : 'BULETIN HIDROLOGIC - COTELE APELOR DUNARII',
+    ),
+    14,
+    10.5,
+  );
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8.5);
   doc.text(
     asciiRo(
-      `Data observatiei: ${overview.observedDateLabel} | Statii incluse: ${stations.length} | Alerte active: ${overview.alerts.length} | Generat: ${new Date().toLocaleString('ro-RO')}`,
+      isEn
+        ? `Observation date: ${overview.observedDateLabel} | Stations included: ${stations.length} | Active flood alerts: ${floodAlerts.length} | Generated: ${new Date().toLocaleString('en-GB')}`
+        : `Data observatiei: ${overview.observedDateLabel} | Statii incluse: ${stations.length} | Alerte inundatie active: ${floodAlerts.length} | Generat: ${new Date().toLocaleString('ro-RO')}`,
     ),
     14,
     17,
@@ -176,23 +274,38 @@ export function exportBasinBulletinPdf(overview: OverviewResponse, stations: Dan
   doc.setTextColor(15, 23, 42);
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(10.5);
-  doc.text(asciiRo('Alerte Active (Depasiri Cote Inundatie & Scaderi Sub Media pe 10 Ani)'), 14, 30);
+  doc.text(
+    asciiRo(
+      isEn
+        ? 'Active Flood Threshold Alerts (CA / CI / CP)'
+        : 'Alerte Active (Depasiri Cote de Atentie / Inundatie / Pericol - CA / CI / CP)',
+    ),
+    14,
+    30,
+  );
 
-  const topAlerts = overview.alerts.slice(0, 12);
+  const topAlerts = floodAlerts.slice(0, 12);
   autoTable(doc, {
     startY: 33,
-    head: [['Localitate', 'Km', 'Tip Alerta', 'Cota Curenta', 'Prag / Media 10A', 'Diferenta']],
+    head: [[
+      isEn ? 'Locality' : 'Localitate',
+      'Km',
+      isEn ? 'Alert Type' : 'Tip Alerta',
+      isEn ? 'Current Level' : 'Cota Curenta',
+      isEn ? 'Threshold' : 'Prag (CA/CI/CP)',
+      isEn ? 'Exceedance' : 'Depasire',
+    ]],
     body:
       topAlerts.length > 0
         ? topAlerts.map((a) => [
             asciiRo(`${a.stationName} (${a.country})`),
             `${a.km.toFixed(1)}`,
-            asciiRo(a.type === 'below_10yr_avg' ? 'Sub Media 10 Ani' : a.type.toUpperCase()),
+            asciiRo(a.type.toUpperCase()),
             `${a.currentLevelCm} cm`,
             `${a.referenceCm} cm`,
             `${a.deltaCm >= 0 ? '+' : ''}${a.deltaCm} cm`,
           ])
-        : [[asciiRo('Fara alerte active in prezent'), '-', '-', '-', '-', '-']],
+        : [[asciiRo(isEn ? 'No active flood alerts currently' : 'Fara alerte de inundatie active in prezent'), '-', '-', '-', '-', '-']],
     styles: { fontSize: 8, cellPadding: 2 },
     headStyles: { fillColor: [185, 28, 28], textColor: 255 },
   });
@@ -200,20 +313,28 @@ export function exportBasinBulletinPdf(overview: OverviewResponse, stations: Dan
   const nextY = (doc as unknown as { lastAutoTable: { finalY: number } }).lastAutoTable.finalY + 7;
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(10.5);
-  doc.text(asciiRo('Situatia Curenta si Prognozele (3 Zile / 14 Zile) pe Localitati'), 14, nextY);
+  doc.text(
+    asciiRo(
+      isEn
+        ? 'Current Water Levels and Forecasts (3-Day / 14-Day) by Locality'
+        : 'Situatia Curenta si Prognozele (3 Zile / 14 Zile) pe Localitati',
+    ),
+    14,
+    nextY,
+  );
 
   autoTable(doc, {
     startY: nextY + 3,
     head: [[
-      'Localitate',
-      'Tara',
+      isEn ? 'Locality' : 'Localitate',
+      isEn ? 'Country' : 'Tara',
       'Km',
-      'Cota (cm)',
-      'Var 24h',
-      'Media 10A',
-      'Deviație 10A',
-      'Prog 3Z',
-      'Prog 14Z',
+      isEn ? 'Level (cm)' : 'Cota (cm)',
+      isEn ? '24h Chg' : 'Var 24h',
+      isEn ? '10Y Avg' : 'Media 10A',
+      isEn ? '10Y Dev' : 'Deviatie 10A',
+      isEn ? '3D Fcst' : 'Prog 3Z',
+      isEn ? '14D Fcst' : 'Prog 14Z',
       'CA / CI / CP',
       'Status',
     ]],
@@ -228,12 +349,30 @@ export function exportBasinBulletinPdf(overview: OverviewResponse, stations: Dan
       `${s.forecast3dCm}`,
       `${s.forecast14dCm}`,
       `${s.thresholds.ca ?? '-'}/${s.thresholds.ci ?? '-'}/${s.thresholds.cp ?? '-'}`,
-      asciiRo(getStatusPresentation(s.status).shortLabel),
+      asciiRo(getStatusPresentation(s.status, lang).shortLabel),
     ]),
     styles: { fontSize: 7.5, cellPadding: 1.8 },
     headStyles: { fillColor: [15, 23, 42], textColor: 255 },
     alternateRowStyles: { fillColor: [248, 250, 252] },
   });
 
-  doc.save(`Buletin_Cotele_Dunarii_${new Date().toISOString().slice(0, 10)}.pdf`);
+  const basinPageCount = doc.getNumberOfPages();
+  for (let i = 1; i <= basinPageCount; i++) {
+    doc.setPage(i);
+    doc.setFontSize(7.5);
+    doc.setTextColor(100, 116, 139);
+    doc.text(
+      asciiRo(
+        isEn
+          ? `HidroDunare · This application is not official, but uses information from official sources (OVF Hydroinfo, AFDJ/INHGA, WSV Pegelonline, Copernicus GloFAS v4, ECMWF) · Page ${i}/${basinPageCount}`
+          : `HidroDunare · Aplicatia nu este oficiala, dar foloseste informatii din surse oficiale (OVF Hydroinfo, AFDJ/INHGA, WSV Pegelonline, Copernicus GloFAS v4, ECMWF) · Pagina ${i}/${basinPageCount}`,
+      ),
+      14,
+      204,
+    );
+  }
+
+  doc.save(
+    `${isEn ? 'Danube_Water_Levels_Bulletin' : 'Buletin_Cotele_Dunarii'}_${new Date().toISOString().slice(0, 10)}.pdf`,
+  );
 }
