@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Capacitor } from '@capacitor/core';
 import { BellRing, Download, Info, Languages, MapPin, Moon, RefreshCw, Search, ShieldAlert, Smartphone, Sun, Table2, X } from 'lucide-react';
 import { AboutView } from './components/AboutView';
 import { AlertsView } from './components/AlertsView';
@@ -20,6 +21,7 @@ type StationListFilter = 'all' | 'ro' | 'flood' | 'below_avg';
 export default function App() {
   const { lang, setLang } = useLanguage();
   const isEn = lang === 'en';
+  const isNativeIos = Capacitor.isNativePlatform() && Capacitor.getPlatform() === 'ios';
 
   const [activeTab, setActiveTab] = useState<WorkspaceTab>('dashboard');
   const [overview, setOverview] = useState<OverviewResponse | null>(null);
@@ -163,54 +165,60 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 pb-16 md:pb-0">
-      {/* Top Bar Contract: 1 row, 3 zones, gap-8 */}
-      <header className="sticky top-0 z-30 h-[52px] bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 px-4 lg:px-6 flex items-center justify-between gap-8">
-        <a
-          href="#top"
-          onClick={(e) => {
-            e.preventDefault();
-            setActiveTab('dashboard');
-          }}
-          className="text-lg font-bold tracking-tight text-slate-900 dark:text-white whitespace-nowrap shrink-0"
-        >
-          HidroDunăre
-        </a>
-
-        <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600 dark:text-slate-300">
-          {(
-            [
-              { id: 'dashboard', label: isEn ? 'Dashboard & Map' : 'Panou & Hartă' },
-              { id: 'table', label: isEn ? 'Danube Stations' : 'Stații Dunăre' },
-              { id: 'alerts', label: isEn ? 'Push Alerts' : 'Alerte Push' },
-              { id: 'about', label: isEn ? 'About' : 'Despre' },
-            ] as const
-          ).map((item) => (
-            <button
-              key={item.id}
-              type="button"
-              onClick={() => setActiveTab(item.id)}
-              className={`py-1 border-b-2 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
-                activeTab === item.id
-                  ? 'border-sky-700 text-slate-900 dark:border-sky-400 dark:text-white font-semibold'
-                  : 'border-transparent hover:text-slate-900 dark:hover:text-white'
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
-        </nav>
-
-        <div className="shrink-0">
-          <button
-            type="button"
-            onClick={handleExportGlobalPdf}
-            disabled={!overview}
-            className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-sky-700 text-white hover:bg-sky-800 disabled:opacity-50 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+    <div className="min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 safe-area-page-pb">
+      {/* Top Bar Contract: 1 row, 3 zones, gap-8 — with iOS status-bar safe-area clearance */}
+      <header
+        className={`sticky top-0 z-30 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 ${
+          isNativeIos ? 'safe-area-header-ios' : 'safe-area-header'
+        }`}
+      >
+        <div className="h-[52px] safe-area-x flex items-center justify-between gap-8">
+          <a
+            href="#top"
+            onClick={(e) => {
+              e.preventDefault();
+              setActiveTab('dashboard');
+            }}
+            className="text-lg font-bold tracking-tight text-slate-900 dark:text-white whitespace-nowrap shrink-0"
           >
-            <Download className="w-3.5 h-3.5" />
-            {isEn ? 'Export PDF' : 'Exportă PDF'}
-          </button>
+            HidroDunăre
+          </a>
+
+          <nav className="hidden md:flex items-center gap-7 text-sm font-medium text-slate-600 dark:text-slate-300">
+            {(
+              [
+                { id: 'dashboard', label: isEn ? 'Dashboard & Map' : 'Panou & Hartă' },
+                { id: 'table', label: isEn ? 'Danube Stations' : 'Stații Dunăre' },
+                { id: 'alerts', label: isEn ? 'Push Alerts' : 'Alerte Push' },
+                { id: 'about', label: isEn ? 'About' : 'Despre' },
+              ] as const
+            ).map((item) => (
+              <button
+                key={item.id}
+                type="button"
+                onClick={() => setActiveTab(item.id)}
+                className={`py-1 border-b-2 transition-colors whitespace-nowrap shrink-0 cursor-pointer ${
+                  activeTab === item.id
+                    ? 'border-sky-700 text-slate-900 dark:border-sky-400 dark:text-white font-semibold'
+                    : 'border-transparent hover:text-slate-900 dark:hover:text-white'
+                }`}
+              >
+                {item.label}
+              </button>
+            ))}
+          </nav>
+
+          <div className="shrink-0">
+            <button
+              type="button"
+              onClick={handleExportGlobalPdf}
+              disabled={!overview}
+              className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold rounded-lg bg-sky-700 text-white hover:bg-sky-800 disabled:opacity-50 transition-colors whitespace-nowrap shrink-0 cursor-pointer"
+            >
+              <Download className="w-3.5 h-3.5" />
+              {isEn ? 'Export PDF' : 'Exportă PDF'}
+            </button>
+          </div>
         </div>
       </header>
 
@@ -529,7 +537,7 @@ export default function App() {
 
       {/* Offline Connectivity Indicator */}
       {!isOnline && (
-        <div className="fixed bottom-16 md:bottom-4 left-4 z-40 rounded-lg bg-amber-600 px-3.5 py-2 text-xs font-medium text-white shadow-lg">
+        <div className="fixed safe-area-overlay-bottom left-4 z-40 rounded-lg bg-amber-600 px-3.5 py-2 text-xs font-medium text-white shadow-lg">
           {isEn
             ? 'Offline Mode — Showing latest cached levels.'
             : 'Mod Offline — Se utilizează ultimele cote salvate în cache.'}
@@ -538,7 +546,7 @@ export default function App() {
 
       {/* Real-Time In-App Push Toast */}
       {push.inAppToast && (
-        <div className="fixed bottom-16 md:bottom-4 right-4 z-50 w-[calc(100%-2rem)] max-w-sm bg-slate-900 text-white border border-slate-700 rounded-xl p-4 shadow-xl">
+        <div className="fixed safe-area-overlay-bottom right-4 z-50 w-[calc(100%-2rem)] max-w-sm bg-slate-900 text-white border border-slate-700 rounded-xl p-4 shadow-xl">
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-2 text-xs font-semibold text-sky-300">
               <ShieldAlert className="w-4 h-4 shrink-0" />
@@ -558,30 +566,32 @@ export default function App() {
       )}
 
       {/* Mobile Bottom Navigation Bar */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 h-14 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 grid grid-cols-4 items-center">
-        {(
-          [
-            { id: 'dashboard', label: isEn ? 'Map' : 'Hartă', Icon: MapPin },
-            { id: 'table', label: isEn ? 'Stations' : 'Stații', Icon: Table2 },
-            { id: 'alerts', label: isEn ? 'Alerts' : 'Alerte', Icon: BellRing },
-            { id: 'about', label: isEn ? 'About' : 'Despre', Icon: Info },
-          ] as const
-        ).map(({ id, label, Icon }) => {
-          const active = activeTab === id;
-          return (
-            <button
-              key={id}
-              type="button"
-              onClick={() => setActiveTab(id)}
-              className={`flex flex-col items-center justify-center h-full text-[10px] font-medium cursor-pointer ${
-                active ? 'text-sky-700 dark:text-sky-400 font-semibold' : 'text-slate-500 dark:text-slate-400'
-              }`}
-            >
-              <Icon className="w-4 h-4 mb-0.5" />
-              <span>{label}</span>
-            </button>
-          );
-        })}
+      <nav className="md:hidden fixed bottom-0 left-0 right-0 z-40 safe-area-bottom bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800">
+        <div className="h-14 grid grid-cols-4 items-center">
+          {(
+            [
+              { id: 'dashboard', label: isEn ? 'Map' : 'Hartă', Icon: MapPin },
+              { id: 'table', label: isEn ? 'Stations' : 'Stații', Icon: Table2 },
+              { id: 'alerts', label: isEn ? 'Alerts' : 'Alerte', Icon: BellRing },
+              { id: 'about', label: isEn ? 'About' : 'Despre', Icon: Info },
+            ] as const
+          ).map(({ id, label, Icon }) => {
+            const active = activeTab === id;
+            return (
+              <button
+                key={id}
+                type="button"
+                onClick={() => setActiveTab(id)}
+                className={`flex flex-col items-center justify-center h-full text-[10px] font-medium cursor-pointer ${
+                  active ? 'text-sky-700 dark:text-sky-400 font-semibold' : 'text-slate-500 dark:text-slate-400'
+                }`}
+              >
+                <Icon className="w-4 h-4 mb-0.5" />
+                <span>{label}</span>
+              </button>
+            );
+          })}
+        </div>
       </nav>
     </div>
   );

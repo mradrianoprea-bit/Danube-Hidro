@@ -11,6 +11,9 @@ const config: CapacitorConfig = {
     androidScheme: 'https',
     iosScheme: 'https',
   },
+  ios: {
+    contentInset: 'never',
+  },
   plugins: {
     LocalNotifications: {
       smallIcon: 'ic_launcher',

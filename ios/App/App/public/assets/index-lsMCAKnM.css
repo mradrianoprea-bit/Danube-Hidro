@@ -1108,10 +1108,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
     bottom: 0;
   }
 
-  .bottom-16 {
-    bottom: calc(var(--spacing) * 16);
-  }
-
   .left-0 {
     left: 0;
   }
@@ -1914,10 +1910,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
     padding-bottom: calc(var(--spacing) * 4);
   }
 
-  .pb-16 {
-    padding-bottom: calc(var(--spacing) * 16);
-  }
-
   .pl-3 {
     padding-left: calc(var(--spacing) * 3);
   }
@@ -2236,10 +2228,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
   }
 
   @media (min-width: 48rem) {
-    .md\:bottom-4 {
-      bottom: calc(var(--spacing) * 4);
-    }
-
     .md\:flex {
       display: flex;
     }
@@ -2250,10 +2238,6 @@ svg.leaflet-image-layer.leaflet-interactive path {
 
     .md\:grid-cols-2 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .md\:pb-0 {
-      padding-bottom: 0;
     }
   }
 
@@ -2665,6 +2649,48 @@ svg.leaflet-image-layer.leaflet-interactive path {
   *, :before, :after {
     transition-duration: .01ms !important;
     animation-duration: .01ms !important;
+  }
+}
+
+.safe-area-header {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.safe-area-header-ios {
+  padding-top: max(calc(env(safe-area-inset-top, 0px) + 6px), 28px);
+}
+
+.safe-area-x {
+  padding-left: max(1rem, env(safe-area-inset-left, 0px));
+  padding-right: max(1rem, env(safe-area-inset-right, 0px));
+}
+
+@media (min-width: 1024px) {
+  .safe-area-x {
+    padding-left: max(1.5rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1.5rem, env(safe-area-inset-right, 0px));
+  }
+}
+
+.safe-area-bottom {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+.safe-area-page-pb {
+  padding-bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
+}
+
+.safe-area-overlay-bottom {
+  bottom: calc(4rem + env(safe-area-inset-bottom, 0px));
+}
+
+@media (min-width: 768px) {
+  .safe-area-page-pb {
+    padding-bottom: 0;
+  }
+
+  .safe-area-overlay-bottom {
+    bottom: 1rem;
   }
 }
 
